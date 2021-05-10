@@ -27,9 +27,10 @@ services:
 
 script:
   - export HOST_IP=$(ifconfig docker0 | awk -F"[:, ]+" '/inet/ {print $4}')
+  - echo "$DOCKER_PAS" | docker login --username "$DOCKER_USER" --password-stdin
   - docker-compose -f ./selenium-grid/docker-compose.yml up -d
-  - . ./selenium-grid/wait-for-grid.sh
   - curl http://buildemojis.com/jenkins_backup.tar -o /home/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid/jenkins_backup.tar
+  - . ./selenium-grid/wait-for-grid.sh
   - docker run --rm -q --volumes-from jenkins2 -v /home/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid:/backup ubuntu bash -c "cd /var && tar xvf /backup/jenkins_backup.tar --strip 1"
   - docker restart jenkins2
   - pytest -v -s
