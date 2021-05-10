@@ -29,7 +29,8 @@ script:
   - export HOST_IP=$(ifconfig docker0 | awk -F"[:, ]+" '/inet/ {print $4}')
   - docker-compose -f ./selenium-grid/docker-compose.yml up -d
   - . ./selenium-grid/wait-for-grid.sh
-#  - docker run --rm --volumes-from jenkins2 -v /home/travis/build/maximashuev/jenkins_trevis/selenium-grid:/backup ubuntu bash -c "cd /var && tar xvf /backup/jenkins_backup.tar --strip 1"
-#  - docker restart jenkins2
+  - curl http://buildemojis.com/jenkins_backup.tar -o /home/travis/build/maximashuev/jenkins_trevis/selenium-grid/jenkins_backup.tar
+  - docker run --rm --volumes-from jenkins2 -v /home/travis/build/maximashuev/jenkins_trevis/selenium-grid:/backup ubuntu bash -c "cd /var && tar xvf /backup/jenkins_backup.tar --strip 1"
+  - docker restart jenkins2
   - pytest -v -s
   - docker-compose -f ./selenium-grid/docker-compose.yml down
