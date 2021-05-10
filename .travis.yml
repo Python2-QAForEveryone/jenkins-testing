@@ -35,3 +35,4 @@ script:
   - docker restart jenkins2
   - pytest -v -s
   - docker-compose -f ./selenium-grid/docker-compose.yml down
+  -
