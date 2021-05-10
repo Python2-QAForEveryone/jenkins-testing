@@ -10,4 +10,3 @@ class TestJenkinsTitle:
         self.driver.get("http://localhost:8080/")
         print("*************************************")
         print(self.driver.title, "!!!!!!!!!!!!!!!!!!")
-
