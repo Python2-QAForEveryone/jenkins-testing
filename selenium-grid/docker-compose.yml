@@ -1,0 +1,52 @@
+# To execute this docker-compose yml file use `docker-compose -f <file_name> up`
+# Add the `-d` flag at the end for detached execution
+version: '3.3'
+services:
+  chrome:
+    image: selenium/node-chrome:3.141.59-zirconium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+    extra_hosts:
+      - "localhost.host:${HOST_IP}"
+
+  firefox:
+    image: selenium/node-firefox:3.141.59-zirconium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+    extra_hosts:
+      - "localhost.host:${HOST_IP}"
+
+  hub:
+    image: selenium/hub:3.141.59-zirconium
+    ports:
+      - "4444:4444"
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins2
+    privileged: true
+    user: root
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      jenkins-net:
+        aliases:
+          - jenkins-net
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  jenkins-data:
+    driver: local
+
+networks:
+  jenkins-net:

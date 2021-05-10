@@ -1,0 +1,35 @@
+language: python
+
+python:
+  - "3.6"
+
+install:
+  - pip install -Ur requirements.txt
+
+cache:
+  bundler: true
+  directories:
+    - $HOME/.pytest_cache
+    - $HOME/.cache/pip
+    - $HOME/docker
+    - $HOME/.wdm/drivers
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+
+addons:
+  apt:
+    packages:
+      - net-tools
+
+services:
+  - docker
+
+script:
+  - export HOST_IP=$(ifconfig docker0 | awk -F"[:, ]+" '/inet/ {print $4}')
+  - docker-compose -f ./selenium-grid/docker-compose.yml up -d
+  - . ./selenium-grid/wait-for-grid.sh
+#  - docker run --rm --volumes-from jenkins2 -v /home/travis/build/maximashuev/jenkins_trevis/selenium-grid:/backup ubuntu bash -c "cd /var && tar xvf /backup/jenkins_backup.tar --strip 1"
+#  - docker restart jenkins2
+  - pytest -v -s
+  - docker-compose -f ./selenium-grid/docker-compose.yml down
