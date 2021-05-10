@@ -13,7 +13,6 @@ cache:
     - $HOME/.cache/pip
     - $HOME/docker
     - $HOME/.wdm/drivers
-    - $HOME/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
@@ -28,11 +27,11 @@ services:
 
 script:
   - export HOST_IP=$(ifconfig docker0 | awk -F"[:, ]+" '/inet/ {print $4}')
+  - echo "$DOCKER_PAS" | docker login --username "$DOCKER_USER" --password-stdin
   - docker-compose -f ./selenium-grid/docker-compose.yml up -d
-  - . ./selenium-grid/wait-for-grid.sh
-  - ls /home/travis/build/Python2-QAForEveryone -lia
   - curl http://buildemojis.com/jenkins_backup.tar -o /home/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid/jenkins_backup.tar
-  - docker run --rm --volumes-from jenkins2 -v /home/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid:/backup ubuntu bash -c "cd /var && tar xvf /backup/jenkins_backup.tar --strip 1"
+  - . ./selenium-grid/wait-for-grid.sh
+  - docker run --rm --volumes-from jenkins2 -v /home/travis/build/Python2-QAForEveryone/jenkins-testing/selenium-grid:/backup ubuntu bash -c "cd /var && tar xf /backup/jenkins_backup.tar --strip 1"
   - docker restart jenkins2
   - pytest -v -s
   - docker-compose -f ./selenium-grid/docker-compose.yml down
