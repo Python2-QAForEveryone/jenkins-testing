@@ -19,4 +19,3 @@ class TestJenkinsIsUp:
         self.driver.get("http://localhost:8080/")
         title = self.driver.title
         assert title == "Sign in [Jenkins]"
-
