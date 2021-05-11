@@ -14,3 +14,9 @@ class TestJenkinsIsUp:
         except:
             print("Not found")
         print(self.driver.title, "!!!!!!!!!!!!!!!!!!")
+
+    def test_title(self):
+        self.driver.get("http://localhost:8080/")
+        title = self.driver.title
+        assert title == "Sign in [Jenkins]"
+
