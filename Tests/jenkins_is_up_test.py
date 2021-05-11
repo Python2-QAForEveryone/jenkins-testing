@@ -7,7 +7,7 @@ class TestJenkinsIsUp:
 
     def test_jenkins_is_up(self):
         self.driver.get("http://localhost:8080/")
-        print("*************************************")
+        print('\n', "*************************************")
         try:
             WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, 'j_username')))
             print("PASS")
