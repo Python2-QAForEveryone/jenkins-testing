@@ -74,6 +74,12 @@ class TestDashboardPage:
         assert BasePage.is_visible(locatorsDashboardPage.BUILD_EXECUTOR_STATUS)
         assert BasePage.is_clickable(locatorsDashboardPage.BUILD_EXECUTOR_STATUS)
 
+    def test_tc_024_dashboard_page_description_link_is_visible(self):
+        driver = DashboardPage(self.driver)
+        assert BasePage.is_visible(locatorsDashboardPage.ADD_DESCRIPTION_LINK)
+        assert BasePage.is_clickable(locatorsDashboardPage.ADD_DESCRIPTION_LINK)
+        assert BasePage.is_visible(locatorsDashboardPage.ADD_DESCRIPTION_ICON)
+
 
     # def test_tc_005_menu_selector_can_be_push(self):
     #     self.search_field = DashboardPage(self.driver)
