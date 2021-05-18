@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from TestData.TestData import TestData as TD
+from selenium.webdriver.common.by import By
 
 REMOTE_URL = 'http://127.0.0.1:4444/wd/hub'
 
@@ -28,8 +30,12 @@ def init_remote_driver_chrome():
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
-        options.headless = True
+        # options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        driver.get(TD.BASE_URL)
+        driver.find_element(By.CSS_SELECTOR, '#j_username').send_keys(TD.LOGIN)
+        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+        driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
 
     return driver
 
@@ -45,6 +51,10 @@ def init_remote_driver_firefox():
         options.add_argument("--height=1080")
         options.headless = True
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+        driver.get(TD.BASE_URL)
+        driver.find_element(By.CSS_SELECTOR, '#j_username').send_keys(TD.LOGIN)
+        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+        driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
 
     return driver
 
