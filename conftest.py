@@ -30,12 +30,8 @@ def init_remote_driver_chrome():
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
-        # options.headless = True
+        options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        # driver.get(TD.BASE_URL)
-        # driver.find_element(By.CSS_SELECTOR, '#j_username').send_keys(TD.LOGIN)
-        # driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
-        # driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
 
     return driver
 
@@ -51,10 +47,6 @@ def init_remote_driver_firefox():
         options.add_argument("--height=1080")
         options.headless = True
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
-        # driver.get(TD.BASE_URL)
-        # driver.find_element(By.CSS_SELECTOR, '#j_username').send_keys(TD.LOGIN)
-        # driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
-        # driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
 
     return driver
 
@@ -71,6 +63,10 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.implicitly_wait(5)
+    driver.get(TD.BASE_URL)
+    driver.find_element(By.CSS_SELECTOR, '#j_username').send_keys(TD.LOGIN)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
 
     yield

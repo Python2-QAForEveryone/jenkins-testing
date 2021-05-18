@@ -1,6 +1,5 @@
 from Pages.BasePage import BasePage
 from Pages.HomePage import HomePage
-import time
 
 
 class TestHomePage:
