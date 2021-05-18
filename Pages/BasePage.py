@@ -10,11 +10,11 @@ class BasePage:
     def get_title(self):
         return self.driver.title
 
-    def go_to_page(self, url:str):
+    def go_to_page(self, url: str):
         self.driver.get(url)
         return self
 
-    def click(self, locator:tuple):
+    def click(self, locator: tuple):
         element = self.driver.find_element(locator[0], locator[1])
         element.click()
 
