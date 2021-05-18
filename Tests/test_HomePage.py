@@ -2,7 +2,7 @@ import pytest
 
 from Pages.BasePage import BasePage
 from Pages.HomePage import HomePage
-from Tests.locators_HomePage import DashboardPageLocators, FooterLocators
+from Tests.locators_HomePage import DashboardPageLocators, FooterLocators, BuildLocators
 
 
 class TestHomePage:
@@ -30,3 +30,8 @@ class TestHomePage:
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_text_field)
     def test_dashboard_all_element_is_clickable_tc_009(self, locator):
         assert BasePage.is_clickable(locator)
+
+    def test_dashboard_build_queue_executor_is_visible_tc_021(self):
+        assert BasePage.is_visible(BuildLocators.BUILD_QUEUE)
+        assert BasePage.is_visible(BuildLocators.BUILD_EXECUTOR_STATUS)
+        assert BasePage.is_clickable(BuildLocators.BUILD_EXECUTOR_STATUS)
