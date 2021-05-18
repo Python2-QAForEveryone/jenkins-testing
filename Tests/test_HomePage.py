@@ -1,3 +1,5 @@
+import pytest
+
 from Pages.BasePage import BasePage
 from Pages.HomePage import HomePage
 from Tests.locators_HomePage import DashboardPageLocators
@@ -15,3 +17,11 @@ class TestHomePage:
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
         assert BasePage.is_clickable(DashboardPageLocators.DASHBOARD_MENU_ANCHOR)
+
+    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all)
+    def test_dashboard_all_element_is_visible_tc_008(self, locator):
+        assert BasePage.is_visible(locator)
+
+    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_text_field)
+    def test_dashboard_all_element_is_clickable_tc_009(self, locator):
+        assert BasePage.is_clickable(locator)
