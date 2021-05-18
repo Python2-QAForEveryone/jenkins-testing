@@ -2,7 +2,7 @@ import pytest
 
 from Pages.BasePage import BasePage
 from Pages.HomePage import HomePage
-from Tests.locators_HomePage import DashboardPageLocators, FooterLocators, BuildLocators
+from Tests.locators_HomePage import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators
 
 
 class TestHomePage:
@@ -35,3 +35,8 @@ class TestHomePage:
         assert BasePage.is_visible(BuildLocators.BUILD_QUEUE)
         assert BasePage.is_visible(BuildLocators.BUILD_EXECUTOR_STATUS)
         assert BasePage.is_clickable(BuildLocators.BUILD_EXECUTOR_STATUS)
+
+    def test_dashboard_page_description_link_is_visible_tc_024(self):
+        assert BasePage.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
+        assert BasePage.is_clickable(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
+        assert BasePage.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_ICON)
