@@ -5,6 +5,11 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from TestData.TestData import TestData as TD
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 REMOTE_URL = 'http://127.0.0.1:4444/wd/hub'
 
@@ -61,6 +66,10 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.implicitly_wait(5)
+    driver.get(TD.BASE_URL)
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
 
     yield
