@@ -14,7 +14,7 @@ class DashboardPageLocators:
     TEXT_MANAGE_JENKINS = (By.CSS_SELECTOR, 'a[title~=Manage]')
     ICON_MANAGE_JENKINS = (By.CSS_SELECTOR, 'img.icon-gear2')
     TEXT_MY_VIEWS = (By.CSS_SELECTOR, 'a[title~=Views]')
-    ICON_MY_VIEWS = (By.CSS_SELECTOR, '//*[@id="tasks"]/div[5]/span/a/span[1]/img')
+    ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
     TEXT_LOCKABLE_RESOURCES = (By.CSS_SELECTOR, 'a[title~=Resources]')
     ICON_LOCKABLE_RESOURCES = (By.XPATH, '//*[@id="tasks"]/div[6]/span/a/span[1]/img')
     TEXT_NEW_VIEW = (By.XPATH, '//*[@id="tasks"]/div[7]/span/a')
@@ -31,8 +31,8 @@ class DashboardPageLocators:
 
 
 class BuildLocators:
-    BUILD_QUEUE = (By.XPATH, '//*[@id="buildOueue"]/div[1]/div[1]/span/a')
-    BUILD_EXECUTOR_STATUS = (By.XPATH, '//*[@id="executor"]/div[1]/div[1]/span/a')
+    BUILD_QUEUE = (By.XPATH, '//span[text()="Build Queue"]')
+    BUILD_EXECUTOR_STATUS = (By.XPATH, '//a[@href="/computer/"]')
 
 
 class WelcomeLocators:
