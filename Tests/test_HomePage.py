@@ -16,12 +16,14 @@ class TestHomePage:
         new_item.go_to_page('http://localhost:8080/')
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
-        assert BasePage.is_clickable(DashboardPageLocators.DASHBOARD_MENU_ANCHOR)
+        home_page = HomePage(self.driver)
+        assert home_page.is_clickable(DashboardPageLocators.DASHBOARD_MENU_ANCHOR)
 
     @pytest.mark.parametrize('locator', FooterLocators.locators_for_footer)
     def test_footer_all_elements_visible_and_clickable_tc_002(self, locator):
-        assert BasePage.is_visible(locator)
-        assert BasePage.is_clickable(locator)
+        home_page = HomePage(self.driver)
+        assert home_page.is_visible(locator)
+        assert home_page.is_clickable(locator)
 
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all)
     def test_dashboard_all_element_is_visible_tc_008(self, locator):
