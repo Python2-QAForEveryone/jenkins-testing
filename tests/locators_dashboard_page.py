@@ -5,6 +5,8 @@ class DashboardPageLocators:
     DASHBOARD_MENU_ANCHOR = (By.CSS_SELECTOR, 'a.breadcrumbBarAnchor')
     MENU_SELECTOR = (By.ID, 'menuSelector')
     RIGHT_ARROW_SELECTOR = (By.CLASS_NAME, 'children')
+    RIGHT_ARROW_SELECTOR_ALL = (By.XPATH, '//a[@href="/view/all/"]')
+    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.ID, 'breadcrumb-menu')
     TEXT_NEW_ITEM = (By.XPATH, '//a[@title="New Item"]')
     ICON_NEW_ITEM = (By.CSS_SELECTOR, 'img.icon-new-package')
     TEXT_PEOPLE = (By.CSS_SELECTOR, 'a[title~=People]')
@@ -72,3 +74,7 @@ class URLLocators:
     URL_NEW_VIEW = 'http://localhost:8080/newView'
     URL_FOOTER_REST_API = 'http://localhost:8080/api/'
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
+
+class Titles:
+    TITLE_DASHBOARD_PAGE = 'Dashboard [Jenkins]'
+    TITLE_NEW_ITEM = 'New Item [Jenkins]'
