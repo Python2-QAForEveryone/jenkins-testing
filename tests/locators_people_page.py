@@ -2,13 +2,12 @@ from selenium.webdriver.common.by import By
 
 from config.TestData import TestData
 
-
-PEOPLE = (By.XPATH, '/html/body/div[4]/div[1]/div[1]/div[2]/span/a/span[2]')
-PEOPLE_LOGO = (By.XPATH, '/html/body/div[4]/div[2]/h1/img')
 TITLE = "People - [Jenkins]"
 
 
 class PeoplePageLocator:
+    PEOPLE = (By.XPATH, '/html/body/div[4]/div[1]/div[1]/div[2]/span/a/span[2]')
+    PEOPLE_LOGO = (By.XPATH, '/html/body/div[4]/div[2]/h1/img')
     TABLE_USER_ID = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a')
     TABLE_USER_ID_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a/span')
     TABLE_NAME = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[3]/a')
