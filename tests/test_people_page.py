@@ -1,7 +1,10 @@
+import time
+
 import pytest
 
+from pages.BasePage import BasePage
 from pages.PeoplePage import PeoplePage
-from tests.locators_people_page import PeoplePageLocator, URLLocators
+from tests.locators_people_page import PeoplePageLocator, URLLocators, IdUsersLocator
 
 
 class TestPagePeople:

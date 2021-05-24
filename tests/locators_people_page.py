@@ -2,9 +2,7 @@ from selenium.webdriver.common.by import By
 
 from config.TestData import TestData
 
-USER = 'j_username'
-PASSWD = 'j_password'
-SUBMIT = 'Submit'
+
 PEOPLE = (By.XPATH, '/html/body/div[4]/div[1]/div[1]/div[2]/span/a/span[2]')
 PEOPLE_LOGO = (By.XPATH, '/html/body/div[4]/div[2]/h1/img')
 TITLE = "People - [Jenkins]"
@@ -30,11 +28,12 @@ class PeoplePageLocator:
                             TABLE_USER_ID_USERS, TABLE_NAME_USERS, TABLE_ICON_LINK, TABLE_ICON_LINK_2]
 
 
-class LoginLocator:
-    USER = 'j_username'
-    PASSWD = 'j_password'
-    SUBMIT = 'Submit'
-
-
 class URLLocators:
     URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
+
+
+class IdUsersLocator:
+    TABLE_USER_ID_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a/span')
+    locator_id_user_arrow = [TABLE_USER_ID_ARROW]
+    TABLE_USER_ID = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a')
+    locator_id_user = [TABLE_USER_ID]
