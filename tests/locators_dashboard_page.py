@@ -56,12 +56,12 @@ class FooterLocators:
 
 
 class URLLocators:
-    URL_NEW_ITEM = 'http://localhost:8080/view/all/newJob'
-    URL_PEOPLE = 'http://localhost:8080/asynchPeople/'
-    URL_BUILD_HISTORY = 'http://localhost:8080/view/all/builds'
-    URL_MANAGE_JENKINS = 'http://localhost:8080/manage'
-    URL_MY_VIEW = 'http://localhost:8080/me/my-views/view/all/'
-    URL_LOCKABLE_RESOURCES = 'http://localhost:8080/lockable-resources/'
-    URL_NEW_VIEW = 'http://localhost:8080/newView'
-    URL_FOOTER_REST_API = 'http://localhost:8080/api/'
+    URL_NEW_ITEM = TestData.BASE_URL + 'view/all/newJob'
+    URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
+    URL_BUILD_HISTORY = TestData.BASE_URL + 'view/all/builds'
+    URL_MANAGE_JENKINS = TestData.BASE_URL + 'manage'
+    URL_MY_VIEW = TestData.BASE_URL + 'me/my-views/view/all/'
+    URL_LOCKABLE_RESOURCES = TestData.BASE_URL + 'lockable-resources/'
+    URL_NEW_VIEW = TestData.BASE_URL + 'newView'
+    URL_FOOTER_REST_API = TestData.BASE_URL + 'api/'
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
