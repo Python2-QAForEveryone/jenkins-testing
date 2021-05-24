@@ -11,7 +11,6 @@ class TestPagePeople:
     def test_people_title_001(self):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
-        print(driver.get_title())
         assert driver.get_title() == PeoplePage.TITLE
 
     @pytest.mark.parametrize('locator', PeoplePageLocator.locators_people_page)
