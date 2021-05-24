@@ -1,29 +1,24 @@
 import pytest
-from config.TestData import TestData
-from pages.BasePage import BasePage
-from pages.DashboardPage import DashboardPage
-from tests.locators_people_page import PeoplePageLocator, URLLocators
+
 from pages.PeoplePage import PeoplePage
+from tests.locators_people_page import PeoplePageLocator, URLLocators
 
 
 class TestPagePeople:
-    def test_title(self):
+    def test_people_title_001(self):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
         print(driver.get_title())
         assert driver.get_title() == PeoplePage.TITLE
 
-    # def test_title(self):
-    #     assert BasePage.get_title(TestData.BASE_URL + 'asynchPeople') == PeoplePage.TITLE
-
     @pytest.mark.parametrize('locator', PeoplePageLocator.locators_people_page)
-    def test_verify_page_icon(self, locator):
+    def test_all_element_is_visible_002(self, locator):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
         assert driver.is_visible(locator)
 
     @pytest.mark.parametrize('locator', PeoplePageLocator.locators_people_page)
-    def test_verify_page_icon(self, locator):
+    def test_all_element_is_clickable_003(self, locator):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
         assert driver.is_clickable(locator)
