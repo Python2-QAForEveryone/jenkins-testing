@@ -1,0 +1,10 @@
+common:
+environment:
+  local:
+    url: http://localhost:8080/
+    username: user
+    password: 12345678
+  travis:
+    url: http://localhost:8080/
+    username: user
+    password: 12345678

@@ -1,3 +1,4 @@
+import os
 import pytest
 import requests
 from requests.exceptions import ConnectionError
@@ -9,6 +10,7 @@ from config.TestData import TestData as TD
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from utils.config import Config
 
 
 REMOTE_URL = 'http://127.0.0.1:4444/wd/hub'
@@ -65,10 +67,16 @@ def init_driver(request):
         print('Please pass the correct browser name: {}'.format(request.param))
         raise Exception('driver is not found')
 
+    config = Config()
+    url = os.getenv('URL') if os.getenv('URL', None) else config.url
+    username = os.getenv('USERNAME') if os.getenv('USERNAME', None) else config.username
+    password = os.getenv('PASSWORD') if os.getenv('PASSWORD', None) else config.password
+
+    driver.get(url)
     driver.implicitly_wait(5)
     driver.get(TD.BASE_URL)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
-    driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(username)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(password)
     driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
 
