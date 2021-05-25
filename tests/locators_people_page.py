@@ -6,25 +6,26 @@ TITLE = "People - [Jenkins]"
 
 
 class PeoplePageLocator:
-    PEOPLE = (By.XPATH, '/html/body/div[4]/div[1]/div[1]/div[2]/span/a/span[2]')
-    PEOPLE_LOGO = (By.XPATH, '/html/body/div[4]/div[2]/h1/img')
-    TABLE_USER_ID = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a')
-    TABLE_USER_ID_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a/span')
-    TABLE_NAME = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[3]/a')
-    TABLE_NAME_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[3]/a/span')
-    TABLE_LAST_COMMIT_ACTIVITY = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[4]/a')
-    TABLE_LAST_COMMIT_ACTIVITY_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[4]/a/span')
-    TABLE_ON = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[5]/a')
-    TABLE_ON_ARROW = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[5]/a/span')
+    PEOPLE = (By.CSS_SELECTOR, '.task-link--active')
+    PEOPLE_LOGO = (By.CSS_SELECTOR, '.icon-xlg')
+    TABLE_USER_ID = (By.XPATH, '//a[contains(text(),"User ID")]')
+    TABLE_USER_ID_ARROW = (By.XPATH, '//th[2]/a/span')
+    TABLE_NAME = (By.XPATH, '//a[contains(text(),"Name")]')
+    TABLE_NAME_ARROW = (By.XPATH, '//th[3]/a/span')
+    TABLE_LAST_COMMIT_ACTIVITY = (By.XPATH, '//a[contains(text(),"Last Commit Activity")]')
+    TABLE_LAST_COMMIT_ACTIVITY_ARROW = (By.XPATH, '//th[4]/a/span')
+    TABLE_ON = (By.XPATH, '//a[contains(text(),"On")]')
+    TABLE_ON_ARROW = (By.XPATH, '//th[5]/a/span')
     TABLE_ICON = (By.XPATH, '//*[@id="person-users"]/td[1]/a/img')
-    TABLE_USER_ID_USERS = (By.XPATH, '/html/body/div[4]/div[2]/table[2]/tbody/tr[2]/td[2]/a')
-    TABLE_NAME_USERS = (By.XPATH, '/html/body/div[4]/div[2]/table[2]/tbody/tr[2]/td[3]/a')
-    TABLE_ICON_LINK = (By.XPATH, '/html/body/div[4]/div[2]/table[3]/tbody/tr/td[1]/a[1]')
-    TABLE_ICON_LINK_2 = (By.XPATH, '/html/body/div[4]/div[2]/table[3]/tbody/tr/td[1]/a[2]')
+    TABLE_USER_ID_USERS = (By.XPATH, '//td[3]/a')
+    TABLE_NAME_USERS = (By.XPATH, '//td[3]/a')
+    TABLE_ICON_LINK_S = (By.LINK_TEXT, 'S')
+    TABLE_ICON_LINK_M = (By.LINK_TEXT, 'M')
+    TABLE_ICON_LINK_L = (By.LINK_TEXT, 'L')
 
     locators_people_page = [PEOPLE, PEOPLE_LOGO, TABLE_USER_ID, TABLE_USER_ID_ARROW, TABLE_NAME, TABLE_NAME_ARROW,
                             TABLE_LAST_COMMIT_ACTIVITY, TABLE_LAST_COMMIT_ACTIVITY_ARROW, TABLE_ON, TABLE_ON_ARROW,
-                            TABLE_USER_ID_USERS, TABLE_NAME_USERS, TABLE_ICON_LINK, TABLE_ICON_LINK_2]
+                            TABLE_USER_ID_USERS, TABLE_NAME_USERS, TABLE_ICON_LINK_S, TABLE_ICON_LINK_M]
 
 
 class URLLocators:
