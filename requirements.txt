@@ -1,3 +1,4 @@
-pytest
-selenium
+pytest~=6.2.4
+selenium~=3.141.0
 webdriver_manager
+requests~=2.25.1

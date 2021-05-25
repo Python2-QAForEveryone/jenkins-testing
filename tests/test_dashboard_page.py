@@ -1,5 +1,6 @@
 import pytest
 
+from config.TestData import TestData
 from pages.BasePage import BasePage
 from pages.DashboardPage import DashboardPage
 from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators
@@ -13,7 +14,7 @@ class TestHomePage:
     def test_new_item(self):
         new_item = DashboardPage(self.driver)
         new_item.click(DashboardPage.NEW_ITEM)
-        new_item.go_to_page('http://localhost:8080/')
+        new_item.go_to_page(TestData.BASE_URL)
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
         driver = DashboardPage(self.driver)
