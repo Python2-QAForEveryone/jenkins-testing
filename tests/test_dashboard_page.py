@@ -26,12 +26,14 @@ class TestHomePage:
         assert driver.is_visible(locator)
         assert driver.is_clickable(locator)
 
-    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all)
+    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
+                             ids=DashboardPageLocators.ids_dashboard_all)
     def test_dashboard_all_element_is_visible_tc_008(self, locator):
         driver = DashboardPage(self.driver)
         assert driver.is_visible(locator)
 
-    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_text_field)
+    @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_text_field,
+                             ids=DashboardPageLocators.ids_dashboard_text_field)
     def test_dashboard_all_element_is_clickable_tc_009(self, locator):
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
