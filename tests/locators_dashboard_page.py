@@ -1,14 +1,16 @@
 from selenium.webdriver.common.by import By
 
+from config.TestData import TestData
+
 
 class DashboardPageLocators:
     DASHBOARD_MENU_ANCHOR = (By.CSS_SELECTOR, 'a.breadcrumbBarAnchor')
     MENU_SELECTOR = (By.ID, 'menuSelector')
     RIGHT_ARROW_SELECTOR = (By.CLASS_NAME, 'children')
-    TEXT_NEW_ITEM = (By.XPATH, '//*[@id="tasks"]/div[1]/span/a')
+    TEXT_NEW_ITEM = (By.XPATH, '//a[@title="New Item"]')
     ICON_NEW_ITEM = (By.CSS_SELECTOR, 'img.icon-new-package')
     TEXT_PEOPLE = (By.CSS_SELECTOR, 'a[title~=People]')
-    ICON_PEOPLE = (By.XPATH, '//*[@id="tasks"]/div[2]/span/a/span[1]/img')
+    ICON_PEOPLE = (By.XPATH, '//a[@title="People"]/span/img')
     TEXT_BUILD_HISTORY = (By.CSS_SELECTOR, 'a[title~=History]')
     ICON_BUILD_HISTORY = (By.CSS_SELECTOR, 'img.icon-notepad.icon-md')
     TEXT_MANAGE_JENKINS = (By.CSS_SELECTOR, 'a[title~=Manage]')
@@ -16,8 +18,8 @@ class DashboardPageLocators:
     TEXT_MY_VIEWS = (By.CSS_SELECTOR, 'a[title~=Views]')
     ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
     TEXT_LOCKABLE_RESOURCES = (By.CSS_SELECTOR, 'a[title~=Resources]')
-    ICON_LOCKABLE_RESOURCES = (By.XPATH, '//*[@id="tasks"]/div[6]/span/a/span[1]/img')
-    TEXT_NEW_VIEW = (By.XPATH, '//*[@id="tasks"]/div[7]/span/a')
+    ICON_LOCKABLE_RESOURCES = (By.XPATH, '//a[@title="Lockable Resources"]/span/img')
+    TEXT_NEW_VIEW = (By.XPATH, '//a[@title="New View"]')
     ICON_NEW_VIEW = (By.CSS_SELECTOR, 'img.icon-folder')
 
     locators_dashboard_all = [TEXT_NEW_ITEM, ICON_NEW_ITEM, TEXT_PEOPLE, ICON_PEOPLE,
@@ -25,10 +27,17 @@ class DashboardPageLocators:
                               ICON_MANAGE_JENKINS, TEXT_MY_VIEWS, ICON_MY_VIEWS,
                               TEXT_LOCKABLE_RESOURCES, ICON_LOCKABLE_RESOURCES, TEXT_NEW_VIEW,
                               ICON_NEW_VIEW]
+    ids_dashboard_all = ['TEXT_NEW_ITEM', 'ICON_NEW_ITEM', 'TEXT_PEOPLE', 'ICON_PEOPLE',
+                              'TEXT_BUILD_HISTORY', 'ICON_BUILD_HISTORY', 'TEXT_MANAGE_JENKINS',
+                              'ICON_MANAGE_JENKINS', 'TEXT_MY_VIEWS', 'ICON_MY_VIEWS',
+                              'TEXT_LOCKABLE_RESOURCES', 'ICON_LOCKABLE_RESOURCES', 'TEXT_NEW_VIEW',
+                              'ICON_NEW_VIEW']
     locators_dashboard_text_field = [TEXT_NEW_ITEM, TEXT_PEOPLE, TEXT_BUILD_HISTORY,
                                      TEXT_MANAGE_JENKINS, TEXT_MY_VIEWS, TEXT_LOCKABLE_RESOURCES,
                                      TEXT_NEW_VIEW]
-
+    ids_dashboard_text_field = ['TEXT_NEW_ITEM', 'TEXT_PEOPLE', 'TEXT_BUILD_HISTORY',
+                                     'TEXT_MANAGE_JENKINS', 'TEXT_MY_VIEWS', 'TEXT_LOCKABLE_RESOURCES',
+                                     'TEXT_NEW_VIEW']
 
 class BuildLocators:
     BUILD_QUEUE = (By.XPATH, '//span[text()="Build Queue"]')
@@ -36,10 +45,10 @@ class BuildLocators:
 
 
 class WelcomeLocators:
-    CREATE_JOB = (By.XPATH, '//*[@id="main-panel"]/div[2]/div/section[1]/ul/li/a')
-    SET_UP_AN_AGENT = (By.XPATH, '//*[@id="main-panel"]/div[2]/div/section[2]/ul/li[1]/a')
-    CONFIGURE_A_CLOUD = (By.XPATH, '//*[@id="main-panel"]/div[2]/div/section[2]/ul/li[1]/a')
-    LEARN_MORE_ABOUT_DISTRIBUTED_BUILDS = (By.XPATH, '//*[@id="main-panel"]/div[2]/div/section[2]/ul/li[1]/a')
+    CREATE_JOB = (By.XPATH, '//a[@href="newJob"]')
+    SET_UP_AN_AGENT = (By.XPATH, '//a[@href="computer/new"]')
+    CONFIGURE_A_CLOUD = (By.XPATH, '//a[@href="configureClouds"]')
+    LEARN_MORE_ABOUT_DISTRIBUTED_BUILDS = (By.CSS_SELECTOR, 'a.content-block__link.content-block__help-link')
 
 
 class AddDescriptionLocators:
@@ -56,12 +65,12 @@ class FooterLocators:
 
 
 class URLLocators:
-    URL_NEW_ITEM = 'http://localhost:8080/view/all/newJob'
-    URL_PEOPLE = 'http://localhost:8080/asynchPeople/'
-    URL_BUILD_HISTORY = 'http://localhost:8080/view/all/builds'
-    URL_MANAGE_JENKINS = 'http://localhost:8080/manage'
-    URL_MY_VIEW = 'http://localhost:8080/me/my-views/view/all/'
-    URL_LOCKABLE_RESOURCES = 'http://localhost:8080/lockable-resources/'
-    URL_NEW_VIEW = 'http://localhost:8080/newView'
-    URL_FOOTER_REST_API = 'http://localhost:8080/api/'
+    URL_NEW_ITEM = TestData.BASE_URL + 'view/all/newJob'
+    URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
+    URL_BUILD_HISTORY = TestData.BASE_URL + 'view/all/builds'
+    URL_MANAGE_JENKINS = TestData.BASE_URL + 'manage'
+    URL_MY_VIEW = TestData.BASE_URL + 'me/my-views/view/all/'
+    URL_LOCKABLE_RESOURCES = TestData.BASE_URL + 'lockable-resources/'
+    URL_NEW_VIEW = TestData.BASE_URL + 'newView'
+    URL_FOOTER_REST_API = TestData.BASE_URL + 'api/'
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
