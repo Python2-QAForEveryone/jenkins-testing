@@ -32,7 +32,6 @@ class BasePage:
         element = self.driver.find_element(locator[0], locator[1])
         return element
 
-
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
