@@ -15,7 +15,7 @@ class TestHomePage:
     def test_new_item(self):
         new_item = DashboardPage(self.driver)
         new_item.click(DashboardPage.NEW_ITEM)
-        new_item.go_to_page('http://localhost:8080/')
+        new_item.go_to_page(TD.BASE_URL)
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
         driver = DashboardPage(self.driver)
@@ -26,14 +26,6 @@ class TestHomePage:
         driver = DashboardPage(self.driver)
         assert driver.is_visible(locator)
         assert driver.is_clickable(locator)
-
-    def test_menu_selector_can_be_push_tc_005(self):
-        driver = DashboardPage(self.driver)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
-        assert driver.is_visible(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
-        assert driver.get_title() == Titles.TITLE_DASHBOARD_PAGE
-        driver.go_to_page(TD.BASE_URL)
 
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
                              ids=DashboardPageLocators.ids_dashboard_all)
