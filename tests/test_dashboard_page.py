@@ -3,11 +3,10 @@ import pytest
 from pages.BasePage import BasePage
 from pages.DashboardPage import DashboardPage
 from config.TestData import TestData as TD
-from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, \
-    Titles
+from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, Titles
 
 
-class TestHomePage:
+class TestDashboardPage:
 
     def test_title(self):
         assert BasePage.get_title(self) == DashboardPage.TITLE
@@ -27,6 +26,14 @@ class TestHomePage:
         assert driver.is_visible(locator)
         assert driver.is_clickable(locator)
 
+    def test_menu_selector_can_be_click_tc_005(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
+        assert driver.is_visible(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
+        assert driver.get_title() == Titles.TITLE_DASHBOARD_PAGE
+        driver.go_to_page(TD.BASE_URL)
+
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
                              ids=DashboardPageLocators.ids_dashboard_all)
     def test_dashboard_all_element_is_visible_tc_008(self, locator):
@@ -39,6 +46,7 @@ class TestHomePage:
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
 
+    @pytest.mark.skip
     def test_dashboard_new_item_clickable_tc_010(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
