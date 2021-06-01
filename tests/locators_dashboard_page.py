@@ -15,7 +15,7 @@ class DashboardPageLocators:
     ICON_PEOPLE = (By.XPATH, '//a[@title="People"]/span/img')
     TEXT_BUILD_HISTORY = (By.CSS_SELECTOR, 'a[title~=History]')
     ICON_BUILD_HISTORY = (By.CSS_SELECTOR, 'img.icon-notepad.icon-md')
-    TEXT_MANAGE_JENKINS = (By.XPATH, '//a[@title="Manage Jenkins"]')
+    TEXT_MANAGE_JENKINS = (By.XPATH, '//span[contains(text(), "Manage Jenkins")]')
     ICON_MANAGE_JENKINS = (By.CSS_SELECTOR, 'img.icon-gear2')
     TEXT_MY_VIEWS = (By.CSS_SELECTOR, 'a[title~=Views]')
     ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
