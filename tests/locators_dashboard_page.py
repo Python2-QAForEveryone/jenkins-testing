@@ -75,6 +75,7 @@ class URLLocators:
     URL_LOCKABLE_RESOURCES = TestData.BASE_URL + 'lockable-resources/'
     URL_NEW_VIEW = TestData.BASE_URL + 'newView'
     URL_FOOTER_REST_API = TestData.BASE_URL + 'api/'
+    URL_BUILD_EXECUTOR_STATUS = TestData.BASE_URL + 'computer/'
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
 
 class Titles:

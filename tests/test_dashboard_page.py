@@ -3,7 +3,8 @@ import pytest
 from pages.BasePage import BasePage
 from pages.DashboardPage import DashboardPage
 from config.TestData import TestData as TD
-from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, Titles
+from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, \
+    Titles, URLLocators
 
 
 class TestDashboardPage:
@@ -26,6 +27,12 @@ class TestDashboardPage:
         assert driver.is_visible(locator)
         assert driver.is_clickable(locator)
 
+    def test_dashboard_footer_rest_api_clickable_tc_003(self):
+        driver = DashboardPage(self.driver)
+        driver.click(FooterLocators.FOOTER_REST_API)
+        assert driver.get_current_url() == URLLocators.URL_FOOTER_REST_API
+        driver.go_to_page(TD.BASE_URL)
+
     def test_menu_selector_can_be_click_tc_005(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
@@ -46,11 +53,47 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
 
-    @pytest.mark.skip
     def test_dashboard_new_item_clickable_tc_010(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
-        assert driver.get_title() == Titles.TITLE_NEW_ITEM
+        assert driver.get_current_url() == URLLocators.URL_NEW_ITEM
+        driver.go_to_page(TD.BASE_URL)
+
+    def test_dashboard_people_clickable_tc_011(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_PEOPLE)
+        assert driver.get_current_url() == URLLocators.URL_PEOPLE
+        driver.go_to_page(TD.BASE_URL)
+
+    def test_dashboard_buile_history_clickable_tc_012(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
+        assert driver.get_current_url() == URLLocators.URL_BUILD_HISTORY
+        driver.go_to_page(TD.BASE_URL)
+
+
+    def test_dashboard_manage_jenkins_clickable_tc_013(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_MANAGE_JENKINS)
+        assert driver.get_current_url() == URLLocators.URL_MANAGE_JENKINS
+        driver.go_to_page(TD.BASE_URL)
+
+    def test_dashboard_my_view_clickable_tc_014(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_MY_VIEWS)
+        assert driver.get_current_url() == URLLocators.URL_MY_VIEW
+        driver.go_to_page(TD.BASE_URL)
+
+    def test_dashboard_lockable_resources_clickable_tc_015(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_LOCKABLE_RESOURCES)
+        assert driver.get_current_url() == URLLocators.URL_LOCKABLE_RESOURCES
+        driver.go_to_page(TD.BASE_URL)
+
+    def test_dashboard_new_view_clickable_tc_016(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_NEW_VIEW)
+        assert driver.get_current_url() == URLLocators.URL_NEW_VIEW
         driver.go_to_page(TD.BASE_URL)
 
     def test_dashboard_build_queue_executor_is_visible_tc_021(self):
@@ -58,6 +101,12 @@ class TestDashboardPage:
         assert driver.is_visible(BuildLocators.BUILD_QUEUE)
         assert driver.is_visible(BuildLocators.BUILD_EXECUTOR_STATUS)
         assert driver.is_clickable(BuildLocators.BUILD_EXECUTOR_STATUS)
+
+    def test_dashboard_build_queue_executor_clickable_tc_022(self):
+        driver = DashboardPage(self.driver)
+        driver.click(BuildLocators.BUILD_EXECUTOR_STATUS)
+        assert driver.get_current_url() == URLLocators.URL_BUILD_EXECUTOR_STATUS
+        driver.go_to_page(TD.BASE_URL)
 
     def test_dashboard_page_description_link_is_visible_tc_024(self):
         driver = DashboardPage(self.driver)
