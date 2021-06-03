@@ -19,3 +19,23 @@ class TestDashboardLowerDropdownPage:
         driver.hover_and_click_element(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
                                             DashboardLowerDropdownPageLocators.MENU_SELECTOR)
         assert driver.is_clickable(DashboardLowerDropdownPageLocators.NEW_ITEM)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.PEOPLE)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.BUILD_HISTORY)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.MANAGE_JENKINS)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.MY_VIEWS)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.LOCKABLE_RESOURCES)
+        assert driver.is_clickable(DashboardLowerDropdownPageLocators.NEW_VIEW)
+
+    def test_dashboard_lower_dropdown_items_visible(self):
+        driver = DashboardLowerDropdownPage(self.driver)
+        driver.hover_and_click_element(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
+                                       DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.NEW_ITEM)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.PEOPLE)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.BUILD_HISTORY)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.MANAGE_JENKINS)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.MY_VIEWS)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.LOCKABLE_RESOURCES)
+        assert driver.is_visible(DashboardLowerDropdownPageLocators.NEW_VIEW)
+
+
