@@ -15,7 +15,7 @@ class DashboardPageLocators:
     ICON_PEOPLE = (By.XPATH, '//a[@title="People"]/span/img')
     TEXT_BUILD_HISTORY = (By.CSS_SELECTOR, 'a[title~=History]')
     ICON_BUILD_HISTORY = (By.CSS_SELECTOR, 'img.icon-notepad.icon-md')
-    TEXT_MANAGE_JENKINS = (By.CSS_SELECTOR, 'a[title~=Manage]')
+    TEXT_MANAGE_JENKINS = (By.XPATH, '//span[contains(text(), "Manage Jenkins")]')
     ICON_MANAGE_JENKINS = (By.CSS_SELECTOR, 'img.icon-gear2')
     TEXT_MY_VIEWS = (By.CSS_SELECTOR, 'a[title~=Views]')
     ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
@@ -75,6 +75,7 @@ class URLLocators:
     URL_LOCKABLE_RESOURCES = TestData.BASE_URL + 'lockable-resources/'
     URL_NEW_VIEW = TestData.BASE_URL + 'newView'
     URL_FOOTER_REST_API = TestData.BASE_URL + 'api/'
+    URL_BUILD_EXECUTOR_STATUS = TestData.BASE_URL + 'computer/'
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
 
 class Titles:
