@@ -16,6 +16,8 @@ class BuildHistoryPage(BasePage):
     header_btn1= (By.XPATH, '//*[@id="projectStatus"]/tbody/tr/th[2]/a')
     # role=generic
     tble_header = (By.XPATH, "//table[contains(@class,'sortable pane bigtable')]")
+    #table header
+    table_header = (By.XPATH,'//*[@id="timeline-band-0"]')
     # its a link
     legend_btn =(By.XPATH, "//*[@id='rss - bar']/a")
     # role=generic

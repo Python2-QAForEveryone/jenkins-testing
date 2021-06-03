@@ -15,7 +15,14 @@ class TestBuildHistory:
         bhp.go_to_page(BuildHistoryPage.page_url)
         assert bhp.is_visible(BuildHistoryPage.pict)
 
+    def test_build_history_tableheadervisible(self):
+        bhp = BuildHistoryPage(self.driver)
+        bhp.go_to_page(BuildHistoryPage.page_url)
+        assert bhp.is_visible(BuildHistoryPage.table_header)
+
     def test_build_history_header_buildbtnclickable(self):
         bhp = BuildHistoryPage(self.driver)
         bhp.go_to_page(BuildHistoryPage.page_url)
         assert bhp.is_clickable(BuildHistoryPage.header_btn1)
+
+
