@@ -16,8 +16,8 @@ class TestDashboardLowerDropdownPage:
 
     def test_dashboard_lower_dropdown_items_clickable(self):
         driver = DashboardLowerDropdownPage(self.driver)
-        driver.hover_and_click_element(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
-                                            DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        driver.hover_element1_and_click_element2(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
+                                                 DashboardLowerDropdownPageLocators.MENU_SELECTOR)
         assert driver.is_clickable(DashboardLowerDropdownPageLocators.NEW_ITEM)
         assert driver.is_clickable(DashboardLowerDropdownPageLocators.PEOPLE)
         assert driver.is_clickable(DashboardLowerDropdownPageLocators.BUILD_HISTORY)
@@ -28,8 +28,8 @@ class TestDashboardLowerDropdownPage:
 
     def test_dashboard_lower_dropdown_items_visible(self):
         driver = DashboardLowerDropdownPage(self.driver)
-        driver.hover_and_click_element(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
-                                       DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        driver.hover_element1_and_click_element2(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
+                                                 DashboardLowerDropdownPageLocators.MENU_SELECTOR)
         assert driver.is_visible(DashboardLowerDropdownPageLocators.NEW_ITEM)
         assert driver.is_visible(DashboardLowerDropdownPageLocators.PEOPLE)
         assert driver.is_visible(DashboardLowerDropdownPageLocators.BUILD_HISTORY)
