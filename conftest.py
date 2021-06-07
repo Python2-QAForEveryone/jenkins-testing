@@ -66,7 +66,9 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
-    WebDriverWait(driver, 120).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
+    print("*************************"+ driver.title + "*************************")
+    print("*************************"+driver.current_url + "*************************")
+    WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
     driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
     driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
