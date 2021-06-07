@@ -45,8 +45,8 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
         driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
         assert driver.get_current_url() == URLLocators.URL_RIGHT_ARROW
+        driver.go_to_page(TD.BASE_URL)
 
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
                              ids=DashboardPageLocators.ids_dashboard_all)
