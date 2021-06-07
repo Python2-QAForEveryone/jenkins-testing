@@ -6,9 +6,9 @@ from config.TestData import TestData
 class DashboardPageLocators:
     DASHBOARD_MENU_ANCHOR = (By.CSS_SELECTOR, 'a.breadcrumbBarAnchor')
     MENU_SELECTOR = (By.ID, 'menuSelector')
-    RIGHT_ARROW_SELECTOR = (By.CLASS_NAME, 'children')
-    RIGHT_ARROW_SELECTOR_ALL = (By.XPATH, '//a[@href="/view/all/"]')
-    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.ID, 'breadcrumb-menu')
+    RIGHT_ARROW_SELECTOR = (By.XPATH, '//ul[@id="breadcrumbs"]/li[@class="children"]')
+    RIGHT_ARROW_SELECTOR_ALL = (By.XPATH, '//li[@id="yui-gen2"]/a[@href="/view/all/"]')
+    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.XPATH, '//div[@id="breadcrumb-menu-target"]/div')
     TEXT_NEW_ITEM = (By.XPATH, '//a[@title="New Item"]')
     ICON_NEW_ITEM = (By.CSS_SELECTOR, 'img.icon-new-package')
     TEXT_PEOPLE = (By.CSS_SELECTOR, 'a[title~=People]')
@@ -67,6 +67,7 @@ class FooterLocators:
 
 
 class URLLocators:
+    URL_RIGHT_ARROW = TestData.BASE_URL + 'view/all/'
     URL_NEW_ITEM = TestData.BASE_URL + 'view/all/newJob'
     URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
     URL_BUILD_HISTORY = TestData.BASE_URL + 'view/all/builds'

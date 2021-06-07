@@ -41,6 +41,13 @@ class TestDashboardPage:
         assert driver.get_title() == Titles.TITLE_DASHBOARD_PAGE
         driver.go_to_page(TD.BASE_URL)
 
+    def test_right_button_all_is_clickable_tc_006(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
+        assert driver.get_current_url() == URLLocators.URL_RIGHT_ARROW
+
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
                              ids=DashboardPageLocators.ids_dashboard_all)
     def test_dashboard_all_element_is_visible_tc_008(self, locator):
