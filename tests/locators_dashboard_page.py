@@ -6,18 +6,18 @@ from config.TestData import TestData
 class DashboardPageLocators:
     DASHBOARD_MENU_ANCHOR = (By.CSS_SELECTOR, 'a.breadcrumbBarAnchor')
     MENU_SELECTOR = (By.ID, 'menuSelector')
-    RIGHT_ARROW_SELECTOR = (By.CLASS_NAME, 'children')
+    RIGHT_ARROW_SELECTOR = (By.XPATH, '//ul[@id="breadcrumbs"]/li[@class="children"]')
     RIGHT_ARROW_SELECTOR_ALL = (By.XPATH, '//a[@href="/view/all/"]')
-    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.ID, 'breadcrumb-menu')
+    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.XPATH, '//div[@id="breadcrumb-menu-target"]/div')
     TEXT_NEW_ITEM = (By.XPATH, '//a[@title="New Item"]')
     ICON_NEW_ITEM = (By.CSS_SELECTOR, 'img.icon-new-package')
     TEXT_PEOPLE = (By.CSS_SELECTOR, 'a[title~=People]')
     ICON_PEOPLE = (By.XPATH, '//a[@title="People"]/span/img')
     TEXT_BUILD_HISTORY = (By.CSS_SELECTOR, 'a[title~=History]')
     ICON_BUILD_HISTORY = (By.CSS_SELECTOR, 'img.icon-notepad.icon-md')
-    TEXT_MANAGE_JENKINS = (By.XPATH, '//span[contains(text(), "Manage Jenkins")]')
+    TEXT_MANAGE_JENKINS = (By.XPATH, '//a[@href="/manage"]/span[text()="Manage Jenkins"]')
     ICON_MANAGE_JENKINS = (By.CSS_SELECTOR, 'img.icon-gear2')
-    TEXT_MY_VIEWS = (By.CSS_SELECTOR, 'a[title~=Views]')
+    TEXT_MY_VIEWS = (By.XPATH, '//a[@href="/me/my-views"]/span[text()="My Views"]')
     ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
     TEXT_LOCKABLE_RESOURCES = (By.CSS_SELECTOR, 'a[title~=Resources]')
     ICON_LOCKABLE_RESOURCES = (By.XPATH, '//a[@title="Lockable Resources"]/span/img')
@@ -67,6 +67,7 @@ class FooterLocators:
 
 
 class URLLocators:
+    URL_RIGHT_ARROW = TestData.BASE_URL + 'view/all/'
     URL_NEW_ITEM = TestData.BASE_URL + 'view/all/newJob'
     URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
     URL_BUILD_HISTORY = TestData.BASE_URL + 'view/all/builds'

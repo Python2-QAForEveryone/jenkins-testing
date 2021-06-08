@@ -40,5 +40,14 @@ class BasePage:
         element = WebDriverWait(self.driver, 2).until(condition)
         return element.text
 
+    def get_wait(self, locator):
+        WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator))
+
     def do_send_keys(self, locator, text):
         WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator)).sendKeys(text)
+
+    def scroll_to_bottom(self):
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+    def js_click(self, locator):
+        self.driver.execute_script("arguments[0].click();", self.click(locator))
