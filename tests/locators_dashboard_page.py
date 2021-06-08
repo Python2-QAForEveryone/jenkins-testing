@@ -17,7 +17,7 @@ class DashboardPageLocators:
     ICON_BUILD_HISTORY = (By.CSS_SELECTOR, 'img.icon-notepad.icon-md')
     TEXT_MANAGE_JENKINS = (By.XPATH, '//a[@href="/manage"]/span[text()="Manage Jenkins"]')
     ICON_MANAGE_JENKINS = (By.CSS_SELECTOR, 'img.icon-gear2')
-    TEXT_MY_VIEWS = (By.XPATH, '//a[@href="/me/my-views"]/span[text()="My Views"]')
+    TEXT_MY_VIEWS = (By.XPATH, '//li[contains(@id, "yui-gen")]/a[contains(@href, "my-views")]')
     ICON_MY_VIEWS = (By.XPATH, '//a[@title="My Views"]/span[1]/img')
     TEXT_LOCKABLE_RESOURCES = (By.CSS_SELECTOR, 'a[title~=Resources]')
     ICON_LOCKABLE_RESOURCES = (By.XPATH, '//a[@title="Lockable Resources"]/span/img')
