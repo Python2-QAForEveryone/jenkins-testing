@@ -78,7 +78,7 @@ class TestDashboardPage:
         assert driver.get_current_url() == URLLocators.URL_BUILD_HISTORY
         driver.go_to_page(TD.BASE_URL)
 
-
+    @pytest.skip
     def test_dashboard_manage_jenkins_clickable_tc_013(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_MANAGE_JENKINS)
