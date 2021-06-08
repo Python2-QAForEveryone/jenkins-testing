@@ -64,13 +64,4 @@ class BasePage:
         elementToClick = self.driver.find_element(locator2[0], locator2[1])
         action.move_to_element(elementToHoverOver).click(elementToClick).perform()
 
-    def hover_over_element(self, locator: tuple):
-        action = ActionChains(self.driver)
-        element = self.driver.find_element(locator[0], locator[1])
-        action.move_to_element(element).perform()
 
-    def hover_and_click_element(self, locator1: tuple, locator2: tuple):
-        action = ActionChains(self.driver)
-        elementToHoverOver = self.driver.find_element(locator1[0], locator1[1])
-        elementToClick = self.driver.find_element(locator2[0], locator2[1])
-        action.move_to_element(elementToHoverOver).click(elementToClick).perform()
