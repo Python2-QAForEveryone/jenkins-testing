@@ -6,9 +6,9 @@ from config.TestData import TestData
 class DashboardPageLocators:
     DASHBOARD_MENU_ANCHOR = (By.CSS_SELECTOR, 'a.breadcrumbBarAnchor')
     MENU_SELECTOR = (By.ID, 'menuSelector')
-    RIGHT_ARROW_SELECTOR = (By.XPATH, '//ul[@id="breadcrumbs"]/li[@class="children"]')
-    RIGHT_ARROW_SELECTOR_ALL = (By.XPATH, '//a[@href="/view/all/"]')
-    RIGHT_ARROW_SELECTOR_ALL_VISIBLE = (By.XPATH, '//div[@id="breadcrumb-menu-target"]/div')
+    RIGHT_ARROW = (By.XPATH, '//ul[@id="breadcrumbs"]/li[@class="children"]')
+    RIGHT_ARROW_MENU = (By.XPATH, '//a[@href="/view/all/"]')
+    RIGHT_ARROW_MENU_ICON = (By.XPATH, '//div[@id="breadcrumb-menu-target"]/div')
     TEXT_NEW_ITEM = (By.XPATH, '//a[@title="New Item"]')
     ICON_NEW_ITEM = (By.CSS_SELECTOR, 'img.icon-new-package')
     TEXT_PEOPLE = (By.CSS_SELECTOR, 'a[title~=People]')
