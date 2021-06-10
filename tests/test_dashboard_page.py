@@ -71,13 +71,11 @@ class TestDashboardPage:
         driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
         assert driver.get_current_url() == URLLocators.URL_BUILD_HISTORY
 
-    @pytest.mark.skip
     def test_dashboard_manage_jenkins_clickable_tc_013(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_MANAGE_JENKINS)
         assert driver.get_current_url() == URLLocators.URL_MANAGE_JENKINS
 
-    @pytest.mark.skip
     def test_dashboard_my_view_clickable_tc_014(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_MY_VIEWS)
@@ -103,6 +101,11 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         driver.click(BuildLocators.BUILD_EXECUTOR_STATUS)
         assert driver.get_current_url() == URLLocators.URL_BUILD_EXECUTOR_STATUS
+
+    def test_elements_are_visible_and_clicable_tc_023(self):
+        driver = DashboardPage(self.driver)
+        assert driver.is_visible()
+        assert driver.is_clickable()
 
     def test_dashboard_page_description_link_is_visible_tc_024(self):
         driver = DashboardPage(self.driver)
