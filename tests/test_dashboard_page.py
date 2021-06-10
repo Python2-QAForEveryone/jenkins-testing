@@ -31,15 +31,13 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         driver.click(FooterLocators.FOOTER_REST_API)
         assert driver.get_current_url() == URLLocators.URL_FOOTER_REST_API
-        driver.go_to_page(TD.BASE_URL)
+        # driver.go_to_page(TD.BASE_URL)
 
-    def test_menu_selector_can_be_click_tc_005(self):
+    def test_menu_selector_is_visible_and_clickable_tc_005(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
         assert driver.is_visible(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
-        assert driver.get_title() == Titles.TITLE_DASHBOARD_PAGE
-        driver.go_to_page(TD.BASE_URL)
+        assert driver.is_clickable(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
 
     def test_right_button_all_is_clickable_tc_006(self):
         driver = DashboardPage(self.driver)
