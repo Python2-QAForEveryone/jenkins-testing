@@ -33,14 +33,14 @@ class TestDashboardPage:
     @pytest.mark.first
     def test_menu_selector_is_visible_and_clickable_tc_005(self):
         driver = DashboardPage(self.driver)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
-        assert driver.is_visible(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL_VISIBLE)
-        assert driver.is_clickable(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
+        driver.click(DashboardPageLocators.RIGHT_ARROW)
+        assert driver.is_visible(DashboardPageLocators.RIGHT_ARROW_MENU_ICON)
+        assert driver.is_clickable(DashboardPageLocators.RIGHT_ARROW_MENU)
 
     def test_right_button_all_is_clickable_tc_006(self):
         driver = DashboardPage(self.driver)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR)
-        driver.click(DashboardPageLocators.RIGHT_ARROW_SELECTOR_ALL)
+        driver.click(DashboardPageLocators.RIGHT_ARROW)
+        driver.click(DashboardPageLocators.RIGHT_ARROW_MENU)
         assert driver.get_current_url() == URLLocators.URL_RIGHT_ARROW
 
     @pytest.mark.parametrize('locator', DashboardPageLocators.locators_dashboard_all,
