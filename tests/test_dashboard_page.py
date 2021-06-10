@@ -77,6 +77,7 @@ class TestDashboardPage:
         driver.click(DashboardPageLocators.TEXT_MANAGE_JENKINS)
         assert driver.get_current_url() == URLLocators.URL_MANAGE_JENKINS
 
+    @pytest.mark.skip
     def test_dashboard_my_view_clickable_tc_014(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_MY_VIEWS)
