@@ -10,10 +10,10 @@ class BuildHistoryPage(BasePage):
     href = "view/all/builds"
     page_url = TD.BASE_URL+href
     title = "Build History"
-    pict= (By.XPATH, '//*[@id="main-panel"]/h1/img')
+    bhpage_image= (By.XPATH, '//*[@id="main-panel"]/h1/img')
     title_= (By.XPATH, '//*[contains(text(),"of Jenkins")]')
     subtitl_= (By.XPATH, "//*[contains(text(),' is not guaranteed')]")
-    header_btn1= (By.XPATH, '//*[@id="projectStatus"]/tbody/tr/th[2]/a')
+    project_status_buttn= (By.XPATH, '//*[@id="projectStatus"]/tbody/tr/th[2]/a')
     # role=generic
     tble_header = (By.XPATH, "//table[contains(@class,'sortable pane bigtable')]")
     #table header
