@@ -82,3 +82,28 @@ class URLLocators:
 class Titles:
     TITLE_DASHBOARD_PAGE = 'Dashboard [Jenkins]'
     TITLE_NEW_ITEM = 'New Item [Jenkins]'
+
+class EmptyStateBlock:
+    WELCOME_TO_JENKINS = (By.XPATH, '//h1[text()="Welcome to Jenkins!"]')
+    TEXT_UNDER_WELCOME = (By.XPATH, '//div[contains(@class, "empty-state-block")]/p')
+    SECTION_TEXT_START = (By.XPATH, '//div[contains(@class, "empty-state-block")]/section[1]/h2')
+    SECTION_TEXT_SET_UP = (By.XPATH, '//div[contains(@class, "empty-state-block")]/section[2]/h2')
+    CREATE_JOB_TEXT = (By.XPATH, '//a[@href="newJob"]/span[text()="Create a job"]')
+    CREATE_JOB_ARROW = (By.XPATH, '//a[@href="newJob"]/span[@class="trailing-icon"]')
+    SET_UP_TEXT = (By.XPATH, '//a[@href="computer/new"]/span[text()="Set up an agent"]')
+    SET_UP_ARROW = (By.XPATH, '//a[@href="computer/new"]/span[@class="trailing-icon"]')
+    CONFIGURE_CLOUD_TEXT = (By.XPATH, '//a[@href="configureClouds"]/span[text()="Configure a cloud"]')
+    CONFIGURE_CLOUD_ARROW = (By.XPATH, '//a[@href="configureClouds"]/span[@class="trailing-icon"]')
+    LEARN_MORE_TEXT = (By.XPATH, '//a[@href="https://jenkins.io/redirect/distributed-builds"]/span[contains(text(), "Learn more")]')
+    LEARN_MORE_SIGN = (By.XPATH, '//a[@href="https://jenkins.io/redirect/distributed-builds"]/span[@class="trailing-icon"]')
+
+    locators_for_visible_dashboard = [WELCOME_TO_JENKINS, TEXT_UNDER_WELCOME, SECTION_TEXT_START, SECTION_TEXT_SET_UP,
+                                      CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW, CONFIGURE_CLOUD_TEXT,
+                                      CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+    ids_for_visible_dashboard = ['WELCOME_TO_JENKINS', 'TEXT_UNDER_WELCOME', 'SECTION_TEXT_START', 'SECTION_TEXT_SET_UP',
+                                 'CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
+                                 'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT', 'LEARN_MORE_SIGN']
+    locators_for_clickable_dashboard = [CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW,
+                                        CONFIGURE_CLOUD_TEXT, CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+    ids_for_clickable_dashboard = ['CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
+                                   'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT', 'LEARN_MORE_SIGN']
