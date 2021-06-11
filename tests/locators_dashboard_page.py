@@ -97,4 +97,13 @@ class EmptyStateBlock:
     LEARN_MORE_TEXT = (By.XPATH, '//a[@href="https://jenkins.io/redirect/distributed-builds"]/span[contains(text(), "Learn more")]')
     LEARN_MORE_SIGN = (By.XPATH, '//a[@href="https://jenkins.io/redirect/distributed-builds"]/span[@class="trailing-icon"]')
 
-    locators_for_visible_dashboard = []
+    locators_for_visible_dashboard = [WELCOME_TO_JENKINS, TEXT_UNDER_WELCOME, SECTION_TEXT_START, SECTION_TEXT_SET_UP,
+                                      CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW, CONFIGURE_CLOUD_TEXT,
+                                      CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+    ids_for_visible_dashboard = ['WELCOME_TO_JENKINS', 'TEXT_UNDER_WELCOME', 'SECTION_TEXT_START', 'SECTION_TEXT_SET_UP',
+                                 'CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
+                                 'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT', 'LEARN_MORE_SIGN']
+    locators_for_clickable_dashboard = [CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW,
+                                        CONFIGURE_CLOUD_TEXT, CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+    ids_for_clickable_dashboard = ['CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
+                                   'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT', 'LEARN_MORE_SIGN']

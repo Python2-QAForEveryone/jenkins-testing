@@ -3,7 +3,7 @@ import pytest
 from pages.BasePage import BasePage
 from pages.DashboardPage import DashboardPage
 from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, \
-    Titles, URLLocators
+    Titles, URLLocators, EmptyStateBlock
 
 
 class TestDashboardPage:
@@ -102,10 +102,17 @@ class TestDashboardPage:
         driver.click(BuildLocators.BUILD_EXECUTOR_STATUS)
         assert driver.get_current_url() == URLLocators.URL_BUILD_EXECUTOR_STATUS
 
-    def test_elements_are_visible_and_clicable_tc_023(self):
+    @pytest.mark.parametrize('locator', EmptyStateBlock.locators_for_visible_dashboard,
+                             ids=EmptyStateBlock.ids_for_visible_dashboard)
+    def test_elements_are_visible_tc_023(self, locator):
         driver = DashboardPage(self.driver)
-        assert driver.is_visible()
-        assert driver.is_clickable()
+        assert driver.is_visible(locator)
+
+    @pytest.mark.parametrize('locator', EmptyStateBlock.locators_for_clickable_dashboard,
+                             ids=EmptyStateBlock.ids_for_clickable_dashboard)
+    def test_elements_are_clickable_tc_023(self, locator):
+        driver = DashboardPage(self.driver)
+        assert driver.is_clickable(locator)
 
     def test_dashboard_page_description_link_is_visible_tc_024(self):
         driver = DashboardPage(self.driver)
