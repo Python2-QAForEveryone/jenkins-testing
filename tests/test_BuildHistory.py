@@ -2,6 +2,8 @@ from pages.BasePage import BasePage
 from pages.BuildHistoryPage import BuildHistoryPage
 import pytest
 import time
+
+
 class TestBuildHistory:
 
     def test_buildhistoryurlvisible(self):
@@ -9,6 +11,7 @@ class TestBuildHistory:
         bhp_driver.go_to_page(BuildHistoryPage.page_url)
         curr_url = str(bhp_driver.get_currenturl())
         assert (BuildHistoryPage.href in curr_url)
+
     @pytest.mark.skip
     def test_build_history_logovisible(self):
         bhp_driver = BuildHistoryPage(self.driver)
