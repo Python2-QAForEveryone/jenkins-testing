@@ -13,17 +13,17 @@ class TestBuildHistory:
         assert (BuildHistoryPage.href in curr_url)
 
     @pytest.mark.skip
-    def test_build_history_logovisible(self):
+    def test_build_history_logo_visible(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.page_url)
         assert bhp_driver.is_visible(BuildHistoryPage.bhpage_image)
 
-    def test_build_history_tableheadervisible(self):
+    def test_build_history_table_header_visible(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.page_url)
         assert bhp_driver.is_visible(BuildHistoryPage.table_header)
 
-    def test_build_history_header_buildbtnclickable(self):
+    def test_build_history_header_build_btn_clickable(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.page_url)
         assert bhp_driver.is_clickable(BuildHistoryPage.project_status_buttn)
