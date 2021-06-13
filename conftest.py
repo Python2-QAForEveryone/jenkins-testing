@@ -33,7 +33,7 @@ def init_remote_driver_chrome():
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
-        options.headless = True
+#        options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     return driver
@@ -48,13 +48,13 @@ def init_remote_driver_firefox():
         options = webdriver.FirefoxOptions()
         options.add_argument("--width=1600")
         options.add_argument("--height=1080")
-        options.headless = True
+#        options.headless = True
         driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
 
     return driver
 
 
-@pytest.fixture(params=['chrome', 'firefox'], scope='class', autouse=True)
+@pytest.fixture(params=['chrome'], scope='class', autouse=True)
 def init_driver(request):
     driver = None
     if request.param == 'chrome':
