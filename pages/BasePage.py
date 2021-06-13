@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -9,6 +10,9 @@ class BasePage:
 
     def get_title(self):
         return self.driver.title
+
+    def get_current_url(self):
+        return self.driver.current_url
 
     def go_to_page(self, url: str):
         self.driver.get(url)
@@ -37,5 +41,27 @@ class BasePage:
         element = WebDriverWait(self.driver, 2).until(condition)
         return element.text
 
+    def get_wait(self, locator):
+        WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator))
+
     def do_send_keys(self, locator, text):
         WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator)).sendKeys(text)
+
+    def scroll_to_bottom(self):
+        self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+    def js_click(self, locator):
+        self.driver.execute_script("arguments[0].click();", self.click(locator))
+
+    def hover_over_element(self, locator: tuple):
+        action = ActionChains(self.driver)
+        element = self.driver.find_element(locator[0], locator[1])
+        action.move_to_element(element).perform()
+
+    def hover_element1_and_click_element2(self, locator1: tuple, locator2: tuple):
+        action = ActionChains(self.driver)
+        elementToHoverOver = self.driver.find_element(locator1[0], locator1[1])
+        elementToClick = self.driver.find_element(locator2[0], locator2[1])
+        action.move_to_element(elementToHoverOver).click(elementToClick).perform()
+
+
