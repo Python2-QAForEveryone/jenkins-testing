@@ -1,7 +1,8 @@
 import pytest
 
-from pages.DashboardLowerDropdownPage import DashboardLowerDropdownPage
-from tests.locatorsDashboardLowerDropdown import DashboardLowerDropdownPageLocators, DashboardLowerDropdownLocators
+from pages.DashboardLowerDropdownPage import DashboardLowerDropdownPage, ManageJenkinsDropdownPage
+from tests.locatorsDashboardLowerDropdown import DashboardLowerDropdownPageLocators, DashboardLowerDropdownLocators, \
+    ManageJenkinsDropdownLocators
 
 
 class TestDashboardLowerDropdownPage:
@@ -29,4 +30,26 @@ class TestDashboardLowerDropdownPage:
         driver = DashboardLowerDropdownPage(self.driver)
         driver.hover_element1_and_click_element2(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
                                                  DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        assert driver.is_visible(locator)
+
+
+    @pytest.mark.parametrize("locator", ManageJenkinsDropdownLocators.locators_for_manage_jenkins_dropdown)
+    def test_manage_jenkins_dropdown_items_clickable(self, locator):
+        driver = DashboardLowerDropdownPage(self.driver)
+        driver.hover_element1_and_click_element2(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
+                                                 DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        driver.get_wait(DashboardLowerDropdownLocators.MANAGE_JENKINS)
+        driver.hover_over_element(DashboardLowerDropdownLocators.MANAGE_JENKINS)
+        driver.get_wait(ManageJenkinsDropdownLocators.CONFIGURE_SYSTEM)
+        assert driver.is_clickable(locator)
+
+
+    @pytest.mark.parametrize('locator', ManageJenkinsDropdownLocators.locators_for_manage_jenkins_dropdown)
+    def test_manage_jenkins_dropdown_items_visible(self, locator):
+        driver = DashboardLowerDropdownPage(self.driver)
+        driver.hover_element1_and_click_element2(DashboardLowerDropdownPageLocators.DASHBOARD_LINK,
+                                                 DashboardLowerDropdownPageLocators.MENU_SELECTOR)
+        driver.get_wait(DashboardLowerDropdownLocators.MANAGE_JENKINS)
+        driver.hover_over_element(DashboardLowerDropdownLocators.MANAGE_JENKINS)
+        driver.get_wait(ManageJenkinsDropdownLocators.CONFIGURE_SYSTEM)
         assert driver.is_visible(locator)
