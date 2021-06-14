@@ -129,5 +129,3 @@ class TestDashboardPage:
         driver.click(AddDescriptionLocators.BUTTON_SUBMIT_DESCRIPTION)
         assert driver.get_element_text(AddDescriptionLocators.VERIFY_DESCRIPTION_TEXT) == \
                AddDescriptionLocators.TEXT_TO_DESCRIPTION
-
-

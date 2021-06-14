@@ -63,6 +63,7 @@ class AddDescriptionLocators:
     TEXT_TO_DESCRIPTION = 'Copirate by Mirovich Mikhail'
     VERIFY_DESCRIPTION_TEXT = (By.XPATH, '//div[@id="description"]/div[1]')
 
+
 class FooterLocators:
     FOOTER_REST_API = (By.CLASS_NAME, 'rest_api')
     FOOTER_VERSION = (By.CLASS_NAME, 'jenkins_ver')
