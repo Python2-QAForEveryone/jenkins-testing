@@ -22,6 +22,10 @@ class BasePage:
         element = self.driver.find_element(locator[0], locator[1])
         element.click()
 
+    def clear(self, locator: tuple):
+        element = self.driver.find_element(locator[0], locator[1])
+        element.clear()
+
     def is_visible(self, locator: tuple):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
@@ -45,7 +49,7 @@ class BasePage:
         WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator))
 
     def do_send_keys(self, locator, text):
-        WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator)).sendKeys(text)
+        WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator)).send_keys(text)
 
     def scroll_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")

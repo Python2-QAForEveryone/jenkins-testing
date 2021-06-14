@@ -55,10 +55,13 @@ class WelcomeLocators:
 
 class AddDescriptionLocators:
     ADD_DESCRIPTION_LINK = (By.ID, 'description-link')
-    EDIT_DESCRIPTION_LINK = (By.ID, 'description-link')
     ADD_DESCRIPTION_ICON = (By.CSS_SELECTOR, 'img.icon-notepad.icon-sm')
     DIV_DESCRIPTION = (By.ID, 'description')
-
+    EDIT_DESCRIPTION_LINK = (By.ID, 'description-link')
+    TEXTAREA_DESCRIPTION = (By.XPATH, '//textarea[@name="description"]')
+    BUTTON_SUBMIT_DESCRIPTION = (By.ID, 'yui-gen1-button')
+    TEXT_TO_DESCRIPTION = 'Copirate by Mirovich Mikhail'
+    VERIFY_DESCRIPTION_TEXT = (By.XPATH, '//div[@id="description"]/div[1]')
 
 class FooterLocators:
     FOOTER_REST_API = (By.CLASS_NAME, 'rest_api')
