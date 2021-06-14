@@ -120,7 +120,7 @@ class TestDashboardPage:
         assert driver.is_clickable(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         assert driver.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_ICON)
 
-    def test_dashboard_page_description_link_can_be_click_tc_025(self):
+    def test_dashboard_page_description_link_can_be_add_text_tc_025(self):
         driver = DashboardPage(self.driver)
         driver.click(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         driver.clear(AddDescriptionLocators.TEXTAREA_DESCRIPTION)
