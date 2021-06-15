@@ -40,6 +40,7 @@ class TestDashboardPage:
         driver.switch_to_window(new_name)
         assert driver.get_current_url() == URLLocators.URL_FOOTER_VERSION
 
+
     @pytest.mark.first
     def test_menu_selector_is_visible_and_clickable_tc_005(self):
         driver = DashboardPage(self.driver)
