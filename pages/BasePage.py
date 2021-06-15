@@ -67,5 +67,3 @@ class BasePage:
         elementToHoverOver = self.driver.find_element(locator1[0], locator1[1])
         elementToClick = self.driver.find_element(locator2[0], locator2[1])
         action.move_to_element(elementToHoverOver).click(elementToClick).perform()
-
-
