@@ -67,3 +67,12 @@ class BasePage:
         elementToHoverOver = self.driver.find_element(locator1[0], locator1[1])
         elementToClick = self.driver.find_element(locator2[0], locator2[1])
         action.move_to_element(elementToHoverOver).click(elementToClick).perform()
+
+    def get_name_current_window(self):
+        return self.driver.current_window_handle
+
+    def get_names_open_windows(self):
+        return self.driver.window_handles
+
+    def switch_to_window(self, window_name):
+        self.driver.switch_to.window(window_name)
