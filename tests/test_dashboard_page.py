@@ -114,8 +114,18 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
 
-    def test_dashboard_page_description_link_is_visible_tc_024(self):
+    def test_dashboard_page_description_link_is_visible_and_clickable_tc_024(self):
         driver = DashboardPage(self.driver)
         assert driver.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         assert driver.is_clickable(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         assert driver.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_ICON)
+
+    def test_dashboard_page_description_link_can_be_add_text_tc_025(self):
+        driver = DashboardPage(self.driver)
+        driver.click(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
+        driver.clear(AddDescriptionLocators.TEXTAREA_DESCRIPTION)
+        driver.do_send_keys(AddDescriptionLocators.TEXTAREA_DESCRIPTION,
+                            AddDescriptionLocators.TEXT_TO_DESCRIPTION)
+        driver.click(AddDescriptionLocators.BUTTON_SUBMIT_DESCRIPTION)
+        assert driver.get_element_text(AddDescriptionLocators.VERIFY_DESCRIPTION_TEXT) == \
+               AddDescriptionLocators.TEXT_TO_DESCRIPTION
