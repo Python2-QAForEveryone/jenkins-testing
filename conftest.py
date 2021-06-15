@@ -71,7 +71,6 @@ def init_driver(request):
     driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
 
-
     yield
 
     driver.quit()
