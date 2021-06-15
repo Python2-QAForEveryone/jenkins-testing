@@ -30,6 +30,15 @@ class TestDashboardPage:
         driver.click(FooterLocators.FOOTER_REST_API)
         assert driver.get_current_url() == URLLocators.URL_FOOTER_REST_API
 
+    def test_dashboard_footer_version_can_be_click_tc_004(self):
+        driver = DashboardPage(self.driver)
+        driver.click(FooterLocators.FOOTER_VERSION)
+        old_name = driver.get_name_current_window()
+        new_name = driver.get_names_open_windows()[1]
+        driver.switch_to_window(new_name)
+        assert driver.get_current_url() == URLLocators.URL_FOOTER_VERSION
+        driver.switch_to_window(old_name)
+
     @pytest.mark.first
     def test_menu_selector_is_visible_and_clickable_tc_005(self):
         driver = DashboardPage(self.driver)

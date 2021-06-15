@@ -66,7 +66,7 @@ class AddDescriptionLocators:
 
 class FooterLocators:
     FOOTER_REST_API = (By.CLASS_NAME, 'rest_api')
-    FOOTER_VERSION = (By.CLASS_NAME, 'jenkins_ver')
+    FOOTER_VERSION = (By.XPATH, '//div[contains(@class, "jenkins_ver")]/a')
     locators_for_footer = [FOOTER_REST_API, FOOTER_VERSION]
 
 
