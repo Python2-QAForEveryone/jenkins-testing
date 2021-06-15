@@ -134,7 +134,7 @@ class TestDashboardPage:
     def test_dashboard_page_description_link_can_be_add_text_tc_025(self):
         driver = DashboardPage(self.driver)
         driver.click(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
-        driver.clear(AddDescriptionLocators.TEXTAREA_DESCRIPTION)
+        # driver.clear(AddDescriptionLocators.TEXTAREA_DESCRIPTION)
         driver.do_send_keys(AddDescriptionLocators.TEXTAREA_DESCRIPTION,
                             AddDescriptionLocators.TEXT_TO_DESCRIPTION)
         driver.click(AddDescriptionLocators.BUTTON_SUBMIT_DESCRIPTION)
