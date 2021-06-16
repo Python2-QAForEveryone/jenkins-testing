@@ -49,3 +49,16 @@ class ManageJenkins:
                          MANAGE_OLD_DATA, RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI,
                          SCRIPT_CONSOLE]
 
+    system_configuration_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS,
+                         MANAGE_NODES_AND_CLOUDS]
+
+    security_locators = [CONFIGURE_GLOBAL_SECURITY, MANAGE_CREDENTIALS,
+                         CONFIGURE_CREDENTIAL_PROVIDERS, MANAGE_USERS, IN_PROCESS_SCRIPT_APPROVAL]
+
+    status_information_locators = [SYSTEM_INFORMATION, SYSTEM_LOG, LOAD_STATISTICS, ABOUT_JENKINS]
+
+    troubleshooting_locators = [MANAGE_OLD_DATA]
+
+    tools_and_actions_locators = [RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI,
+                         SCRIPT_CONSOLE, PREPARE_FOR_SHUTDOWN]
+
