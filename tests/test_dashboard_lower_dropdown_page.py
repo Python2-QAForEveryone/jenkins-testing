@@ -89,6 +89,7 @@ class TestDashboardLowerDropdownPage:
         driver.get_wait(DashboardLowerDropdown.MANAGE_JENKINS)
         driver.hover_over_element(DashboardLowerDropdown.MANAGE_JENKINS)
         driver.get_wait(ManageJenkins.CONFIGURE_SYSTEM)
+        driver.get_wait(ManageJenkins.SCROLL_DOWN)
         driver.hover_over_element(ManageJenkins.SCROLL_DOWN)
         driver.get_wait(ManageJenkins.PREPARE_FOR_SHUTDOWN)
         assert driver.is_clickable(locator)

@@ -29,7 +29,7 @@ class ManageJenkins:
     MANAGE_CREDENTIALS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'credentials')]")
     CONFIGURE_CREDENTIAL_PROVIDERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureCredentials')]")
     MANAGE_USERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'securityRealm')]")
-    IN_PROCESS_SCRIPT_APPROVAL = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'scriptApproval')]")
+    IN_PROCESS_SCRIPT_APPROVAL = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'Approval')]")
     SYSTEM_INFORMATION = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'systemInfo')]")
     SYSTEM_LOG = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'log')]")
     LOAD_STATISTICS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'load-statistics')]")
@@ -40,7 +40,7 @@ class ManageJenkins:
     SCRIPT_CONSOLE = (By.XPATH, "(//li[(contains(@class,'yuimenuitem'))]/a[contains(@href, 'script')])[2]")
     PREPARE_FOR_SHUTDOWN = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'prepareShutdown')]")
 
-    SCROLL_DOWN = (By.XPATH, "//div[contains(@class,'ft bottomscrollbar')]")
+    SCROLL_DOWN = (By.XPATH, "//div[contains(@class,'bottomscrollbar')]")
 
     dropdown_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS,
                          MANAGE_NODES_AND_CLOUDS, CONFIGURE_GLOBAL_SECURITY, MANAGE_CREDENTIALS,
