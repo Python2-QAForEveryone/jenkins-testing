@@ -35,7 +35,7 @@ class ManageJenkins:
     LOAD_STATISTICS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'load-statistics')]")
     ABOUT_JENKINS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'about')]")
     MANAGE_OLD_DATA = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'administrativeMonitor')]")
-    RELOAD_CONFIGURATION_FROM_DISC = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[text() =' Reload Configuration from Disk']")
+    RELOAD_CONFIGURATION_FROM_DISC = (By.XPATH, "(//li[contains(@class,'yuimenuitem')]/a[contains(@href, '#')])[6]")
     JENKINS_CLI = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'cli')]")
     SCRIPT_CONSOLE = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[@href='/script']")
     PREPARE_FOR_SHUTDOWN = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'prepareShutdown')]")
@@ -49,16 +49,14 @@ class ManageJenkins:
                          MANAGE_OLD_DATA, RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI,
                          SCRIPT_CONSOLE]
 
-    system_configuration_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS,
-                         MANAGE_NODES_AND_CLOUDS]
+    system_configuration_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS, MANAGE_NODES_AND_CLOUDS]
 
     security_locators = [CONFIGURE_GLOBAL_SECURITY, MANAGE_CREDENTIALS,
                          CONFIGURE_CREDENTIAL_PROVIDERS, MANAGE_USERS, IN_PROCESS_SCRIPT_APPROVAL]
 
     status_information_locators = [SYSTEM_INFORMATION, SYSTEM_LOG, LOAD_STATISTICS, ABOUT_JENKINS]
 
-    troubleshooting_locators = [MANAGE_OLD_DATA]
+    troubleshooting_locators = [MANAGE_OLD_DATA, IN_PROCESS_SCRIPT_APPROVAL]
 
-    tools_and_actions_locators = [RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI,
-                         SCRIPT_CONSOLE, PREPARE_FOR_SHUTDOWN]
+    tools_and_actions_locators = [RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI, SCRIPT_CONSOLE, PREPARE_FOR_SHUTDOWN]
 
