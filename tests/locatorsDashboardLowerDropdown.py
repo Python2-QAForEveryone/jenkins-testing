@@ -29,7 +29,7 @@ class ManageJenkins:
     MANAGE_CREDENTIALS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'credentials')]")
     CONFIGURE_CREDENTIAL_PROVIDERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureCredentials')]")
     MANAGE_USERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'securityRealm')]")
-    IN_PROCESS_SCRIPT_APPROVAL = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[@href='/scriptApproval']")
+    IN_PROCESS_SCRIPT_APPROVAL = (By.XPATH, "(//li[contains(@class,'yuimenuitem')]/a[contains(@href,'/script')])[1]")
     SYSTEM_INFORMATION = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'systemInfo')]")
     SYSTEM_LOG = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'log')]")
     LOAD_STATISTICS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'load-statistics')]")
@@ -56,7 +56,7 @@ class ManageJenkins:
 
     status_information_locators = [SYSTEM_INFORMATION, SYSTEM_LOG, LOAD_STATISTICS, ABOUT_JENKINS]
 
-    troubleshooting_locators = [MANAGE_OLD_DATA, IN_PROCESS_SCRIPT_APPROVAL]
+    troubleshooting_locators = [MANAGE_OLD_DATA]
 
     tools_and_actions_locators = [RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI, SCRIPT_CONSOLE, PREPARE_FOR_SHUTDOWN]
 
