@@ -25,9 +25,11 @@ class ManageJenkins:
     GLOBAL_TOOL_CONFIGURATION = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureTools')]")
     MANAGE_PLUGINS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'pluginManager')]")
     MANAGE_NODES_AND_CLOUDS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'computer')]")
-    CONFIGURE_GLOBAL_SECURITY = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureSecurity')]")
+    CONFIGURE_GLOBAL_SECURITY = (
+    By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureSecurity')]")
     MANAGE_CREDENTIALS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'credentials')]")
-    CONFIGURE_CREDENTIAL_PROVIDERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureCredentials')]")
+    CONFIGURE_CREDENTIAL_PROVIDERS = (
+    By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'configureCredentials')]")
     MANAGE_USERS = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'securityRealm')]")
     IN_PROCESS_SCRIPT_APPROVAL = (By.XPATH, "(//li[contains(@class,'yuimenuitem')]/a[contains(@href,'/script')])[1]")
     SYSTEM_INFORMATION = (By.XPATH, "//li[contains(@class,'yuimenuitem')]/a[contains(@href, 'systemInfo')]")
@@ -49,7 +51,8 @@ class ManageJenkins:
                          MANAGE_OLD_DATA, RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI,
                          SCRIPT_CONSOLE]
 
-    system_configuration_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS, MANAGE_NODES_AND_CLOUDS]
+    system_configuration_locators = [CONFIGURE_SYSTEM, GLOBAL_TOOL_CONFIGURATION, MANAGE_PLUGINS,
+                                     MANAGE_NODES_AND_CLOUDS]
 
     security_locators = [CONFIGURE_GLOBAL_SECURITY, MANAGE_CREDENTIALS,
                          CONFIGURE_CREDENTIAL_PROVIDERS, MANAGE_USERS, IN_PROCESS_SCRIPT_APPROVAL]
@@ -60,3 +63,12 @@ class ManageJenkins:
 
     tools_and_actions_locators = [RELOAD_CONFIGURATION_FROM_DISC, JENKINS_CLI, SCRIPT_CONSOLE, PREPARE_FOR_SHUTDOWN]
 
+
+class URLLocators:
+    URL_NEW_ITEM = TestData.BASE_URL + 'view/all/newJob'
+    URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
+    URL_BUILD_HISTORY = TestData.BASE_URL + 'view/all/builds'
+    URL_MANAGE_JENKINS = TestData.BASE_URL + 'manage'
+    URL_MY_VIEWS = TestData.BASE_URL + 'me/my-views/view/all/'
+    URL_LOCKABLE_RESOURCES = TestData.BASE_URL + 'lockable-resources/'
+    URL_NEW_VIEW = TestData.BASE_URL + 'newView'
