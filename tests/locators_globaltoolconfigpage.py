@@ -57,7 +57,5 @@ class ButtonLocators:
 
     ids_buttons = ['ADD_JDK', 'DELETE_GIT', 'ADD_GRADLE', 'ADD_ANT', 'ADD_MAVEN', 'SAVE','APPLY']
 
-
-
 class Urllocators:
     URL_GLOBAL = TestData.BASE_URL + 'configureTools/'

@@ -29,4 +29,3 @@ class TestGlobalPage:
         driver = GlobalToolConfigPage(self.driver)
         driver.go_to_page(Urllocators.URL_GLOBAL)
         assert driver.is_clickable(locators)
-
