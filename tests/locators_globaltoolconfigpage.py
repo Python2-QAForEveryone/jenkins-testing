@@ -5,7 +5,7 @@ class NavigatetoGlobToolConfigLocators:
     DASHBOARD_LINK = (By.XPATH, "//a[text()='Dashboard']")
     PULLDOWN_ARROW = (By.ID, 'menuSelector')
     MANAGE_JENKINS_SUBMENU = (By.XPATH, ("//li[contains(@id,'yui-gen')]/a[contains(@href,'manage')]"))
-    GLOBTOOLGONG_SUBMENU = (By.XPATH, '//a[contains(text(),"Global Tool Configuration")]')
+    GLOBTOOLGONG_SUBMENU = (By.XPATH, ("//li[contains(@id,'yui-gen')]/a[contains(@href,'/configureTools')]"))
     PAGE_TITLE = (By.XPATH, '//h1[text()="Global Tool Configuration"]')
 
 class HeadersLocators:
