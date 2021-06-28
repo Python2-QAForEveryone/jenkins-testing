@@ -7,14 +7,15 @@ from tests.locators_globaltoolconfigpage import NavigatetoGlobToolConfigLocators
 class TestGlobalPage:
     def test_global_title(self):
         driver = GlobalToolConfiguration(self.driver)
-        driver.hover_over_element(NavigatetoGlobToolConfigLocators.DASHBOARD_LINK)
-        driver.click(NavigatetoGlobToolConfigLocators.PULLDOWN_ARROW)
-        driver.get_wait(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
-        driver.hover_over_element(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
-        driver.get_wait(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
-        driver.hover_element1_and_click_element2(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU,
-                                                 NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
-        driver.get_wait(NavigatetoGlobToolConfigLocators.PAGE_TITLE)
+        driver.go_to_page(Urllocators.URL_GLOBAL)
+        # driver.hover_over_element(NavigatetoGlobToolConfigLocators.DASHBOARD_LINK)
+        # driver.click(NavigatetoGlobToolConfigLocators.PULLDOWN_ARROW)
+        # driver.get_wait(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
+        # driver.hover_over_element(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
+        # driver.get_wait(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
+        # driver.hover_element1_and_click_element2(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU,
+        #                                          NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
+        # driver.get_wait(NavigatetoGlobToolConfigLocators.PAGE_TITLE)
         assert driver.get_title() == GlobalToolConfiguration.TITLE
 
     @pytest.mark.parametrize("locator", HeadersLocators.locators_globtoolpage_all,
