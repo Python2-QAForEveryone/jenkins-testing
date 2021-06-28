@@ -11,8 +11,9 @@ class TestGlobalPage:
         driver.click(NavigatetoGlobToolConfigLocators.PULLDOWN_ARROW)
         driver.get_wait(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
         driver.hover_over_element(NavigatetoGlobToolConfigLocators.MANAGE_JENKINS_SUBMENU)
-        driver.hover_over_element(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
-        driver.click(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
+        driver.get_wait(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
+        driver.hover_element1_and_click_element2(NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU,
+                                                 NavigatetoGlobToolConfigLocators.GLOBTOOLGONG_SUBMENU)
         driver.get_wait(NavigatetoGlobToolConfigLocators.PAGE_TITLE)
         assert driver.get_title() == GlobalToolConfiguration.TITLE
 
