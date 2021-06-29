@@ -1,6 +1,6 @@
 import pytest
 from pages.GlobalToolConfiguration import GlobalToolConfiguration
-from tests.locators_globaltoolconfigpage import NavigatetoGlobToolConfigLocators, HeadersLocators, ButtonLocators, \
+from tests.locators_global_tool_config_page import NavigatetoGlobToolConfigLocators, HeadersLocators, ButtonLocators, \
     Urllocators
 
 
