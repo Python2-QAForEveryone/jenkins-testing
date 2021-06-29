@@ -35,5 +35,4 @@ class TestCreatePeoplePage:
 
         button_delete = self.driver.find_element_by_xpath(f"//a[contains(@href, '/user/{name.lower()}/delete')]")
         button_delete.click()
-        time.sleep(2)
         self.driver.find_element_by_id("yui-gen1-button").click()
