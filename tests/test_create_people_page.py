@@ -29,7 +29,6 @@ class TestCreatePeoplePage:
         assert field[0] == name
 
         driver.go_to_page(URLLocators.URL_PEOPLE)
-
         user_delete = self.driver.find_element_by_xpath(f"//a[contains(text(),'{name}')]")
         user_delete.click()
 
