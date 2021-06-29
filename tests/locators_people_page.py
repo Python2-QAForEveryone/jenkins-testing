@@ -41,9 +41,10 @@ class IdUsersLocator:
 
 
 class InputFormNewUser:
-    CREATE_USERNAME = (By.ID, 'username')
+    CREATE_USERNAME = (By.ID, "username")
     CREATE_PASSWORD = (By.NAME, 'password1')
     CONFIRM_PASSWORD = (By.NAME, 'password2')
     CREATE_FULLNAME = (By.NAME, 'fullname')
     CREATE_EMAIL = (By.NAME, 'email')
-    FIELD_NEW_USER = (By.XPATH, '//tr[@id=\'person-user1\']')
+
+

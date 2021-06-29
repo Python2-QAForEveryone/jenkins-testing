@@ -38,3 +38,9 @@ class CreateUserPage(BasePage):
 
     def find_element_by_xpath(self, locator):
         self.driver.find_element_by_xpath(locator)
+
+    def find_element_by_link_text(self, text):
+        self.driver.find_element_by_link_text(text)
+
+    def find_element_by_id(self, _id):
+        self.find_element_by_id(_id)
