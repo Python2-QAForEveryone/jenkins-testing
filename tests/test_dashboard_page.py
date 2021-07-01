@@ -1,12 +1,37 @@
 import pytest
 
-from pages.BasePage import BasePage
-from pages.DashboardPage import DashboardPage
-from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, \
-    URLLocators, EmptyStateBlock
+from pages.DashboardPage import *
 
 
 class TestDashboardPage:
+    """
+    TestDashboardPage includes testing first/main page after log in, which has name DashboardPage
+
+    list of the tests:
+        test_title
+        test_new_item
+        test_dashboard_menu_anchor_is_clickable_tc_001
+        test_footer_all_elements_visible_and_clickable_tc_002
+        test_dashboard_footer_rest_api_clickable_tc_003
+        test_dashboard_footer_version_can_be_click_tc_004
+        test_menu_selector_is_visible_and_clickable_tc_005
+        test_right_button_all_is_clickable_tc_006
+        test_dashboard_all_element_is_visible_tc_008
+        test_dashboard_all_element_is_clickable_tc_009
+        test_dashboard_new_item_clickable_tc_010
+        test_dashboard_people_clickable_tc_011
+        test_dashboard_buile_history_clickable_tc_012
+        test_dashboard_manage_jenkins_clickable_tc_013
+        test_dashboard_my_view_clickable_tc_014
+        test_dashboard_lockable_resources_clickable_tc_015
+        test_dashboard_new_view_clickable_tc_016
+        test_dashboard_build_queue_executor_is_visible_tc_021
+        test_dashboard_build_queue_executor_clickable_tc_022
+        test_elements_are_visible_tc_023
+        test_elements_are_clickable_tc_023
+        test_dashboard_page_description_link_is_visible_and_clickable_tc_024
+        test_dashboard_page_description_link_can_be_click_tc_025
+    """
 
     def test_title(self):
         assert BasePage.get_title(self) == DashboardPage.TITLE
@@ -39,7 +64,6 @@ class TestDashboardPage:
                 new_name = i
         driver.switch_to_window(new_name)
         assert driver.get_current_url() == URLLocators.URL_FOOTER_VERSION
-
 
     @pytest.mark.first
     def test_menu_selector_is_visible_and_clickable_tc_005(self):
@@ -140,5 +164,3 @@ class TestDashboardPage:
         driver.click(AddDescriptionLocators.BUTTON_SUBMIT_DESCRIPTION)
         assert driver.get_element_text(AddDescriptionLocators.VERIFY_DESCRIPTION_TEXT) == \
                AddDescriptionLocators.TEXT_TO_DESCRIPTION
-
-
