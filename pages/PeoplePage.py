@@ -47,10 +47,3 @@ class IdUsersLocator:
     locator_id_user_arrow = [TABLE_USER_ID_ARROW]
     TABLE_USER_ID = (By.XPATH, '//*[@id="people"]/tbody/tr[1]/th[2]/a')
     locator_id_user = [TABLE_USER_ID]
-
-# class InputFormNewUser:
-#     CREATE_USERNAME = (By.ID, "username")
-#     CREATE_PASSWORD = (By.NAME, 'password1')
-#     CONFIRM_PASSWORD = (By.NAME, 'password2')
-#     CREATE_FULLNAME = (By.NAME, 'fullname')
-#     CREATE_EMAIL = (By.NAME, 'email')
