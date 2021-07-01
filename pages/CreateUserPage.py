@@ -1,3 +1,5 @@
+from selenium.webdriver.common.by import By
+
 from pages.BasePage import BasePage
 
 
@@ -12,6 +14,7 @@ class CreateUserPage(BasePage):
     fullname_name = "fullname"
     email_name = "email"
     button_create_id = "yui-gen1-button"
+    user = (By.ID, "username")
 
     def enter_username(self, username):
         self.driver.find_element_by_id(self.username_id).clear()
