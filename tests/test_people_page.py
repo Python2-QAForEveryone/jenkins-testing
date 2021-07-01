@@ -1,7 +1,7 @@
 import pytest
 
 from pages.PeoplePage import PeoplePage
-from tests.locators_people_page import PeoplePageLocator, URLLocators
+from pages.PeoplePage import PeoplePageLocator, URLLocators
 
 
 class TestPagePeople:
