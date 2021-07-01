@@ -2,12 +2,14 @@ import random
 import string
 
 from selenium.webdriver.common.by import By
-
 from pages.BasePage import BasePage
 
 
 class CreateUserPage(BasePage):
-
+    """
+    initialized driver
+    added moving to the BasePage after log in
+    """
     def __init__(self, driver):
         super().__init__(driver)
 

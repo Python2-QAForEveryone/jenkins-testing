@@ -5,7 +5,11 @@ from pages.BasePage import BasePage
 
 
 class PeoplePage(BasePage):
-    TITLE = 'People - [Jenkins]'
+
+    """
+    initialized driver
+    added moving to the BasePage after log in
+    """
 
     def __init__(self, driver):
         super().__init__(driver)
