@@ -1,19 +1,45 @@
 import pytest
 
-from pages.BasePage import BasePage
-from pages.DashboardPage import DashboardPage
-from tests.locators_dashboard_page import DashboardPageLocators, FooterLocators, BuildLocators, AddDescriptionLocators, \
-    URLLocators, EmptyStateBlock
+from pages.DashboardPage import *
 
 
 class TestDashboardPage:
+    """
+    TestDashboardPage includes testing first/main page after log in, which has name DashboardPage
+
+    list of the tests:
+        test_title
+        test_new_item
+        test_dashboard_menu_anchor_is_clickable_tc_001
+        test_footer_all_elements_visible_and_clickable_tc_002
+        test_dashboard_footer_rest_api_clickable_tc_003
+        test_dashboard_footer_version_can_be_click_tc_004
+        test_menu_selector_is_visible_and_clickable_tc_005
+        test_right_button_all_is_clickable_tc_006
+        test_dashboard_all_element_is_visible_tc_008
+        test_dashboard_all_element_is_clickable_tc_009
+        test_dashboard_new_item_clickable_tc_010
+        test_dashboard_people_clickable_tc_011
+        test_dashboard_buile_history_clickable_tc_012
+        test_dashboard_manage_jenkins_clickable_tc_013
+        test_dashboard_my_view_clickable_tc_014
+        test_dashboard_lockable_resources_clickable_tc_015
+        test_dashboard_new_view_clickable_tc_016
+        test_dashboard_build_queue_executor_is_visible_tc_021
+        test_dashboard_build_queue_executor_clickable_tc_022
+        test_elements_are_visible_tc_023
+        test_elements_are_clickable_tc_023
+        test_dashboard_page_description_link_is_visible_and_clickable_tc_024
+        test_dashboard_page_description_link_can_be_click_tc_025
+    """
 
     def test_title(self):
-        assert BasePage.get_title(self) == DashboardPage.TITLE
+        assert BasePage.get_title(self) == Titles.TITLE_DASHBOARD_PAGE
 
     def test_new_item(self):
         new_item = DashboardPage(self.driver)
-        new_item.click(DashboardPage.NEW_ITEM)
+        new_item.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        assert BasePage.get_title(self) == Titles.TITLE_NEW_ITEM
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
         driver = DashboardPage(self.driver)
@@ -40,8 +66,6 @@ class TestDashboardPage:
         driver.switch_to_window(new_name)
         assert driver.get_current_url() == URLLocators.URL_FOOTER_VERSION
 
-
-    @pytest.mark.first
     def test_menu_selector_is_visible_and_clickable_tc_005(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.RIGHT_ARROW)
@@ -71,7 +95,6 @@ class TestDashboardPage:
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
         assert driver.get_current_url() == URLLocators.URL_NEW_ITEM
 
-    @pytest.mark.first
     def test_dashboard_people_clickable_tc_011(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_PEOPLE)
@@ -131,7 +154,7 @@ class TestDashboardPage:
         assert driver.is_clickable(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         assert driver.is_visible(AddDescriptionLocators.ADD_DESCRIPTION_ICON)
 
-    def test_dashboard_page_description_link_can_be_add_text_tc_025(self):
+    def test_dashboard_page_description_link_can_be_click_tc_025(self):
         driver = DashboardPage(self.driver)
         driver.click(AddDescriptionLocators.ADD_DESCRIPTION_LINK)
         # driver.clear(AddDescriptionLocators.TEXTAREA_DESCRIPTION)

@@ -4,6 +4,28 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
+    """
+    list of the methods:
+        init
+        get_title
+        get_current_url
+        go_to_page
+        click
+        clear
+        is_visible
+        is_clickable
+        get_element
+        get_element_text
+        get_wait
+        do_send_keys
+        scroll_to_bottom
+        js_click
+        hover_over_element
+        hover_element1_and_click_element2
+        get_name_current_window
+        get_names_open_windows
+        switch_to_window
+    """
 
     def __init__(self, driver):
         self.driver = driver
