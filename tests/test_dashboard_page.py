@@ -89,6 +89,7 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
 
+    @pytest.mark.first
     def test_dashboard_new_item_clickable_tc_010(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
