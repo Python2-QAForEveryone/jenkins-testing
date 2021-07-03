@@ -5,7 +5,6 @@ from pages.BasePage import BasePage
 
 
 class PeoplePage(BasePage):
-
     """
     initialized driver
     added moving to the BasePage after log in
@@ -14,8 +13,7 @@ class PeoplePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-
-TITLE = "People - [Jenkins]"
+    TITLE = "People - [Jenkins]"
 
 
 class PeoplePageLocator:

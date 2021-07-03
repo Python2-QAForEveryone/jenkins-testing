@@ -5,6 +5,7 @@ from pages.PeoplePage import PeoplePageLocator, URLLocators
 
 
 class TestPagePeople:
+
     def test_people_title_001(self):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
