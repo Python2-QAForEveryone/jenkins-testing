@@ -6,6 +6,7 @@ from pages.BasePage import BasePage
 
 
 class CreateUserPage(BasePage):
+
     """
     initialized driver
     added moving to the BasePage after log in
@@ -23,6 +24,6 @@ class CreateUserPage(BasePage):
     button_create_id = (By.ID, "yui-gen1-button")
 
     USER_NAME = (By.XPATH, f'//tr[@id=\'person-{name}\']')
-    PEOPLE_DELETE = (By.XPATH, f"//a[contains(@href, '/user/{name.lower()}')]" )
+    PEOPLE_DELETE = (By.XPATH, f"//a[contains(@href, '/user/{name.lower()}')]")
     BUTTON_DELETE = (By.XPATH, f"//a[contains(@href, '/user/{name.lower()}/delete')]")
-    BUTTON_YES =(By.ID, "yui-gen1-button")
+    BUTTON_YES = (By.ID, "yui-gen1-button")
