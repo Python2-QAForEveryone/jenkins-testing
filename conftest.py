@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from config.TestData import TestData as TD
+from config.TestDataMy import TestData as TD
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

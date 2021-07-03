@@ -34,11 +34,12 @@ class TestDashboardPage:
     """
 
     def test_title(self):
-        assert BasePage.get_title(self) == DashboardPage.TITLE
+        assert BasePage.get_title(self) == Titles.TITLE_DASHBOARD_PAGE
 
     def test_new_item(self):
         new_item = DashboardPage(self.driver)
-        new_item.click(DashboardPage.NEW_ITEM)
+        new_item.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        assert BasePage.get_title(self) == Titles.TITLE_NEW_ITEM
 
     def test_dashboard_menu_anchor_is_clickable_tc_001(self):
         driver = DashboardPage(self.driver)
@@ -89,13 +90,11 @@ class TestDashboardPage:
         driver = DashboardPage(self.driver)
         assert driver.is_clickable(locator)
 
-    @pytest.mark.first
     def test_dashboard_new_item_clickable_tc_010(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
         assert driver.get_current_url() == URLLocators.URL_NEW_ITEM
 
-    @pytest.mark.first
     def test_dashboard_people_clickable_tc_011(self):
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_PEOPLE)
