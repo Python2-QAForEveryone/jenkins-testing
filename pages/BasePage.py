@@ -37,7 +37,7 @@ class BasePage:
         element = WebDriverWait(self.driver, 2).until(condition)
         return bool(element)
 
-    def is_element_present(self, locator: tuple):
+    def is_element_not_present(self, locator: tuple):
         try:
             self.driver.find_element(locator[0], locator[1])
         except NoSuchElementException as e:

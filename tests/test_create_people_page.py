@@ -29,10 +29,9 @@ class TestCreateUserPage:
         driver.go_to_page(URLLocators.URL_PEOPLE)
 
         driver.get_element(CreateUserPage.PEOPLE_DELETE).click()
-        # user.click()
         driver.get_element(CreateUserPage.BUTTON_DELETE).click()
         driver.get_element(CreateUserPage.BUTTON_YES).click()
 
         driver.go_to_page(URLLocators.URL_PEOPLE)
 
-        assert driver.is_element_present(CreateUserPage.PEOPLE_DELETE)
+        assert driver.is_element_not_present(CreateUserPage.PEOPLE_DELETE)
