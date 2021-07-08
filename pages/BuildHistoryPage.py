@@ -14,21 +14,13 @@ class BuildHistoryPage(BasePage):
     TITLE_= (By.XPATH, '//*[contains(text(),"of Jenkins")]')
     SUBTITLE_= (By.XPATH, "//*[contains(text(),' is not guaranteed')]")
     PROJECT_STATUS_BUTTN= (By.XPATH, '//*[@id="projectStatus"]/tbody/tr/th[2]/a')
-    # role=generic
     BHP_TABLE_HEADER = (By.XPATH, "//table[contains(@class,'sortable pane bigtable')]")
-    #table header
     BHP_TABLE_HEADER1 = (By.XPATH, '//*[@id="timeline-band-0"]')
-    # its a link
     LEGEND_BTN =(By.XPATH, "//*[@id='rss - bar']/a")
-    # role=generic
     ATOM_FEED_FORALL= (By.XPATH, '//*[@id="rss - bar"]/span[1]/a/span[2]')
-    # role=generic
     ATOM_FEED_FORFAILURES = (By.XPATH, ' "rss-bar"] / span[1] / a / span[2]')
-    # role=generic
     ATOM_FEED_FOR_LIST_BUILDS = (By.XPATH, '// *[ @ id = "rss-bar"] / span[3] / a / span[2]')
-    # its a link
     REST_API = (By.XPATH, "//*[@id='jenkins']/footer/div/div/div[2]/a")
-    # its a link
     JENKINS_VERS_NUMBER = (By.XPATH, '//*[@id="jenkins"]/footer/div/div/div[3]/a')
 
     def __init__(self, driver):
