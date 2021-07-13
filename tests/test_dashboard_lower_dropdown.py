@@ -1,11 +1,47 @@
 import pytest
 
-from pages.DashboardLowerDropdownModule import DashboardLowerDropdownModule
-from tests.locatorsDashboardLowerDropdown import DashboardLowerDropdownModuleLocators, DashboardLowerDropdown, \
+from pages.DashboardLowerDropdownModule import DashboardLowerDropdownModule, DashboardLowerDropdownModuleLocators, DashboardLowerDropdown, \
     ManageJenkins, URLLocators
 
-
 class TestDashboardLowerDropdownPage:
+    """
+        TestDashboardLowerDropdownPage has tests of the Dashboard dropdown.
+
+        test_dashboard_link_is_visible_and_clickable_01 - Dashboard link is visible and clickable
+
+        Dashboard link returns user to Home Page
+
+        test_dashboard_down_arrow_is_visible_and_clickable_02 - Dashboard down arrow is visible and clickable
+
+        test_dashboard_lower_dropdown_items_visible_04 - after click on down arrow on dashboard lower dropdown
+        menu, items are visible : New Item, People, Build History, Manage Jenkins, My Views, Lockable Resources,
+        New View.
+
+        test_dashboard_lower_dropdown_items_clickable_03 - after click on down arrow on dashboard lower dropdown
+        menu, items are clickable : New Item, People, Build History, Manage Jenkins, My Views, Lockable Resources,
+        New View.
+
+        test_manage_jenkins_dropdown_items_clickable_and_visible_05 - after navigate on Manage Jenkins,
+        menu items are visible and clickable: Configure System, Global Tool Configuration, Manage Plugins,
+        Manage Nodes and Clouds.
+
+        test_manage_jenkins_dropdown_items_clickable_and_visible_06 - after navigate on Manage Jenkins,
+        menu items are visible and clickable: Configure Global Security, Manage Credentials,
+        Configure Credential Providers, Manage Users, In-process Script Approval.
+
+        test_manage_jenkins_dropdown_items_clickable_and_visible_07 - after navigate on Manage Jenkins,
+        menu items are visible and clickable: System Information, System Log, Load Statistics, About Jenkins.
+
+        test_manage_jenkins_dropdown_items_clickable_and_visible_08 - after navigate on Manage Jenkins,
+        menu items are visible and clickable: Manage Old Data.
+
+        test_manage_jenkins_dropdown_items_clickable_and_visible_09 - after navigate on Manage Jenkins,
+        menu items are visible and clickable: Reload Configuration from Disc, Jenkins CLI, Script Console,
+        Prepare for Shutdown.
+
+        test_goto_newItem_from_dropdown_10 - test_goto_newView_from_dropdown_16 -
+        On click on all dropdown menu items the correct page is open.
+        """
 
     def test_dashboard_link_is_visible_and_clickable_01(self):
         driver = DashboardLowerDropdownModule(self.driver)
