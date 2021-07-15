@@ -3,7 +3,6 @@ from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
 
 
-
 class BuildHistoryPage(BasePage):
     TITLE = 'Build History of Jenkins'
     BUILD_HISTORY_ITEM = (By.XPATH, '//a[@TITLE1="Build History"]')
@@ -22,11 +21,8 @@ class BuildHistoryPage(BasePage):
     ATOM_FEED_FOR_LIST_BUILDS = (By.XPATH, '// *[ @ id = "rss-bar"] / span[3] / a / span[2]')
     REST_API = (By.XPATH, "//*[@id='jenkins']/footer/div/div/div[2]/a")
     JENKINS_VERS_NUMBER = (By.XPATH, '//*[@id="jenkins"]/footer/div/div/div[3]/a')
-
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)
 
     def get_currenturl(self):
         return self.driver.current_url
-
-

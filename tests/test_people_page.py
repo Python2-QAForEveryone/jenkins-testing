@@ -1,10 +1,11 @@
 import pytest
 
 from pages.PeoplePage import PeoplePage
-from tests.locators_people_page import PeoplePageLocator, URLLocators, IdUsersLocator
+from pages.PeoplePage import PeoplePageLocator, URLLocators
 
 
 class TestPagePeople:
+
     def test_people_title_001(self):
         driver = PeoplePage(self.driver)
         driver.go_to_page(URLLocators.URL_PEOPLE)
