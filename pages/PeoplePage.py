@@ -42,6 +42,7 @@ class PeoplePageLocator:
 class URLLocators:
     URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'
     URL_PEOPLE_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
+    URL_PEOPLE_MANAGE = TestData.BASE_URL + 'securityRealm/'
 
 
 class IdUsersLocator:
