@@ -3,17 +3,16 @@ from pages.BuildHistoryPage import BuildHistoryPage
 import pytest
 
 
-
 class TestBuildHistory:
 
-    def test_buildhistoryurlvisible(self):
+    def test_build_history_url_visible(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.PAGE_URL)
         curr_url = str(BasePage.get_current_url(self))
         assert (BuildHistoryPage.BHP_HREF in curr_url)
 
     @pytest.mark.skip
-    #added skip as the test, because it was failing previosly
+    # added skip as the test, because it was failing previously
     def test_build_history_logo_visible(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.PAGE_URL)
