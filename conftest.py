@@ -22,7 +22,7 @@ def is_grid_up():
         return False
 
     print('Grid is UP!')
-    return response.status_code == 200
+    return response.status_code == 500
 
 
 def init_remote_driver_chrome():
