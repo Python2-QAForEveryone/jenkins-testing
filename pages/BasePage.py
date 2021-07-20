@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -57,6 +58,13 @@ class BasePage:
         condition = EC.element_to_be_clickable(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
         return bool(element)
+
+    def is_element_not_present(self, locator: tuple):
+        try:
+            self.driver.find_element(locator[0], locator[1])
+        except NoSuchElementException as e:
+            return True
+        return False
 
     def get_element(self, locator):
         element = self.driver.find_element(locator[0], locator[1])
