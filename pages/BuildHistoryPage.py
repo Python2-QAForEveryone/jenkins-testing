@@ -26,7 +26,5 @@ class BuildHistoryPage(BasePage):
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)
 
-    def get_currenturl(self):
-        return self.driver.current_url
 
 
