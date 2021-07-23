@@ -108,7 +108,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
 
-        assert driver.is_element_present(FolderPageLocator.WRONG_REQUEST)
+        assert driver.get_title() == FolderPage.WRONG_TITLE
 
     def test_name_whitespace(self):
         driver = FolderPage(self.driver)
