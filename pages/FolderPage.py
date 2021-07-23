@@ -15,8 +15,10 @@ class FolderPage(BasePage):
         super().__init__(driver)
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
+    long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
 
     TITLE = f"{name} Config [Jenkins]"
+    WRONG_TITLE = "Jenkins [Jenkins]"
 
 
 class FolderPageLocator:
@@ -24,9 +26,10 @@ class FolderPageLocator:
     ITEM_NAME = (By.ID, 'name')
     LINK_FOLDER = (By.CLASS_NAME, 'com_cloudbees_hudson_plugins_folder_Folder')
     OK_BUTTON = (By.XPATH, '//span[@class="yui-button primary large-button"]')
+    WRONG_REQUEST = (By.XPATH,
+                     '//div[@id="error-description"]/h2[contains(text(),"A problem occurred ")]')
 
 
 class URLLocators:
-
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
     URL_PEOPLE_MANAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
