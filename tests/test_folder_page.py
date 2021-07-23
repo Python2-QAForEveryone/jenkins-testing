@@ -1,3 +1,4 @@
+import time
 
 from pages.FolderPage import FolderPage
 from pages.FolderPage import FolderPageLocator, URLLocators
@@ -107,7 +108,7 @@ class TestFolderPage:
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
-
+        time.sleep(5)
         assert driver.get_title() == FolderPage.WRONG_TITLE
 
     def test_name_whitespace(self):
