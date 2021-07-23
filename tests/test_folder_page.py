@@ -101,15 +101,6 @@ class TestFolderPage:
         assert driver.is_element_present(FolderPageLocator.OK_BUTTON_DISABLED)
         assert driver.is_element_present(FolderPageLocator.ITEM_NAME_NOT_ALLOWED)
 
-    def test_name_folder_three_or_more_dot(self):
-        driver = FolderPage(self.driver)
-        driver.go_to_page(URLLocators.URL_FOLDER_CREATE)
-
-        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
-        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
-        driver.get_element(FolderPageLocator.OK_BUTTON).click()
-        time.sleep(5)
-        assert driver.get_title() == FolderPage.WRONG_TITLE
 
     def test_name_whitespace(self):
         driver = FolderPage(self.driver)
