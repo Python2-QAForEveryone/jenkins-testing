@@ -14,10 +14,25 @@ class FolderPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '[', ']', '<', '>', '/', '\\', '|', ':', ';']
+
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
+    name_start_special_ch = (''.join(random.choice(special_characters))) \
+                            + (''.join(random.choice(string.ascii_letters) for i in range(9)))
+    name_inside_special_ch = (''.join(random.choice(string.digits) for i in range(3))) \
+                             + (''.join(random.choice(special_characters))) \
+                             + (''.join(random.choice(string.ascii_letters) for i in range(6)))
+    name_digits = (''.join(random.choice(string.digits) for i in range(10)))
+    name_empty = (' '.join(random.choice(string.whitespace) for i in range(2)))
+    name_start_dot = '.' + (''.join(random.choice(string.ascii_letters) for i in range(9)))
+    name_inside_dot = (''.join(random.choice(string.digits) for i in range(3)))\
+                      + '.' + (''.join(random.choice(string.ascii_letters) for i in range(6)))
 
     TITLE = f"{name} Config [Jenkins]"
+    TITLE_DIGITS = f"{name_digits} Config [Jenkins]"
+    TITLE_DOT = f"{name_inside_dot} Config [Jenkins]"
+
     WRONG_TITLE = "Jenkins [Jenkins]"
 
 
@@ -28,7 +43,10 @@ class FolderPageLocator:
     OK_BUTTON = (By.XPATH, '//span[@class="yui-button primary large-button"]')
     WRONG_REQUEST = (By.XPATH,
                      '//div[@id="error-description"]/h2[contains(text(),"A problem occurred ")]')
-
+    ITEM_NAME_INVALID = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is an unsafe character')]")
+    ERROR_PAGE = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'is an unsafe character')]")
+    ITEM_NAME_REQUIRED = (By.XPATH, "//div[@id='itemname-required'][contains(text(),'This field cannot be empty')]")
+    ITEM_NAME_NOT_ALLOWED = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'» “.” is not an allowed name')]")
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
