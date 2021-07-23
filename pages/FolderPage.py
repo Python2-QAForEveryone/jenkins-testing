@@ -16,6 +16,8 @@ class FolderPage(BasePage):
 
     special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '[', ']', '<', '>', '/', '\\', '|', ':', ';']
     dots = ['.', '..']
+    three_or_more_dots = ['...', '....', '.....', '......', '.......', '........']
+    white_spaces = [' ', '  ', '   ', '    ', '     ', '      ', '       ', '        ']
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
@@ -30,11 +32,14 @@ class FolderPage(BasePage):
     name_inside_dot = (''.join(random.choice(string.digits) for i in range(3))) \
                       + '.' + (''.join(random.choice(string.ascii_letters) for i in range(6)))
     name_only_one_or_two_dot = (''.join(random.choice(dots)))
+    name_only_three_or_more_dots = (''.join(random.choice(three_or_more_dots)))
+    name_whitespace = (''.join(random.choice(white_spaces)))
 
     TITLE = f"{name} Config [Jenkins]"
     TITLE_DIGITS = f"{name_digits} Config [Jenkins]"
     TITLE_START_DOT = f"{name_start_dot} Config [Jenkins]"
     TITLE_INSIDE_DOT = f"{name_inside_dot} Config [Jenkins]"
+    TITLE_THREE_START_DOT = f"{name_only_three_or_more_dots} Config [Jenkins]"
 
     WRONG_TITLE = "Jenkins [Jenkins]"
 
@@ -51,7 +56,7 @@ class FolderPageLocator:
     ERROR_PAGE = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'is an unsafe character')]")
     ITEM_NAME_REQUIRED = (By.XPATH, "//div[@id='itemname-required'][contains(text(),'This field cannot be empty')]")
     ITEM_NAME_NOT_ALLOWED = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is not an allowed name')]")
-
+    ERROR_PAGE_NONAME = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'No name is specified')]")
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
