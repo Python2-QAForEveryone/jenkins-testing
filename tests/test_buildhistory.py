@@ -11,8 +11,7 @@ class TestBuildHistory:
         curr_url = str(BasePage.get_current_url(self))
         assert (BuildHistoryPage.BHP_HREF in curr_url)
 
-    @pytest.mark.skip
-    # added skip as the test, because it was failing previously
+    @pytest.mark.skip(reason="because it was failing previously, need some additional research")
     def test_build_history_logo_visible(self):
         bhp_driver = BuildHistoryPage(self.driver)
         bhp_driver.go_to_page(BuildHistoryPage.PAGE_URL)
