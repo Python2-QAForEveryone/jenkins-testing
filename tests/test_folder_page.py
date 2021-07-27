@@ -71,6 +71,7 @@ class TestFolderPage:
 
         assert driver.get_title() == FolderPage.TITLE_START_DOT
 
+
     def test_name_folder_inside_dot(self):
         driver = FolderPage(self.driver)
         driver.go_to_page(URLLocators.URL_FOLDER_CREATE)
