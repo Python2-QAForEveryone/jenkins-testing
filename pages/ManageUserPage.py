@@ -39,12 +39,13 @@ class ManageUserPage(BasePage):
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
 
     def go_to_manage_user_page(self):
-        self.driver = DashboardPage(self.driver)
-        self.driver.click(DashboardPageLocators.TEXT_MANAGE_JENKINS)
-        self.driver.click(ManageJenkinsPageLocators.MANAGE_USERS)
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page('http://localhost:8080/securityRealm/')
+        return self
 
-    def click_button_create_user(self):
-        self.driver.click(ManageUserPage.CREATE_USER)
+    def click_button_create_new_user(self):
+        self.driver.click(self.CREATE_USER)
+        return self
 
     def fill_all_field_and_click_save(self):
         self.driver.do_send_keys(ManageUserPage.username_id, ManageUserPage.name)
@@ -53,3 +54,4 @@ class ManageUserPage(BasePage):
         self.driver.do_send_keys(ManageUserPage.fullname_name, f"User {ManageUserPage.name}")
         self.driver.do_send_keys(ManageUserPage.email_name, f"{ManageUserPage.name}@gmail.com")
         self.driver.click(ManageUserPage.BUTTON_CREATE_ID)
+        return self
