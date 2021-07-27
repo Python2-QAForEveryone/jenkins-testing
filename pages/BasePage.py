@@ -66,6 +66,13 @@ class BasePage:
             return True
         return False
 
+    def is_element_present(self, locator: tuple):
+        try:
+            self.driver.find_element(locator[0], locator[1])
+        except NoSuchElementException as e:
+            return False
+        return True
+
     def get_element(self, locator):
         element = self.driver.find_element(locator[0], locator[1])
         return element
