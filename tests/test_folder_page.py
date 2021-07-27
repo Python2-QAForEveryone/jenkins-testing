@@ -26,6 +26,7 @@ class TestFolderPage:
     def test_name_folder_start_special_ch(self):
         driver = FolderPage(self.driver)
         driver.go_to_page(URLLocators.URL_FOLDER_CREATE)
+
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_start_special_ch)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
 
@@ -65,6 +66,8 @@ class TestFolderPage:
     def test_name_folder_start_dot(self):
         driver = FolderPage(self.driver)
         driver.go_to_page(URLLocators.URL_FOLDER_CREATE)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_start_dot)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_start_dot)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
