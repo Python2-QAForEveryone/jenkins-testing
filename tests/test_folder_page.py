@@ -68,8 +68,6 @@ class TestFolderPage:
         driver.go_to_page(URLLocators.URL_FOLDER_CREATE)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_start_dot)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
-        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_start_dot)
-        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
 
         assert driver.get_title() == FolderPage.TITLE_START_DOT
