@@ -13,6 +13,7 @@ class FolderPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.go_to_page(URLLocators.URL_FOLDER_CREATE)
 
     special_characters = ['!', '@', '#', '$', '%', '^', '&', '*', '[', ']', '<', '>', '/', '\\', '|', ':', ';']
     dots = ['.', '..']
