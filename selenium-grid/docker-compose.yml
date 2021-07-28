@@ -34,8 +34,8 @@ services:
     privileged: true
     user: root
     restart: unless-stopped
-#    ports:
-#      - "8080:8080"
+    ports:
+      - "8080:8080"
 #      - "50000:50000"
 #    networks:
 #      jenkins-net:
