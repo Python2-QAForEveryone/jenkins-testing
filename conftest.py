@@ -28,6 +28,7 @@ def is_grid_up():
 
 def init_remote_driver_chrome():
     if is_grid_up():
+        print("\n" + "@"*30 )
         caps = DesiredCapabilities.CHROME.copy()
         driver = webdriver.Remote(command_executor=REMOTE_URL,
                                   desired_capabilities=caps)
