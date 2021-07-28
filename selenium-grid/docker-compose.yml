@@ -11,7 +11,7 @@ services:
     environment:
       HUB_HOST: hub
     extra_hosts:
-      - "localhost:${HOST_IP}"
+      - "localhost.host:${HOST_IP}"
 
   firefox:
     image: selenium/node-firefox:3.141.59-zirconium
@@ -22,7 +22,7 @@ services:
     environment:
       HUB_HOST: hub
     extra_hosts:
-      - "localhost:${HOST_IP}"
+      - "localhost.host:${HOST_IP}"
 
   hub:
     image: selenium/hub:3.141.59-zirconium
@@ -34,9 +34,9 @@ services:
     privileged: true
     user: root
     restart: unless-stopped
-    ports:
-      - "8080:8080"
-      - "50000:50000"
+#    ports:
+#      - "8080:8080"
+#      - "50000:50000"
 #    networks:
 #      jenkins-net:
 #        aliases:
@@ -48,5 +48,5 @@ volumes:
   jenkins-data:
     driver: local
 
-networks:
-  jenkins-net:
+#networks:
+#  jenkins-net:

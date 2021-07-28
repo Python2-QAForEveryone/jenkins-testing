@@ -22,6 +22,7 @@ def is_grid_up():
         return False
 
     print('Grid is UP!')
+    print("\n"+"!!!!!!!!!!!!!!!!!!!!!"+response.status_code)
     return response.status_code == 500
 
 
