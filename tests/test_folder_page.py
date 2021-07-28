@@ -1,15 +1,18 @@
+import pytest
 from pages.FolderPage import FolderPage
 from pages.FolderPage import FolderPageLocator
 
 
 class TestFolderPage:
 
-    def test_create_folder(self):
+    @pytest.mark.parametrize('execution_number', range(1))
+    def test_create_folder(self, execution_number):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
         driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_JOB
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
@@ -44,6 +47,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_DIGITS
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
         driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_DIGITS_JOB
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
@@ -62,6 +66,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_START_DOT
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
         driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_START_DOT_JOB
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
@@ -73,6 +78,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_INSIDE_DOT
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
         driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
         assert driver.get_title() == FolderPage.TITLE_INSIDE_DOT_JOB
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
