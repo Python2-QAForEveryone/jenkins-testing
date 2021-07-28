@@ -10,7 +10,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
 REMOTE_URL = 'http://127.0.0.1:4444/wd/hub'
 
 
@@ -22,16 +21,15 @@ def is_grid_up():
         return False
 
     print('Grid is UP!')
-    print("\n","!!!!!!!!!!!!!!!!!!!!!",response.status_code)
     return response.status_code == 500
 
 
 def init_remote_driver_chrome():
     if is_grid_up():
-        print("\n", "@"*30 )
         caps = DesiredCapabilities.CHROME.copy()
         driver = webdriver.Remote(command_executor=REMOTE_URL,
                                   desired_capabilities=caps)
+        print("\n", "@"*100)
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
