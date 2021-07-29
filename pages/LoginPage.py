@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.BasePage import BasePage
 
 
-class ManageJenkinsPage(BasePage):
+class LoginPage(BasePage):
     """
     initialized driver
 
@@ -12,5 +12,7 @@ class ManageJenkinsPage(BasePage):
         super().__init__(driver)
 
 
-class ManageJenkinsPageLocators:
-    MANAGE_USERS = (By.XPATH, '//a[contains(@title, "Manage Users")]')
+class LoginPageLocators:
+    INPUT_LOGIN = (By.ID, 'j_username')
+    INPUT_PASSWORD = (By.ID, 'j_password')
+    SIGN_IN_BUTTON = (By.NAME, 'Submit')

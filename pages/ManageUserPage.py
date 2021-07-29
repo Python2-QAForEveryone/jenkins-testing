@@ -3,9 +3,7 @@ import string
 
 from selenium.webdriver.common.by import By
 from pages.BasePage import BasePage
-from pages.DashboardPage import DashboardPageLocators, DashboardPage
 from config.TestData import TestData
-from pages.ManageJenkinsPage import ManageJenkinsPageLocators
 
 
 class ManageUserPage(BasePage):
@@ -19,6 +17,7 @@ class ManageUserPage(BasePage):
         self.go_to_page(ManageUserPage.URL_USER_MANAGE)
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
+    password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
     edit_name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
 
     username_id = (By.ID, "username")
@@ -28,30 +27,26 @@ class ManageUserPage(BasePage):
     email_name = (By.NAME, "email")
     BUTTON_CREATE_ID = (By.ID, "yui-gen1-button")
 
-    USER_NAME = f'{name.lower()}'
+    USER_NAME = f'{name}'
+    PASSWORD = f'{password}'
 
-    USER_ID = (By.XPATH, f"//a[contains(@href, '/user/{name.lower()}/')]//..//../td[2]/a")
-    USER_ID_1 = (By.XPATH, f"//a[text()={name}][1]")
+    USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
 
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
+    LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
 
-    def go_to_manage_user_page(self):
-        driver = ManageUserPage(self.driver)
-        driver.go_to_page('http://localhost:8080/securityRealm/')
-        return self
-
     def click_button_create_new_user(self):
-        self.driver.click(self.CREATE_USER)
+        self.click(self.CREATE_USER)
         return self
 
     def fill_all_field_and_click_save(self):
-        self.driver.do_send_keys(ManageUserPage.username_id, ManageUserPage.name)
-        self.driver.do_send_keys(ManageUserPage.password_input_name, "12345")
-        self.driver.do_send_keys(ManageUserPage.enter_confirm_password, "12345")
-        self.driver.do_send_keys(ManageUserPage.fullname_name, f"User {ManageUserPage.name}")
-        self.driver.do_send_keys(ManageUserPage.email_name, f"{ManageUserPage.name}@gmail.com")
-        self.driver.click(ManageUserPage.BUTTON_CREATE_ID)
+        self.do_send_keys(ManageUserPage.username_id, ManageUserPage.name)
+        self.do_send_keys(ManageUserPage.password_input_name, ManageUserPage.password)
+        self.do_send_keys(ManageUserPage.enter_confirm_password, ManageUserPage.password)
+        self.do_send_keys(ManageUserPage.fullname_name, f"User {ManageUserPage.name}")
+        self.do_send_keys(ManageUserPage.email_name, f"{ManageUserPage.name}@gmail.com")
+        self.click(ManageUserPage.BUTTON_CREATE_ID)
         return self
