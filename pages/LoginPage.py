@@ -16,6 +16,12 @@ class LoginPage(BasePage):
     SIGN_IN_BUTTON = (By.NAME, 'Submit')
 
     def login_jenkins(self, login, password):
+        """
+        input login/password and push button Submit on the Login Page
+        :param login:
+        :param password:
+        :return:
+        """
         self.do_send_keys(LoginPage.INPUT_LOGIN, login)
         self.do_send_keys(LoginPage.INPUT_PASSWORD, password)
         self.click(LoginPage.SIGN_IN_BUTTON)

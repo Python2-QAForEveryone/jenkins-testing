@@ -19,6 +19,7 @@ class ManageUserPage(BasePage):
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
     edit_name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
+    edit_password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
 
     username_id = (By.ID, "username")
     password_input_name = (By.NAME, "password1")
@@ -29,26 +30,50 @@ class ManageUserPage(BasePage):
 
     USER_NAME = f'{name}'
     PASSWORD = f'{password}'
+    PASSWORD_EDIT = f'{edit_password}'
+    USER_FULLNAME = f'User {name}'
+    USER_FULLNAME_EDIT = f'User {edit_name}'
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
     USER_ID_DELETE = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
-    USER_ID_DELETE_YES = (By.ID, "yui-gen1-button")
+    USER_ID_YES = (By.ID, "yui-gen1-button")
+
+    PEOPLE_LIST = (By.XPATH, f"//tr[@id='person-{name}']/td/a")
 
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
+    CONFIGURE_USER = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/configure')]/img")
+    INPUT_FULLNAME = (By.XPATH, '//input[@name="_.fullName"]')
+    SAVE_BUTTON = (By.ID, 'yui-gen2-button')
+    FULLNAME_TEXT = (By.TAG_NAME, 'h1')
+
     LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
 
     def click_button_create_new_user(self):
+        """
+        push on the button
+        :return:
+        """
         self.click(self.CREATE_USER)
         return self
 
-    def fill_all_field_and_click_save(self):
-        self.do_send_keys(ManageUserPage.username_id, ManageUserPage.name)
-        self.do_send_keys(ManageUserPage.password_input_name, ManageUserPage.password)
-        self.do_send_keys(ManageUserPage.enter_confirm_password, ManageUserPage.password)
-        self.do_send_keys(ManageUserPage.fullname_name, f"User {ManageUserPage.name}")
-        self.do_send_keys(ManageUserPage.email_name, f"{ManageUserPage.name}@gmail.com")
+    def fill_all_field_and_click_save(self, name, password):
+        """
+        in the during create new user fill out all fields
+        push on the button
+
+        :param name:
+        :param password:
+        :return:
+
+        this object
+        """
+        self.do_send_keys(ManageUserPage.username_id, name)
+        self.do_send_keys(ManageUserPage.password_input_name, password)
+        self.do_send_keys(ManageUserPage.enter_confirm_password, password)
+        self.do_send_keys(ManageUserPage.fullname_name, f"User {name}")
+        self.do_send_keys(ManageUserPage.email_name, f"{name}@gmail.com")
         self.click(ManageUserPage.BUTTON_CREATE_ID)
         return self
