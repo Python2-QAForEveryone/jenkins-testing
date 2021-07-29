@@ -31,6 +31,8 @@ class ManageUserPage(BasePage):
     PASSWORD = f'{password}'
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
+    USER_ID_DELETE = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
+    USER_ID_DELETE_YES = (By.ID, "yui-gen1-button")
 
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
     LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')

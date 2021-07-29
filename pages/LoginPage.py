@@ -11,8 +11,11 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-
-class LoginPageLocators:
     INPUT_LOGIN = (By.ID, 'j_username')
-    INPUT_PASSWORD = (By.ID, 'j_password')
+    INPUT_PASSWORD = (By.NAME, 'j_password')
     SIGN_IN_BUTTON = (By.NAME, 'Submit')
+
+    def login_jenkins(self, login, password):
+        self.do_send_keys(LoginPage.INPUT_LOGIN, login)
+        self.do_send_keys(LoginPage.INPUT_PASSWORD, password)
+        self.click(LoginPage.SIGN_IN_BUTTON)
