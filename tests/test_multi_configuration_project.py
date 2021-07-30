@@ -22,7 +22,7 @@ class TestMultiConfigurationProject:
         driver.click(NewItemPageLocators.MULTI_CONFIGURATION_PROJECT)
         assert driver.is_enabled(NewItemPageLocators.OK_BUTTON)
         driver.click(NewItemPageLocators.OK_BUTTON)
-        assert driver.is_enabled(NewItemPageLocators.SAVE_BUTTON)
+        driver.is_element_present(NewItemPageLocators.SAVE_BUTTON)
         driver.click(NewItemPageLocators.SAVE_BUTTON)
 
         assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + project_name
