@@ -33,11 +33,16 @@ class ManageUserPage(BasePage):
     PASSWORD_EDIT = f'{edit_password}'
     USER_FULLNAME = f'User {name}'
     USER_FULLNAME_EDIT = f'User {edit_name}'
+    USER_NAME_UNDERSCORE = '_'
+    USER_NAME_HYPHEN = '-'
+    USER_NAME_MORE_255_SYMBOLS = f'{name * 30}'
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
+    USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
+    USER_ID_HYPHEN = (By.XPATH, "//table[@id='people']//tr/td/a[text()='-']")
+    USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name*30}']")
     USER_ID_DELETE = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
     USER_ID_YES = (By.ID, "yui-gen1-button")
-
     PEOPLE_LIST = (By.XPATH, f"//tr[@id='person-{name}']/td/a")
 
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
