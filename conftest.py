@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-from config.TestDataMy import TestData as TD
+from config.TestData import TestData as TD
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -33,7 +33,7 @@ def init_remote_driver_chrome():
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
-        options.headless = False
+        options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     return driver

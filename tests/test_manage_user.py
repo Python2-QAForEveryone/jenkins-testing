@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from config.TestDataMy import TestData as TD
+from config.TestData import TestData as TD
 from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
 from pages.PeoplePage import PeoplePage, URLLocators
