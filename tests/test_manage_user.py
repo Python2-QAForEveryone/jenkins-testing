@@ -108,7 +108,7 @@ class TestManageUserPage:
 
     def test_edit_new_user_fullname(self):
         """
-        TC_JN_42
+        TC_JN_41
         verify that we can change fullname
         :return:
         """
