@@ -91,6 +91,17 @@ class BasePage:
         element = self.driver.find_element(locator[0], locator[1])
         return element
 
+    def get_elements(self, locator):
+        elements = self.driver.find_elements(locator[0], locator[1])
+        return elements
+
+    def get_elements_text(self, locator):
+        elements = self.get_elements(locator)
+        text_elements = []
+        for el in elements:
+            text_elements.append(el.text)
+        return text_elements
+
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
