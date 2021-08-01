@@ -120,6 +120,9 @@ class EmptyStateBlock:
                                    'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT',
                                    'LEARN_MORE_SIGN']
 
+class ProjectLocators(BasePage):
+    def job_by_name(project_name):
+        return (By.XPATH, f"//tr[@id='job_{project_name}']//a[text()='{project_name}']")
 
 class DashboardPage(BasePage):
     """
