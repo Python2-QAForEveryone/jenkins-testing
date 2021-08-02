@@ -1,12 +1,10 @@
-import pytest
 from pages.FolderPage import FolderPage
 from pages.FolderPage import FolderPageLocator
 
 
 class TestFolderPage:
 
-    @pytest.mark.parametrize('execution_number', range(1))
-    def test_create_folder(self, execution_number):
+    def test_create_folder(self):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()

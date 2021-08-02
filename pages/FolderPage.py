@@ -54,7 +54,7 @@ class FolderPageLocator:
     LINK_FOLDER = (By.CLASS_NAME, 'com_cloudbees_hudson_plugins_folder_Folder')
     OK_BUTTON = (By.ID, 'ok-button')
     OK_BUTTON_DISABLED = (By.XPATH, "//button[@id='ok-button'][@class='disabled']")
-    SAVE_BUTTON = (By.XPATH, "//button[@id='yui-gen15-button']")
+    SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
     WRONG_REQUEST = (By.XPATH,
                      '//div[@id="error-description"]/h2[contains(text(),"A problem occurred ")]')
     ITEM_NAME_INVALID = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is an unsafe character')]")
