@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+
+from config.TestData import TestData
 from pages.BasePage import BasePage
 
 
@@ -16,6 +18,7 @@ class LoginPage(BasePage):
     SIGN_IN_BUTTON = (By.NAME, 'Submit')
     ALERT_INVALID_DATA = (By.XPATH, '//form[@name ="login"]/div[contains(@class, "alert")]')
     ALERT_TEXT = "Invalid username or password"
+    URL_LOGIN_ERROR = TestData.BASE_URL + "loginError"
 
     def login_jenkins(self, login, password):
         """

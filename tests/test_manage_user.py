@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from config.TestDataMy import TestData as TD
+from config.TestData import TestData as TD
 from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
 from pages.PeoplePage import PeoplePage, URLLocators
@@ -170,4 +170,5 @@ class TestManageUserPage:
         driver = LoginPage(self.driver)
         driver.login_jenkins(ManageUserPage.USER_NAME, ManageUserPage.PASSWORD)
 
-        assert driver.get_current_url() == TD.BASE_URL
+        assert driver.get_current_url() == LoginPage.URL_LOGIN_ERROR
+        assert driver.get_element_text(LoginPage.ALERT_INVALID_DATA) == LoginPage.ALERT_TEXT
