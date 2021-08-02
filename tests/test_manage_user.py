@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from config.TestData import TestData as TD
@@ -51,7 +49,6 @@ class TestManageUserPage:
 
         assert driver.get_current_url() == TD.BASE_URL
 
-    @pytest.mark.skip
     def test_create_user_with_underscore_name(self):
         """
         TC_JN_64
@@ -66,7 +63,6 @@ class TestManageUserPage:
 
         assert driver.get_elements_text(ManageUserPage.USER_ID_UNDERSCORE)[0] == ManageUserPage.USER_NAME_UNDERSCORE
 
-    @pytest.mark.skip
     def test_create_user_with_hyphen_name(self):
         """
         TC_JN_72
@@ -81,7 +77,6 @@ class TestManageUserPage:
 
         assert driver.get_elements_text(ManageUserPage.USER_ID_HYPHEN)[0] == ManageUserPage.USER_NAME_HYPHEN
 
-    @pytest.mark.skip
     def test_create_user_with_long_name(self):
         """
         TC_JN_79

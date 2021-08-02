@@ -9,7 +9,6 @@ from config.TestData import TestData
 class ManageUserPage(BasePage):
     """
     initialized driver
-
     """
 
     def __init__(self, driver):
