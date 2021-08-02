@@ -44,6 +44,7 @@ class ManageUserPage(BasePage):
     USER_ID_DELETE = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
     USER_ID_YES = (By.ID, "yui-gen1-button")
     PEOPLE_LIST = (By.XPATH, f"//tr[@id='person-{name}']/td/a")
+    PEOPLE_LIST_ALL_RECORD = (By.XPATH, "//tr[contains(@id, 'person')]/td/a[contains(@href, 'user')]")
 
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
     CONFIGURE_USER = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/configure')]/img")
