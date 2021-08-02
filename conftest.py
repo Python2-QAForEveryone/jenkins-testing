@@ -68,6 +68,7 @@ def init_driver(request):
     driver.get(TD.BASE_URL)
     print("Conftest Before Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     if driver.title == "Sign in [Jenkins]":
+        print("Start logging-", driver.title, "!!!!!!!!!!!!!!!!!!")
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
