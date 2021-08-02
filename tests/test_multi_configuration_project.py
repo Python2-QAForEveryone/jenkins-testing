@@ -34,6 +34,9 @@ class TestMultiConfigurationProject:
         driver.click(NewItemPageLocators.MULTI_CONFIGURATION_PROJECT)
         assert driver.is_enabled(NewItemPageLocators.OK_BUTTON)
         driver.click(NewItemPageLocators.OK_BUTTON)
+        assert driver.get_current_url() == TestData.BASE_URL + f"job/{project_name}/configure"
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        assert driver.is_clickable(NewItemPageLocators.SAVE_BUTTON)
         driver.click(NewItemPageLocators.SAVE_BUTTON)
 
         assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + project_name
