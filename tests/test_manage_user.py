@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from config.TestData import TestData as TD
@@ -50,18 +48,6 @@ class TestManageUserPage:
         driver.login_jenkins(ManageUserPage.USER_NAME, ManageUserPage.PASSWORD)
 
         assert driver.get_current_url() == TD.BASE_URL
-
-    def test_added_new_user_on_the_people_page(self):
-        """
-        TC_JN_37
-        verify that on the PeoplePage new record in the list
-        :return:
-        """
-        driver = PeoplePage(self.driver)
-        driver.go_to_page(URLLocators.URL_PEOPLE)
-        lst = driver.get_elements_text(ManageUserPage.PEOPLE_LIST)
-        assert lst[1] == ManageUserPage.USER_NAME
-        lst.clear()
 
     def test_create_user_with_underscore_name(self):
         """
@@ -154,3 +140,30 @@ class TestManageUserPage:
         driver.click(ManageUserPage.USER_ID_YES)
 
         assert driver.is_element_not_present(ManageUserPage.USER_ID)
+
+    def test_deleted_new_user_on_the_people_page(self):
+        """
+        TC_JN_40
+        verify that on the PeoplePage new record is not in the list
+        :return:
+        """
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(URLLocators.URL_PEOPLE)
+        lst = driver.get_elements_text(ManageUserPage.PEOPLE_LIST_ALL_RECORD)
+        assert ManageUserPage.USER_NAME is not lst
+        lst.clear()
+
+    def test_verify_cant_log_in_new_user_after_deleted(self):
+        """
+        TC_JN_39
+        verify that we can't login with deleted login/password new user
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click(ManageUserPage.LOG_OUT_BUTTON)
+        driver = LoginPage(self.driver)
+        driver.login_jenkins(ManageUserPage.USER_NAME, ManageUserPage.PASSWORD)
+
+        assert driver.get_current_url() == LoginPage.URL_LOGIN_ERROR
+        assert driver.get_element_text(LoginPage.ALERT_INVALID_DATA) == LoginPage.ALERT_TEXT
