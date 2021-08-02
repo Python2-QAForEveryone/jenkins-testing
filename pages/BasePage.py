@@ -1,5 +1,9 @@
+import random
+import string
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.remote import switch_to
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -59,6 +63,16 @@ class BasePage:
         element = WebDriverWait(self.driver, 2).until(condition)
         return bool(element)
 
+    def is_disabled(self, locator: tuple):
+        element = self.driver.find_element(locator[0], locator[1])
+        attribute = element.get_attribute("class")
+        return attribute == "disabled"
+
+    def is_enabled(self, locator: tuple):
+        element = self.driver.find_element(locator[0], locator[1])
+        attribute = element.get_attribute("class")
+        return attribute == ""
+
     def is_element_not_present(self, locator: tuple):
         try:
             self.driver.find_element(locator[0], locator[1])
@@ -94,7 +108,13 @@ class BasePage:
         return element.text
 
     def get_wait(self, locator):
-        WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+
+    def get_wait_for_alert(self):
+        WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+
+    def accept_alert(self):
+        self.driver.switch_to.alert.accept()
 
     def do_send_keys(self, locator, text):
         WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located(locator)).send_keys(text)
