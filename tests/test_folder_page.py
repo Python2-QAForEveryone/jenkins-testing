@@ -1,3 +1,5 @@
+import time
+
 from pages.FolderPage import FolderPage
 from pages.FolderPage import FolderPageLocator
 
@@ -99,6 +101,7 @@ class TestFolderPage:
     def test_name_only_three_or_more_dots(self):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
+        time.sleep(0.5)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.is_element_present(FolderPageLocator.WRONG_REQUEST)
