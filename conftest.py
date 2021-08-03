@@ -74,10 +74,12 @@ def init_driver(request):
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).clear()
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(
             TD.LOGIN)
+        driver.save_screenshot("saved_screenshots/screenshot_2.png")
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+        driver.save_screenshot("saved_screenshots/screenshot_3.png")
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        driver.save_screenshot("saved_screenshots/screenshot_2.png")
+        driver.save_screenshot("saved_screenshots/screenshot_4.png")
         print("Logging complete 1-", driver.title, "!!!!!!!!!!!!!!!!!!")
         try:
             print(WebDriverWait(driver, 5).until(
@@ -88,7 +90,7 @@ def init_driver(request):
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
             driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-            driver.save_screenshot("saved_screenshots/screenshot_3.png")
+            driver.save_screenshot("saved_screenshots/screenshot_5.png")
             print("Logging complete 2-", driver.title, "!!!!!!!!!!!!!!!!!!")
 
 
