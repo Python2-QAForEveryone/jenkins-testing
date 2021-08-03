@@ -76,8 +76,8 @@ def init_driver(request):
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        # if WebDriverWait(driver, 5).until(
-        #         EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
+        driver.save_screenshot("saved_screenshots/screenshot_1.png")
+        print("Logging complete 1-", driver.title, "!!!!!!!!!!!!!!!!!!")
         try:
             print(WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))).text)
@@ -87,6 +87,9 @@ def init_driver(request):
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
             driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
+            driver.save_screenshot("saved_screenshots/screenshot_2.png")
+            print("Logging complete 2-", driver.title, "!!!!!!!!!!!!!!!!!!")
+
 
         except:
             print("Conftest After Title-", driver.title, "!!!!!!!!!!!!!!!!!!")
