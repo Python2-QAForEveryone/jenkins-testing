@@ -55,7 +55,7 @@ class FolderPageLocator:
     OK_BUTTON = (By.ID, 'ok-button')
     OK_BUTTON_DISABLED = (By.XPATH, "//button[@id='ok-button'][@class='disabled']")
     SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
-    WRONG_REQUEST = (By.CSS_SELECTOR, '#error-description > h2')
+    WRONG_REQUEST = (By.CSS_SELECTOR, 'main-panel > h1 > img')
     ITEM_NAME_INVALID = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is an unsafe character')]")
     ERROR_PAGE = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'is an unsafe character')]")
     ITEM_NAME_REQUIRED = (By.XPATH, "//div[@id='itemname-required'][contains(text(),'This field cannot be empty')]")
