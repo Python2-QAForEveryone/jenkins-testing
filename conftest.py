@@ -73,12 +73,14 @@ def init_driver(request):
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        if WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
+        # if WebDriverWait(driver, 5).until(
+        #         EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
+        try:
             print(WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))).text)
+        except:
+            print("Conftest After Title-", driver.title, "!!!!!!!!!!!!!!!!!!")
 
-    print("Conftest After Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     request.cls.driver = driver
     print("$"*150)
 
