@@ -66,15 +66,21 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
+    print("$"*150)
     print("Conftest Before Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     if driver.title == "Sign in [Jenkins]":
         print("Start logging-", driver.title, "!!!!!!!!!!!!!!!!!!")
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
+        if WebDriverWait(driver, 30).until(
+                EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
+            print(WebDriverWait(driver, 30).until(
+                EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))).text)
+
     print("Conftest After Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     request.cls.driver = driver
-    print("$"*100)
+    print("$"*150)
 
 
     yield
