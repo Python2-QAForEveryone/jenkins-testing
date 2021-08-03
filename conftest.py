@@ -73,9 +73,9 @@ def init_driver(request):
         WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        if WebDriverWait(driver, 30).until(
+        if WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
-            print(WebDriverWait(driver, 30).until(
+            print(WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))).text)
 
     print("Conftest After Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
