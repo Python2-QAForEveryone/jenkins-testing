@@ -1,5 +1,4 @@
 from pages.BasePage import BasePage
-from config.TestData import TestData as TD
 from selenium.webdriver.common.by import By
 
 
@@ -9,8 +8,9 @@ class ProjectPageLocators:
     DISABLE_PROJECT_BUTTON = (By.XPATH, '//button[text()="Disable Project"]')
     ENABLE_PROJECT_BUTTON = (By.XPATH, '// button[text() = "Enable"]')
     DISABLE_PROJECT_WARNING = (By.XPATH, "//div[@class='warning']")
+    BUILD_NOW = (By.XPATH, "//a[@title='Build Now']//span[2]")
 
-class NewItemPage(BasePage):
+class ProjectPage(BasePage):
     """
     initialized driver
     added moving to the BasePage after log in
@@ -18,4 +18,4 @@ class NewItemPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.go_to_page(TD.BASE_URL)
+
