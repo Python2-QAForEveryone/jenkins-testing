@@ -66,6 +66,7 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
+    driver.save_screenshot("saved_screenshots/screenshot_1.png")
     print("$"*150)
     print("Conftest Before Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     if driver.title == "Sign in [Jenkins]":
@@ -76,7 +77,7 @@ def init_driver(request):
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
         driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        driver.save_screenshot("saved_screenshots/screenshot_1.png")
+        driver.save_screenshot("saved_screenshots/screenshot_2.png")
         print("Logging complete 1-", driver.title, "!!!!!!!!!!!!!!!!!!")
         try:
             print(WebDriverWait(driver, 5).until(
@@ -87,7 +88,7 @@ def init_driver(request):
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
             driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
             driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-            driver.save_screenshot("saved_screenshots/screenshot_2.png")
+            driver.save_screenshot("saved_screenshots/screenshot_3.png")
             print("Logging complete 2-", driver.title, "!!!!!!!!!!!!!!!!!!")
 
 
