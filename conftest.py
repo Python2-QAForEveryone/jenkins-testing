@@ -70,8 +70,8 @@ def init_driver(request):
     print("Conftest Before Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
     if driver.title == "Sign in [Jenkins]":
         print("Start logging-", driver.title, "!!!!!!!!!!!!!!!!!!")
-        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
-        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).clear().send_keys(TD.LOGIN)
+        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear().send_keys(TD.PASSWORD)
         driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
         # if WebDriverWait(driver, 5).until(
         #         EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))):
