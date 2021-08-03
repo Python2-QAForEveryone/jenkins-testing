@@ -68,7 +68,7 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest -vs
+        pytest -vs -m 'mark1 and not mark2'
 
     - uses: actions/upload-artifact@v2
       with:
