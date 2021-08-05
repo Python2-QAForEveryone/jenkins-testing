@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: |
+        mkdir -p saved_screenshots
 
     - uses: actions/cache@v2
       with:
@@ -67,6 +69,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -vs
+      continue-on-error: true
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Saved_screenshots
+        path: saved_screenshots
 
     - name: Docker stop
       run: docker-compose -f ./selenium-grid/docker-compose.yml down
