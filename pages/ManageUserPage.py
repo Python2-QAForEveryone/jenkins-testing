@@ -32,6 +32,7 @@ class ManageUserPage(BasePage):
     PASSWORD_EDIT = f'{edit_password}'
     USER_FULLNAME = f'User {name}'
     USER_FULLNAME_EDIT = f'User {edit_name}'
+    USER_EMAIL_EDIT = f"{edit_name}@gmail.com"
     USER_NAME_UNDERSCORE = '_'
     USER_NAME_HYPHEN = '-'
     USER_NAME_MORE_255_SYMBOLS = f'{name * 30}'
@@ -48,6 +49,9 @@ class ManageUserPage(BasePage):
     CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
     CONFIGURE_USER = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/configure')]/img")
     INPUT_FULLNAME = (By.XPATH, '//input[@name="_.fullName"]')
+    INPUT_EMAIL = (By.NAME, 'email.address')
+    INPUT_PASSWORD = (By.NAME, 'user.password')
+    INPUT_CONFIRM_PASSWORD = (By.NAME, 'user.password2')
     SAVE_BUTTON = (By.ID, 'yui-gen2-button')
     FULLNAME_TEXT = (By.TAG_NAME, 'h1')
 
