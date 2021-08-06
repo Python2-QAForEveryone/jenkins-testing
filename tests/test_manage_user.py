@@ -1,8 +1,6 @@
-import time
-
 import pytest
 
-from config.TestDataMy import TestData as TD
+from config.TestData import TestData as TD
 from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
 from pages.PeoplePage import PeoplePage, URLLocators
@@ -188,5 +186,20 @@ class TestManageUserPage:
         assert lst[1] == ManageUserPage.USER_NAME
         assert lst[2] == ManageUserPage.USER_FULLNAME_EDIT
         lst.clear()
+
+    def test_login_after_update(self):
+        """
+        TC_JN_42
+        verify that we can login with login/password after updated data
+        :return:
+        """
+
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click(ManageUserPage.LOG_OUT_BUTTON)
+        driver = LoginPage(self.driver)
+        driver.login_jenkins(ManageUserPage.USER_NAME, ManageUserPage.PASSWORD_EDIT)
+
+        assert driver.get_current_url() == TD.BASE_URL
 
         self.test_delete_new_user()
