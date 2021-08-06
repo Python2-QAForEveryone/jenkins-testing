@@ -66,40 +66,10 @@ def init_driver(request):
         raise Exception('driver is not found')
 
     driver.get(TD.BASE_URL)
-    driver.save_screenshot("saved_screenshots/screenshot_1.png")
-    print("$"*150)
-    print("Conftest Before Title-",driver.title, "!!!!!!!!!!!!!!!!!!")
-    if driver.title == "Sign in [Jenkins]":
-        print("Start logging-", driver.title, "!!!!!!!!!!!!!!!!!!")
-        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).clear()
-        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(
-            TD.LOGIN)
-        driver.save_screenshot("saved_screenshots/screenshot_2.png")
-        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
-        driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
-        driver.save_screenshot("saved_screenshots/screenshot_3.png")
-        driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-        driver.save_screenshot("saved_screenshots/screenshot_4.png")
-        print("Logging complete 1-", driver.title, "!!!!!!!!!!!!!!!!!!")
-        try:
-            print(WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.XPATH, '/html/body/div/div/form/div[1]'))).text)
-            WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).clear()
-            WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(
-                TD.LOGIN)
-            driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').clear()
-            driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
-            driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
-            driver.save_screenshot("saved_screenshots/screenshot_5.png")
-            print("Logging complete 2-", driver.title, "!!!!!!!!!!!!!!!!!!")
-
-
-        except:
-            print("Conftest After Title-", driver.title, "!!!!!!!!!!!!!!!!!!")
-
+    WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'j_username'))).send_keys(TD.LOGIN)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="j_password"]').send_keys(TD.PASSWORD)
+    driver.find_element(By.CSS_SELECTOR, 'input[name="Submit"]').click()
     request.cls.driver = driver
-    print("$"*150)
-
 
     yield
 
