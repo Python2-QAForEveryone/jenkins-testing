@@ -1,11 +1,15 @@
 from pages.BasePage import BasePage
 from pages.DashboardPage import DashboardPageLocators
 from pages.DashboardPage import URLLocators
-
+from pages.NewItemPage import *
 from selenium.webdriver.common.by import By
 from config.TestData import TestData as TD
 import time
-import random
+
+from datetime import datetime
+from datetime import timezone
+
+import pages.StringUtils
 import pytest
 
 
@@ -16,46 +20,60 @@ class NewItemLocators:
 class NewJobsLocators:
     PIPELINE_RADIO = (By.XPATH, '//*[@id="j-add-item-type-standalone-projects"]/ul/li[2]')
     SUBMIT_BTN = (By.XPATH, '//*[@id="ok-button"]')
-
+    MENU_TASKS= (By.XPATH, '//*[@id="tasks"]')
 
 class NewPipelineConfigure:
     SAVE_PIPELINE = (By.XPATH, '//*[@type="submit"]')
 
 
 class TestCreatePipeline:
-
-    def test_create_pipeline(self):
+    test_name_valid = 'test_pipeline_' + str(pages.StringUtils.generate_random_int(4))
+    pipelineNameString = pages.StringUtils.generate_random_string(10)
+    pipelineNameInt = pages.StringUtils.generate_random_int(10)
+    pipelineNameIntandString=pages.StringUtils.generate_random_string_and_int(10)
+    pipelineName= [pipelineNameString, pipelineNameInt, pipelineNameIntandString]
+#    pipelineName= [pipelineNameIntandString]
+    @pytest.mark.dependency()
+    @pytest.mark.parametrize("pipeline_name", pipelineName)
+    def test_create_pipeline(self, pipeline_name):
         driver = BasePage(self.driver)
+#       pipeline_name=self.test_name_valid()
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
         time.sleep(2)
         #  verify if user is on the right page by checking current page url
         assert (URLLocators.URL_NEW_ITEM == driver.get_current_url())
-        # generate a random numeral string with 3 digits
-        rand_int_str = str(random.randint(0,9))+str(random.randint(0,9))+str(random.randint(0,9))
-        test_name = 'pipeline_'+ rand_int_str
-        time.sleep(2)
-
         if driver.is_element_present(NewItemLocators.NEW_ITEM_NAME):
-            driver.do_send_keys(NewItemLocators.NEW_ITEM_NAME, test_name)
+            driver.do_send_keys(NewItemLocators.NEW_ITEM_NAME, pipeline_name)
             time.sleep(2)
         else:
             print("Locator" + NewItemLocators.NEW_ITEM_NAME + "is not found")
-        driver.get_element(NewJobsLocators.PIPELINE_RADIO)
-        driver.click(NewJobsLocators.PIPELINE_RADIO)
+        driver.get_element(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.PIPELINE)
         time.sleep(3)
-        if driver.is_clickable(NewJobsLocators.SUBMIT_BTN):
-            driver.get_element(NewJobsLocators.SUBMIT_BTN)
-            driver.click(NewJobsLocators.SUBMIT_BTN)
+        if driver.is_clickable(NewItemPageLocators.OK_BUTTON):
+            driver.get_element(NewItemPageLocators.OK_BUTTON)
+            driver.click(NewItemPageLocators.OK_BUTTON)
         else:
             print("Submit button is not clickable!!!")
-        time.sleep(5)
+        time.sleep(2)
         # verify the job name is in the link
-        assert (test_name in driver.get_current_url())
+        assert (pipeline_name in driver.get_current_url())
         driver.get_element(NewPipelineConfigure.SAVE_PIPELINE)
         driver.click(NewPipelineConfigure.SAVE_PIPELINE)
         time.sleep(5)
         # verify Jenkins has created page for a pipeline with format name plus [Jenkins]
-        assert (driver.get_title() == test_name + " [Jenkins]")
-       # print(driver.get_element_text('//*[@id="breadcrumbs"]') )
-       # lst = driver.get_element_text('//*[@id="tasks"]')
-        print(lst)
+        assert (driver.get_title() == pipeline_name + " [Jenkins]")
+        time_stamp=datetime.now()
+        print("Pipeline created with valid random name "+pipeline_name+" at "+time_stamp.strftime("%d/%m/%Y %H:%M:%S"))
+
+    @pytest.mark.dependency(depends=["test_create_pipeline"])
+    def test_pipeline_enabled(self):
+        driver = BasePage(self.driver)
+        print(self.pipelineName)
+        menu_tasks= driver.get_element_text(NewJobsLocators.MENU_TASKS)
+ #       assert ("Build Now" in menu_tasks)
+
+    def test_pipeline_disabled(self):
+        pass
+
+
