@@ -1,14 +1,15 @@
-import time
-
 import pytest
-from pages.NewItemPage import *
-from pages.FolderPage import *
+
 from pages.DashboardPage import *
-from pages.StringUtils import *
+from pages.ProjectPage import *
+from pages.FolderPage import *
+from pages.NewItemPage import *
 from pages.ProjectPage import ProjectPageLocators
-from selenium.webdriver.support import expected_conditions as EC
+from pages.StringUtils import *
+
 
 class TestMultiConfigurationProject:
+
     projectNameString = generate_random_string(10)
     projectNameInt = generate_random_int(10)
     projectNameStringAndInt = generate_random_string_and_int(10)
@@ -44,17 +45,23 @@ class TestMultiConfigurationProject:
 
     @pytest.mark.dependency(depends=["test_create_project_02"])
     def test_disable_project_03(self):
-        driver = DashboardPage(self.driver)
-        driver.go_to_page(TestData.BASE_URL)
-        driver.get_wait(ProjectLocators.job_by_name(TestMultiConfigurationProject.projectNameString))
-        driver.click(ProjectLocators.job_by_name(TestMultiConfigurationProject.projectNameString))
-        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + TestMultiConfigurationProject.projectNameString
+        driver = ProjectPage(self.driver)
         assert driver.is_element_present(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
         driver.click(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
         assert driver.is_element_present(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
         assert driver.get_element_text(ProjectPageLocators.DISABLE_PROJECT_WARNING) == "This project is currently disabled\nEnable"
 
     @pytest.mark.dependency(depends=["test_disable_project_03"])
+    def test_enable_project_04(self):
+        driver = ProjectPage(self.driver)
+        assert driver.is_element_not_present(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        assert driver.is_element_present(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        driver.click(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        assert driver.is_element_not_present(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        assert driver.is_element_present(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        assert driver.is_element_present(ProjectPageLocators.BUILD_NOW)
+
+    @pytest.mark.dependency(depends=["test_enable_project_04"])
     @pytest.mark.parametrize("project_name", projectName)
     def test_delete_project_05(self, project_name):
         driver = DashboardPage(self.driver)
