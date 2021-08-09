@@ -27,19 +27,19 @@ class NewPipelineConfigure:
 
 
 class TestCreatePipeline:
-    test_name_valid = 'test_pipeline_' + str(pages.StringUtils.generate_random_int(4))
+
     pipelineNameString = pages.StringUtils.generate_random_string(10)
     pipelineNameInt = pages.StringUtils.generate_random_int(10)
     pipelineNameIntandString=pages.StringUtils.generate_random_string_and_int(10)
     pipelineName= [pipelineNameString, pipelineNameInt, pipelineNameIntandString]
-#    pipelineName= [pipelineNameIntandString]
+
     @pytest.mark.dependency()
     @pytest.mark.parametrize("pipeline_name", pipelineName)
     def test_create_pipeline(self, pipeline_name):
         driver = BasePage(self.driver)
-#       pipeline_name=self.test_name_valid()
+        driver.go_to_page(TD.BASE_URL)
+        time.sleep(5)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
-        time.sleep(2)
         #  verify if user is on the right page by checking current page url
         assert (URLLocators.URL_NEW_ITEM == driver.get_current_url())
         if driver.is_element_present(NewItemLocators.NEW_ITEM_NAME):
@@ -55,25 +55,24 @@ class TestCreatePipeline:
             driver.click(NewItemPageLocators.OK_BUTTON)
         else:
             print("Submit button is not clickable!!!")
-        time.sleep(2)
         # verify the job name is in the link
         assert (pipeline_name in driver.get_current_url())
         driver.get_element(NewPipelineConfigure.SAVE_PIPELINE)
         driver.click(NewPipelineConfigure.SAVE_PIPELINE)
-        time.sleep(5)
         # verify Jenkins has created page for a pipeline with format name plus [Jenkins]
         assert (driver.get_title() == pipeline_name + " [Jenkins]")
         time_stamp=datetime.now()
         print("Pipeline created with valid random name "+pipeline_name+" at "+time_stamp.strftime("%d/%m/%Y %H:%M:%S"))
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
-    def test_pipeline_enabled(self):
+    @pytest.mark.parametrize("pipeline_name", pipelineName)
+    def test_pipeline_enabled(self,pipeline_name):
         driver = BasePage(self.driver)
-        print(self.pipelineName)
+        print(TD.BASE_URL+"job/"+pipeline_name)
+        driver.go_to_page(TD.BASE_URL+"job/"+pipeline_name)
+        print(pipeline_name)
         menu_tasks= driver.get_element_text(NewJobsLocators.MENU_TASKS)
- #       assert ("Build Now" in menu_tasks)
+        assert ("Build Now" in menu_tasks)
 
-    def test_pipeline_disabled(self):
-        pass
 
 
