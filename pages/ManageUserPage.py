@@ -62,7 +62,7 @@ class ManageUserPage(BasePage):
     URL_JOB_CREATE = TestData.BASE_URL + f'job/{job_name}/configure'
     JOB_DELETE_PROJECT = (By.XPATH, '//span[text()="Delete Project"]')
 
-    STARTED_BY_USER = (By.XPATH, f'//a[@href="/user/{name}")]')
+    STARTED_BY_USER = (By.CSS_SELECTOR, 'pre.console-output a')
 
     LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')
 

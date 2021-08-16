@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from config.TestData import TestData as TD
@@ -119,10 +117,7 @@ class TestManageUserPage:
         driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
         driver.click(ProjectPageLocators.BUILD_SUCCESS_LAST_JOB)
 
-        time.sleep(3)
-
-        print("========================" + driver.get_element_text(ManageUserPage.STARTED_BY_USER))
-        print("========================" + ManageUserPage.USER_FULLNAME)
+        assert driver.get_element_text(ManageUserPage.STARTED_BY_USER) == ManageUserPage.USER_FULLNAME
         self.delete_job(name)
 
     def test_delete_new_user(self):
