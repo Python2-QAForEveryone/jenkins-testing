@@ -9,6 +9,9 @@ class ProjectPageLocators:
     ENABLE_PROJECT_BUTTON = (By.XPATH, '// button[text() = "Enable"]')
     DISABLE_PROJECT_WARNING = (By.XPATH, "//div[@class='warning']")
     BUILD_NOW = (By.XPATH, "//a[@title='Build Now']//span[2]")
+    BUILD_HISTORY_JOBS = (By.XPATH, '//tr[contains(@class, "build-row multi-line")]')
+    BUILD_SUCCESS_JOBS = (By.XPATH, '//a[@class="build-status-link"]')
+    BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//img')
 
 class ProjectPage(BasePage):
     """

@@ -2,6 +2,8 @@ import random
 import string
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+
 from pages.BasePage import BasePage
 from config.TestData import TestData
 
@@ -19,6 +21,7 @@ class ManageUserPage(BasePage):
     password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
     edit_name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     edit_password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
+    job_name = (''.join(random.choice(string.ascii_letters) for i in range(5)))
 
     username_id = (By.ID, "username")
     password_input_name = (By.NAME, "password1")
@@ -55,10 +58,18 @@ class ManageUserPage(BasePage):
     SAVE_BUTTON = (By.ID, 'yui-gen2-button')
     FULLNAME_TEXT = (By.TAG_NAME, 'h1')
 
+    CREATE_USER_JOB = f'{job_name}'
+    URL_JOB_CREATE = TestData.BASE_URL + f'job/{job_name}/configure'
+    JOB_DELETE_PROJECT = (By.XPATH, '//span[text()="Delete Project"]')
+
+    STARTED_BY_USER = (By.XPATH, f'//a[@href="/user/{name}")]')
+
     LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
+
+    URL_JOB_CREATE = TestData.BASE_URL + 'view/all/newJob'
 
     def click_button_create_new_user(self):
         """
