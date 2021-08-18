@@ -11,24 +11,24 @@ from pages.ProjectPage import ProjectPageLocators, ProjectPage
 
 class TestManageUserPage:
 
-    def get_element_from_people_page(self, locator):
-        """
-        get element from people page
-        :param locator:
-        :return:
-        """
-        driver = PeoplePage(self.driver)
-        driver.go_to_page(URLLocators.URL_PEOPLE)
-        lst = driver.get_elements_text(locator)
-        return lst
+    # def get_element_from_people_page(self, locator):
+    #     """
+    #     get element from people page
+    #     :param locator:
+    #     :return:
+    #     """
+    #     driver = PeoplePage(self.driver)
+    #     driver.go_to_page(URLLocators.URL_PEOPLE)
+    #     lst = driver.get_elements_text(locator)
+    #     return lst
 
-    def login_with_default_credential(self):
-        """
-        login with default credential
-        :return:
-        """
-        driver = LoginPage(self.driver)
-        driver.login_jenkins(TD.LOGIN, TD.PASSWORD)
+    # def login_with_default_credential(self):
+    #     """
+    #     login with default credential
+    #     :return:
+    #     """
+    #     driver = LoginPage(self.driver)
+    #     driver.login_jenkins(TD.LOGIN, TD.PASSWORD)
 
     def create_new_job(self):
         """
@@ -129,7 +129,8 @@ class TestManageUserPage:
         """
         driver = ManageUserPage(self.driver)
         driver.click(ManageUserPage.LOG_OUT_BUTTON)
-        self.login_with_default_credential()
+        driver = LoginPage(self.driver)
+        driver.login_with_default_credential()
         driver = ManageUserPage(self.driver)
         driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
 
@@ -146,8 +147,9 @@ class TestManageUserPage:
         verify that on the PeoplePage new record is not in the list
         :return:
         """
-
-        lst = self.get_element_from_people_page(ManageUserPage.PEOPLE_LIST_ALL_RECORD)
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(URLLocators.URL_PEOPLE)
+        lst = driver.get_element_from_people_page(ManageUserPage.PEOPLE_LIST_ALL_RECORD)
         assert ManageUserPage.USER_NAME is not lst
         lst.clear()
 
@@ -219,10 +221,13 @@ class TestManageUserPage:
         verify that we can change fullname
         :return:
         """
-        self.login_with_default_credential()
+        driver = LoginPage(self.driver)
+        driver.login_with_default_credential()
         self.test_create_user_valid_credential()
 
-        lst = self.get_element_from_people_page(ManageUserPage.PEOPLE_LIST)
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(URLLocators.URL_PEOPLE)
+        lst = driver.get_element_from_people_page(ManageUserPage.PEOPLE_LIST)
         assert lst[1] == ManageUserPage.USER_NAME
         assert lst[2] == ManageUserPage.USER_FULLNAME
         lst.clear()
@@ -243,7 +248,9 @@ class TestManageUserPage:
         driver.click(ManageUserPage.USER_ID_YES)
         driver.get_element(ManageUserPage.SAVE_BUTTON).click()
 
-        lst = self.get_element_from_people_page(ManageUserPage.PEOPLE_LIST)
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(URLLocators.URL_PEOPLE)
+        lst = driver.get_element_from_people_page(ManageUserPage.PEOPLE_LIST)
         assert lst[1] == ManageUserPage.USER_NAME
         assert lst[2] == ManageUserPage.USER_FULLNAME_EDIT
         lst.clear()

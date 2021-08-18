@@ -15,6 +15,15 @@ class PeoplePage(BasePage):
 
     TITLE = "People - [Jenkins]"
 
+    def get_element_from_people_page(self, locator):
+        """
+        get element from people page
+        :param locator:
+        :return:
+        """
+        lst = self.get_elements_text(locator)
+        return lst
+
 
 class PeoplePageLocator:
     PEOPLE = (By.CSS_SELECTOR, '.task-link--active')
