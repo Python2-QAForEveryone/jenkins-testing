@@ -110,6 +110,9 @@ class BasePage:
     def get_wait(self, locator):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
 
+    def get_wait_is_clickable(self, locator):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+
     def get_wait_for_alert(self):
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
 
