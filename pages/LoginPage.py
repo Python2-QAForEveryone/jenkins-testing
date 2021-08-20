@@ -30,3 +30,10 @@ class LoginPage(BasePage):
         self.do_send_keys(LoginPage.INPUT_LOGIN, login)
         self.do_send_keys(LoginPage.INPUT_PASSWORD, password)
         self.click(LoginPage.SIGN_IN_BUTTON)
+
+    def login_with_default_credential(self):
+        """
+        login with default credential
+        :return:
+        """
+        self.login_jenkins(TestData.LOGIN, TestData.PASSWORD)
