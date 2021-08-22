@@ -58,8 +58,26 @@ class TestMultiConfigurationProject:
         assert driver.is_element_present(ProjectPageLocators.BUILD_NOW)
 
     @pytest.mark.dependency(depends=["test_enable_project_04"])
+    def test_add_description_05(self):
+        driver = ProjectPage(self.driver)
+        driver.click(ProjectPageLocators.ADD_DESCRIPTION_BUTTON)
+        driver.do_send_keys(ProjectPageLocators.DESCRIPTION_TEXTAREA, "Project description")
+        driver.click(ProjectPageLocators.SUBMIT_DESCRIPTION_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "Project description"
+
+    @pytest.mark.dependency(depends=["test_add_description_05"])
+    def test_edit_description_06(self):
+        driver = ProjectPage(self.driver)
+        assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "Project description"
+        driver.click(ProjectPageLocators.ADD_DESCRIPTION_BUTTON)
+        driver.clear(ProjectPageLocators.DESCRIPTION_TEXTAREA);
+        driver.do_send_keys(ProjectPageLocators.DESCRIPTION_TEXTAREA, "New description")
+        driver.click(ProjectPageLocators.SUBMIT_DESCRIPTION_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "New description"
+
+    @pytest.mark.dependency(depends=["test_edit_description_06"])
     @pytest.mark.parametrize("project_name", projectName)
-    def test_delete_project_05(self, project_name):
+    def test_delete_project_07(self, project_name):
         driver = DashboardPage(self.driver)
         driver.go_to_page(TestData.BASE_URL)
         driver.get_wait(ProjectLocators.job_by_name(project_name))
