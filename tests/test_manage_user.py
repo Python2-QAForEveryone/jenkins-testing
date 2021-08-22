@@ -5,6 +5,7 @@ from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
 from pages.PeoplePage import PeoplePage, URLLocators
 from pages.ProjectPage import ProjectPageLocators, ProjectPage
+from pages.BuildHistoryPage import BuildHistoryPage
 
 
 class TestManageUserPage:
@@ -54,7 +55,7 @@ class TestManageUserPage:
     def test_run_the_build_job_started(self):
         """
         TC_JN_98
-        veify that the job was started
+        verify that the job was started
         :return:
         """
         name = ProjectPage.create_new_job(self)
@@ -68,6 +69,32 @@ class TestManageUserPage:
 
         assert driver.get_element_text(ManageUserPage.STARTED_BY_USER) == ManageUserPage.USER_FULLNAME
         ProjectPage.delete_job(self, name)
+
+    def test_verify_the_build_job_was_run(self):
+        """
+        TC_JN_99
+        verify that the job was run
+        :return:
+        """
+        name = ProjectPage.create_new_job(self)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+        driver = BuildHistoryPage(self.driver)
+        driver.go_to_page(BuildHistoryPage.URL_BUILD_HISTORY)
+        lst = driver.get_list_builded_jobs(name)
+
+        assert len(lst) != 0
+        ProjectPage.delete_job(self, name)
+
+    def test_verify_job_in_the_list(self):
+        """
+        verify that job in the list of
+        :return:
+        """
 
     def test_delete_new_user(self):
         """

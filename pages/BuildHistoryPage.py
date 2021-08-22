@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 
 class BuildHistoryPage(BasePage):
+    URL_BUILD_HISTORY = TD.BASE_URL + 'view/all/builds'
     TITLE = 'Build History of Jenkins'
     BUILD_HISTORY_ITEM = (By.XPATH, '//a[@TITLE1="Build History"]')
     BHP_HREF = "view/all/builds"
@@ -26,5 +27,7 @@ class BuildHistoryPage(BasePage):
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)
 
-
-
+    def get_list_builded_jobs(self, name):
+        BUILDED_JOB = (By.XPATH, f'//a[@href="/job/{name}/"]')
+        lst = self.get_elements(BUILDED_JOB)
+        return lst
