@@ -16,6 +16,8 @@ class ProjectPageLocators:
     BUILD_HISTORY_JOBS = (By.XPATH, '//tr[contains(@class, "build-row multi-line")]')
     BUILD_SUCCESS_JOBS = (By.XPATH, '//a[@class="build-status-link"]')
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
+    BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
+
 
 class ProjectPage(BasePage):
     """
@@ -25,7 +27,6 @@ class ProjectPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-
 
     def create_new_job(self):
         """
