@@ -2,8 +2,6 @@ import random
 import string
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
 from pages.BasePage import BasePage
 from config.TestData import TestData
 
@@ -43,7 +41,7 @@ class ManageUserPage(BasePage):
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
     USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
     USER_ID_HYPHEN = (By.XPATH, "//table[@id='people']//tr/td/a[text()='-']")
-    USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name*30}']")
+    USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name * 30}']")
     USER_ID_DELETE = \
         (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
     USER_ID_YES = (By.ID, "yui-gen1-button")
@@ -69,8 +67,7 @@ class ManageUserPage(BasePage):
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
-
-    URL_JOB_CREATE = TestData.BASE_URL + 'view/all/newJob'
+    URL_JOB_VIEW_FROM_USER = TestData.BASE_URL + f'user/{name}/builds'
 
     def click_button_create_new_user(self):
         """

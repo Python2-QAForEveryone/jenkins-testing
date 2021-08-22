@@ -33,7 +33,7 @@ def init_remote_driver_chrome():
     else:
         options = webdriver.ChromeOptions()
         options.add_argument("--window-size=1600,1080")
-        options.headless = False
+        options.headless = True
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     return driver

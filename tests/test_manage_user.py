@@ -3,7 +3,7 @@ import pytest
 from config.TestData import TestData as TD
 from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
-from pages.PeoplePage import PeoplePage, URLLocators
+from pages.PeoplePage import PeoplePage, URLLocators, PeoplePageLocator
 from pages.ProjectPage import ProjectPageLocators, ProjectPage
 from pages.BuildHistoryPage import BuildHistoryPage
 
@@ -92,9 +92,26 @@ class TestManageUserPage:
 
     def test_verify_job_in_the_list(self):
         """
+        TC_JN_100
         verify that job in the list of
         :return:
         """
+
+        name = ProjectPage.create_new_job(self)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+        text_num_of_job = driver.get_elements_text(ProjectPageLocators.BUILD_LAST_JOB_BY_TEXT)
+
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_JOB_VIEW_FROM_USER)
+        text_names_of_builds = driver.get_elements_text(PeoplePageLocator.TABLE_NAMES_OF_BUILD)
+
+        assert text_num_of_job[0] in text_names_of_builds
+        ProjectPage.delete_job(self, name)
 
     def test_delete_new_user(self):
         """
