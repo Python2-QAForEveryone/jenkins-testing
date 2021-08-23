@@ -48,7 +48,7 @@ class PeoplePageLocator:
                             TABLE_USER_ID_USERS, TABLE_NAME_USERS, TABLE_ICON_LINK_S, TABLE_ICON_LINK_M]
 
     TABLE_NAMES_OF_BUILD = (By.XPATH, '//table[@id="projectStatus"]//tr/td/a[contains(@class, "inside")]')
-
+    TABLE_STATUS_OF_BUILD = (By.XPATH, '//td[@data="4"]//img')
 
 class URLLocators:
     URL_PEOPLE = TestData.BASE_URL + 'asynchPeople/'

@@ -102,6 +102,13 @@ class BasePage:
             text_elements.append(el.text)
         return text_elements
 
+    def get_elements_attribute(self, locator, attribute):
+        elements = self.get_elements(locator)
+        attr_elements = []
+        for el in elements:
+            attr_elements.append(el.get_attribute(attribute))
+        return attr_elements
+
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
