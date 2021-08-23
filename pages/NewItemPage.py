@@ -9,6 +9,7 @@ class NewItemPageLocators:
     PIPELINE = (By.XPATH, '//li[@class="org_jenkinsci_plugins_workflow_job_WorkflowJob"]')
     MULTI_CONFIGURATION_PROJECT = (By.XPATH, '//li[@class="hudson_matrix_MatrixProject"]')
     SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
+    NEW_PIPELINE_NAME = (By.XPATH, '//*[@id="name"]')
 
 
 class NewItemPage(BasePage):
