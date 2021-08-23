@@ -63,11 +63,12 @@ class TestManageUserPage:
 
         driver = ProjectPage(self.driver)
         driver.go_to_page(URL_JOB)
+        lst_job_before = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
         driver.click(ProjectPageLocators.BUILD_NOW)
         driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
-        driver.click(ProjectPageLocators.BUILD_SUCCESS_LAST_JOB)
+        lst_job_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
 
-        assert driver.get_element_text(ManageUserPage.STARTED_BY_USER) == ManageUserPage.USER_FULLNAME
+        assert len(lst_job_before) != len(lst_job_after)
         ProjectPage.delete_job(self, name)
 
     def test_verify_the_build_job_was_run(self):
@@ -111,6 +112,46 @@ class TestManageUserPage:
         text_names_of_builds = driver.get_elements_text(PeoplePageLocator.TABLE_NAMES_OF_BUILD)
 
         assert text_num_of_job[0] in text_names_of_builds
+        ProjectPage.delete_job(self, name)
+
+    def test_job_was_started_by_user(self):
+        """
+        TC_JN_101
+        Verify that job was build with new Username
+        :return:
+        """
+        name = ProjectPage.create_new_job(self)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+        driver.click(ProjectPageLocators.BUILD_SUCCESS_LAST_JOB)
+
+        assert driver.get_element_text(ManageUserPage.STARTED_BY_USER) == ManageUserPage.USER_FULLNAME
+        ProjectPage.delete_job(self, name)
+
+    def test_review_all_build_ran(self):
+        """
+        TC_JN_102
+        Verify that user has jobs ran which were early
+        :return:
+        """
+        name = ProjectPage.create_new_job(self)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+
+        driver = PeoplePage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_JOB_VIEW_FROM_USER)
+        attr_alt_of_builds = driver.get_elements_attribute(PeoplePageLocator.TABLE_STATUS_OF_BUILD, "alt")
+
+        for alt in attr_alt_of_builds:
+            assert alt == "Success"
         ProjectPage.delete_job(self, name)
 
     def test_delete_new_user(self):
