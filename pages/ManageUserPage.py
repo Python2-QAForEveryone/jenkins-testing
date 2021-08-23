@@ -19,6 +19,7 @@ class ManageUserPage(BasePage):
     password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
     edit_name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     edit_password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
+    job_name = (''.join(random.choice(string.ascii_letters) for i in range(5)))
 
     username_id = (By.ID, "username")
     password_input_name = (By.NAME, "password1")
@@ -40,13 +41,14 @@ class ManageUserPage(BasePage):
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
     USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
     USER_ID_HYPHEN = (By.XPATH, "//table[@id='people']//tr/td/a[text()='-']")
-    USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name*30}']")
-    USER_ID_DELETE = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
+    USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name * 30}']")
+    USER_ID_DELETE = \
+        (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/delete')]/img[contains(@class, 'icon-edit-delete')]")
     USER_ID_YES = (By.ID, "yui-gen1-button")
     PEOPLE_LIST = (By.XPATH, f"//tr[@id='person-{name}']/td/a")
     PEOPLE_LIST_ALL_RECORD = (By.XPATH, "//tr[contains(@id, 'person')]/td/a[contains(@href, 'user')]")
 
-    CREATE_USER = (By.XPATH, '//span[text() = "Create User"]')
+    CREATE_USER = (By.XPATH, '//span[text()="Create User"]')
     CONFIGURE_USER = (By.XPATH, f"//a[contains(@href, 'user/{name.lower()}/configure')]/img")
     INPUT_FULLNAME = (By.XPATH, '//input[@name="_.fullName"]')
     INPUT_EMAIL = (By.NAME, 'email.address')
@@ -55,10 +57,17 @@ class ManageUserPage(BasePage):
     SAVE_BUTTON = (By.ID, 'yui-gen2-button')
     FULLNAME_TEXT = (By.TAG_NAME, 'h1')
 
+    CREATE_USER_JOB = f'{job_name}'
+    URL_JOB_CREATE = TestData.BASE_URL + f'job/{job_name}/configure'
+    JOB_DELETE_PROJECT = (By.XPATH, '//span[text()="Delete Project"]')
+
+    STARTED_BY_USER = (By.CSS_SELECTOR, 'pre.console-output a')
+
     LOG_OUT_BUTTON = (By.XPATH, '//span[text()="log out"]')
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
+    URL_JOB_VIEW_FROM_USER = TestData.BASE_URL + f'user/{name}/builds'
 
     def click_button_create_new_user(self):
         """
