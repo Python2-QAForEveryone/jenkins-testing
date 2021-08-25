@@ -1,11 +1,12 @@
 import time
 from pages.BasePage import BasePage
-from pages.DashboardPage import DashboardPageLocators
+from pages.DashboardPage import *
 from pages.DashboardPage import URLLocators
 from pages.PipelinePage import *
 from pages.NewItemPage import NewItemPageLocators
 from selenium.webdriver.common.by import By
 from config.TestData import TestData as TD
+from pages.ProjectPage import ProjectPageLocators
 
 import pages.StringUtils
 import pytest
@@ -16,14 +17,8 @@ class TestPipeline:
     pipelineName_Int = pages.StringUtils.generate_random_int(10)
     pipelineName_Int_and_String = pages.StringUtils.generate_random_string_and_int(10)
     pipelineName_valid = pages.StringUtils.generate_random_string(3)
-    pipelineName_valid = "pipeline_" + pipelineName_valid
+    pipelineName_valid = "pipeline" + pipelineName_valid
     pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
-
-    TAB_PART1 = '//a[contains(text(),\"'
-    TAB_PART2 = '\")]'
-    PIPELINE_NAME_VALID = f'{pipelineName_valid}'
-    TAB_LOCATOR = (By.XPATH, TAB_PART1 + f'{pipelineName}' + TAB_PART2)
-    TAB_LOCATOR_VALID = (By.XPATH, TAB_PART1 + f'{pipelineName_valid}' + TAB_PART2)
 
     @pytest.mark.dependency()
     @pytest.mark.parametrize("pipeline_name", pipelineName)
@@ -45,23 +40,24 @@ class TestPipeline:
     @pytest.mark.parametrize("pipeline_name", pipelineName)
     def test_pipeline_can_build_now(self, pipeline_name):
         driver = BasePage(self.driver)
-        driver.go_to_page(TD.BASE_URL + "job/" + pipeline_name)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE+ pipeline_name)
         menu_tasks = driver.get_element_text(PipelinePageLocators.MENU_TASKS)
         assert ("Build Now" in menu_tasks)
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_name_in_the_tab(self):
         driver = BasePage(self.driver)
-        driver.go_to_page(TD.BASE_URL + "job/" + self.pipelineName_valid)
-        driver.get_element(self.TAB_LOCATOR_VALID)
-        driver.click(self.TAB_LOCATOR_VALID)
-        assert (self.pipelineName_valid in driver.get_element_text(self.TAB_LOCATOR_VALID))
-        assert driver.is_element_present(self.TAB_LOCATOR_VALID)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
+        tab_locator_valid = PipelinePageLocators.locator_for_tab(self, self.pipelineName_valid)
+        driver.get_element(tab_locator_valid)
+        driver.click(tab_locator_valid)
+        assert (self.pipelineName_valid in driver.get_element_text(tab_locator_valid))
+        assert driver.is_element_present(tab_locator_valid)
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_disabled(self):
         driver = BasePage(self.driver)
-        driver.go_to_page(TD.BASE_URL + "job/" + self.pipelineName_valid)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
         assert (driver.get_title() == self.pipelineName_valid + " [Jenkins]")
         driver.get_element(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
         driver.click(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
@@ -73,7 +69,7 @@ class TestPipeline:
     @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_disabled"])
     def test_pipeline_enabled(self):
         driver = BasePage(self.driver)
-        driver.go_to_page(TD.BASE_URL + "job/" + self.pipelineName_valid)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
         assert (driver.get_title() == self.pipelineName_valid + " [Jenkins]")
         driver.click(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
         driver.click(PipelineConfigureLocators.BOX_DISABLE)
@@ -81,3 +77,16 @@ class TestPipeline:
         menu_tasks = driver.get_element_text(PipelinePageLocators.MENU_TASKS)
         assert ("Build Now" in menu_tasks)
 
+
+    @pytest.mark.dependency(depends=["test_create_pipeline"])
+    @pytest.mark.parametrize("project_name", pipelineName)
+    def test_delete_pipeline_project(self, project_name):
+        driver = DashboardPage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        time.sleep(6)
+        driver.get_wait(ProjectLocators.job_by_name(project_name))
+        driver.click(ProjectLocators.job_by_name(project_name))
+        driver.click(ProjectPageLocators.DELETE_PROJECT)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(ProjectLocators.job_by_name(project_name))

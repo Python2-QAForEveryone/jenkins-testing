@@ -85,6 +85,7 @@ class URLLocators:
     URL_FOOTER_VERSION = 'https://www.jenkins.io/'
 
 
+
 class Titles:
     TITLE_DASHBOARD_PAGE = 'Dashboard [Jenkins]'
     TITLE_NEW_ITEM = 'New Item [Jenkins]'

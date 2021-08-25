@@ -1,12 +1,19 @@
 from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
-
+from config.TestData import TestData as TD
 
 class PipelinePageLocators:
     PIPELINE_RADIO = (By.XPATH, '//*[@id="j-add-item-type-standalone-projects"]/ul/li[2]')
     SUBMIT_BTN = (By.XPATH, '//*[@id="ok-button"]')
     MENU_TASKS = (By.XPATH, '//*[@id="tasks"]')
     BUILD_NOW = (By.XPATH, "//*[contains(text(),'Build Now')]")
+    TAB_PART1 = '//a[contains(text(),\"'
+    TAB_PART2 = '\")]'
+    URL_PIPELINE_PAGE = TD.BASE_URL + "job/"
+
+    def locator_for_tab(self,  name):
+        return (By.XPATH, PipelinePageLocators.TAB_PART1 + f'{name}' + PipelinePageLocators.TAB_PART2)
+
 
 class PipelineConfigureLocators:
     SAVE_PIPELINE = (By.XPATH, '//*[@type="submit"]')
@@ -18,3 +25,7 @@ class PipelineConfigureLocators:
 class PipelinePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
+
+
+
+
