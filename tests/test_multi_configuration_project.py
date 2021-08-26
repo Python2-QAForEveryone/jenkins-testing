@@ -76,8 +76,27 @@ class TestMultiConfigurationProject:
         assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "New description"
 
     @pytest.mark.dependency(depends=["test_edit_description_06"])
+    def test_rename_07(self):
+        driver = ProjectPage(self.driver)
+        driver.click(ProjectPageLocators.RENAME)
+        driver.clear(ProjectPageLocators.NEW_NAME);
+        driver.do_send_keys(ProjectPageLocators.NEW_NAME, "NewProjectName")
+        driver.click(ProjectPageLocators.RENAME_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project NewProjectName"
+
+    @pytest.mark.dependency(depends=["test_rename_07"])
+    def test_rename_08(self):
+        driver = ProjectPage(self.driver)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project NewProjectName"
+        driver.click(ProjectPageLocators.RENAME)
+        driver.clear(ProjectPageLocators.NEW_NAME);
+        driver.do_send_keys(ProjectPageLocators.NEW_NAME, TestMultiConfigurationProject.projectNameStringAndInt)
+        driver.click(ProjectPageLocators.RENAME_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + TestMultiConfigurationProject.projectNameStringAndInt
+
+    @pytest.mark.dependency(depends=["test_rename_08"])
     @pytest.mark.parametrize("project_name", projectName)
-    def test_delete_project_07(self, project_name):
+    def test_delete_project_10(self, project_name):
         driver = DashboardPage(self.driver)
         driver.go_to_page(TestData.BASE_URL)
         driver.get_wait(ProjectLocators.job_by_name(project_name))
