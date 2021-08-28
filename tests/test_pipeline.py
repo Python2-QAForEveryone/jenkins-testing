@@ -56,9 +56,7 @@ class TestPipeline:
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_disabled(self):
-        driver = BasePage(self.driver)
-        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
-        assert (driver.get_title() == self.pipelineName_valid + " [Jenkins]")
+        driver = PipelinePage(self.driver)
         driver.get_element(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
         driver.click(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
         driver.click(PipelineConfigureLocators.BOX_DISABLE)
@@ -68,9 +66,7 @@ class TestPipeline:
 
     @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_disabled"])
     def test_pipeline_enabled(self):
-        driver = BasePage(self.driver)
-        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
-        assert (driver.get_title() == self.pipelineName_valid + " [Jenkins]")
+        driver = PipelinePage(self.driver)
         driver.click(PipelineConfigureLocators.MENU_ITEM_CONFIGURE)
         driver.click(PipelineConfigureLocators.BOX_DISABLE)
         driver.click(PipelineConfigureLocators.BTN_SAVE)
@@ -83,7 +79,6 @@ class TestPipeline:
     def test_delete_pipeline_project(self, project_name):
         driver = DashboardPage(self.driver)
         driver.go_to_page(TD.BASE_URL)
-        time.sleep(6)
         driver.get_wait(ProjectLocators.job_by_name(project_name))
         driver.click(ProjectLocators.job_by_name(project_name))
         driver.click(ProjectPageLocators.DELETE_PROJECT)
