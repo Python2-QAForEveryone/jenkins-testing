@@ -33,10 +33,17 @@ class ManageUserPage(BasePage):
     PASSWORD_EDIT = f'{edit_password}'
     USER_FULLNAME = f'User {name}'
     USER_FULLNAME_EDIT = f'User {edit_name}'
+    USER_EMAIL = f"{name}@gmail.com"
     USER_EMAIL_EDIT = f"{edit_name}@gmail.com"
     USER_NAME_UNDERSCORE = '_'
     USER_NAME_HYPHEN = '-'
     USER_NAME_MORE_255_SYMBOLS = f'{name * 30}'
+    USER_FULLNAME_DOT = '.'
+    USER_PASSWORD_DOT = '.'
+    USER_FULLNAME_WITH_DOT = f'User . {name}'
+    USER_PASSWORD_MORE_255_SYMBOLS = f'{password * 30}'
+    USER_EMAIL_ETTA = '@'
+    USER_EMAIL_WO_DOT = f"{name}@gmailcom"
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
     USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
@@ -60,6 +67,8 @@ class ManageUserPage(BasePage):
     CREATE_USER_JOB = f'{job_name}'
     URL_JOB_CREATE = TestData.BASE_URL + f'job/{job_name}/configure'
     JOB_DELETE_PROJECT = (By.XPATH, '//span[text()="Delete Project"]')
+    USER_DELETE_BUTTON = (By.XPATH, '//span[text()="Delete"]')
+    USER_DELETE_YES_BUTTON = (By.ID, 'yui-gen1-button')
 
     STARTED_BY_USER = (By.CSS_SELECTOR, 'pre.console-output a')
 
@@ -95,3 +104,37 @@ class ManageUserPage(BasePage):
         self.do_send_keys(ManageUserPage.email_name, f"{name}@gmail.com")
         self.click(ManageUserPage.BUTTON_CREATE_ID)
         return self
+
+    def fill_all_field_and_click_save_diff_value(self, name, password, fullname, email):
+        """
+        in the during create new user fill out all fields
+        push on the button
+
+        :param email:
+        :param fullname:
+        :param name:
+        :param password:
+        :return:
+
+        this object
+        """
+        self.do_send_keys(ManageUserPage.username_id, name)
+        self.do_send_keys(ManageUserPage.password_input_name, password)
+        self.do_send_keys(ManageUserPage.enter_confirm_password, password)
+        self.do_send_keys(ManageUserPage.fullname_name, fullname)
+        self.do_send_keys(ManageUserPage.email_name, email)
+        self.click(ManageUserPage.BUTTON_CREATE_ID)
+        return self
+
+    def delete_user(self, name):
+        """
+        delete user from list
+        :param name:
+        :return:
+        """
+        URL_USER_FOR_DELETE = TestData.BASE_URL + f'securityRealm/user/{name}/'
+
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(URL_USER_FOR_DELETE)
+        driver.click(ManageUserPage.USER_DELETE_BUTTON)
+        driver.get_wait_and_click(self.USER_DELETE_YES_BUTTON)
