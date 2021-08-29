@@ -110,6 +110,8 @@ class ManageUserPage(BasePage):
         in the during create new user fill out all fields
         push on the button
 
+        :param email:
+        :param fullname:
         :param name:
         :param password:
         :return:
