@@ -322,11 +322,6 @@ class TestManageUserPage:
                                                         ManageUserPage.USER_PASSWORD_DOT,
                                                         ManageUserPage.USER_FULLNAME,
                                                         ManageUserPage.USER_EMAIL)
-
-        print("*********************1111111**************")
-        print(driver.get_elements_text(ManageUserPage.USER_ID))
-        print(ManageUserPage.USER_NAME)
-        print("**********************1111111*************")
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
@@ -344,11 +339,6 @@ class TestManageUserPage:
                                                         ManageUserPage.PASSWORD,
                                                         ManageUserPage.USER_FULLNAME,
                                                         ManageUserPage.USER_EMAIL_ETTA)
-
-        print("*********************222222**************")
-        print(driver.get_elements_text(ManageUserPage.USER_ID))
-        print(ManageUserPage.USER_NAME)
-        print("*********************2222222*************")
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
@@ -366,12 +356,6 @@ class TestManageUserPage:
                                                         ManageUserPage.PASSWORD,
                                                         ManageUserPage.USER_FULLNAME_DOT,
                                                         ManageUserPage.USER_EMAIL)
-
-        print("*********************333333**************")
-        print(driver.get_elements_text(ManageUserPage.USER_ID))
-        print(ManageUserPage.USER_NAME)
-        print("*********************3333333*************")
-
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
@@ -389,12 +373,6 @@ class TestManageUserPage:
                                                         ManageUserPage.PASSWORD,
                                                         ManageUserPage.USER_FULLNAME,
                                                         ManageUserPage.USER_EMAIL_WO_DOT)
-
-        print("*********************4444444**************")
-        print(driver.get_elements_text(ManageUserPage.USER_ID))
-        print(ManageUserPage.USER_NAME)
-        print("********************4444444*************")
-
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
