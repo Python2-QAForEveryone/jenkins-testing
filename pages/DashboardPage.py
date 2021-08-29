@@ -115,10 +115,9 @@ class EmptyStateBlock:
                                  'CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
                                  'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW']
     locators_for_clickable_dashboard = [CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW,
-                                        CONFIGURE_CLOUD_TEXT, CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+                                        CONFIGURE_CLOUD_TEXT, CONFIGURE_CLOUD_ARROW]
     ids_for_clickable_dashboard = ['CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
-                                   'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT',
-                                   'LEARN_MORE_SIGN']
+                                   'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW']
 
 class ProjectLocators(BasePage):
     def job_by_name(project_name):
