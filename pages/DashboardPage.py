@@ -109,11 +109,11 @@ class EmptyStateBlock:
     locators_for_visible_dashboard = [WELCOME_TO_JENKINS, TEXT_UNDER_WELCOME, SECTION_TEXT_START, SECTION_TEXT_SET_UP,
                                       CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW,
                                       CONFIGURE_CLOUD_TEXT,
-                                      CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
+                                      CONFIGURE_CLOUD_ARROW]
     ids_for_visible_dashboard = ['WELCOME_TO_JENKINS', 'TEXT_UNDER_WELCOME', 'SECTION_TEXT_START',
                                  'SECTION_TEXT_SET_UP',
                                  'CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
-                                 'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW', 'LEARN_MORE_TEXT', 'LEARN_MORE_SIGN']
+                                 'CONFIGURE_CLOUD_TEXT', 'CONFIGURE_CLOUD_ARROW']
     locators_for_clickable_dashboard = [CREATE_JOB_TEXT, CREATE_JOB_ARROW, SET_UP_TEXT, SET_UP_ARROW,
                                         CONFIGURE_CLOUD_TEXT, CONFIGURE_CLOUD_ARROW, LEARN_MORE_TEXT, LEARN_MORE_SIGN]
     ids_for_clickable_dashboard = ['CREATE_JOB_TEXT', 'CREATE_JOB_ARROW', 'SET_UP_TEXT', 'SET_UP_ARROW',
