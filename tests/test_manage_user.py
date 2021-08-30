@@ -202,54 +202,6 @@ class TestManageUserPage:
         assert driver.get_current_url() == LoginPage.URL_LOGIN_ERROR
         assert driver.get_element_text(LoginPage.ALERT_INVALID_DATA) == LoginPage.ALERT_TEXT
 
-    @pytest.mark.skip
-    def test_create_user_with_underscore_name(self):
-        """
-        TC_JN_64
-        create user with '_' name
-        verify, that user present on the page
-        :return:
-        """
-        driver = LoginPage(self.driver)
-        driver.login_with_default_credential()
-        driver = ManageUserPage(self.driver)
-        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
-        driver.click_button_create_new_user()
-        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_UNDERSCORE, ManageUserPage.PASSWORD)
-
-        assert driver.get_elements_text(ManageUserPage.USER_ID_UNDERSCORE)[0] == ManageUserPage.USER_NAME_UNDERSCORE
-
-    @pytest.mark.skip
-    def test_create_user_with_hyphen_name(self):
-        """
-        TC_JN_72
-        create user with '-' name
-        verify, that user present on the page
-        :return:
-        """
-        driver = ManageUserPage(self.driver)
-        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
-        driver.click_button_create_new_user()
-        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_HYPHEN, ManageUserPage.PASSWORD)
-
-        assert driver.get_elements_text(ManageUserPage.USER_ID_HYPHEN)[0] == ManageUserPage.USER_NAME_HYPHEN
-
-    @pytest.mark.skip
-    def test_create_user_with_long_name(self):
-        """
-        TC_JN_79
-        create user with name more than 255 ch
-        verify, that user present on the page
-        :return:
-        """
-        driver = ManageUserPage(self.driver)
-        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
-        driver.click_button_create_new_user()
-        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_MORE_255_SYMBOLS, ManageUserPage.PASSWORD)
-
-        assert driver.get_elements_text(ManageUserPage.USER_ID_MORE_255_SYMBOLS)[0] \
-               == ManageUserPage.USER_NAME_MORE_255_SYMBOLS
-
     def test_edit_new_user_fullname(self):
         """
         TC_JN_41
@@ -306,3 +258,153 @@ class TestManageUserPage:
         assert driver.get_current_url() == TD.BASE_URL
 
         self.test_delete_new_user()
+
+    def test_create_user_with_underscore_name(self):
+        """
+        TC_JN_64
+        create user with '_' name
+        verify, that user present on the page
+        :return:
+        """
+
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_UNDERSCORE, ManageUserPage.PASSWORD)
+
+        assert driver.get_elements_text(ManageUserPage.USER_ID_UNDERSCORE)[0] == ManageUserPage.USER_NAME_UNDERSCORE
+        driver.delete_user(ManageUserPage.USER_NAME_UNDERSCORE)
+
+    def test_create_user_with_hyphen_name(self):
+        """
+        TC_JN_72
+        create user with '-' name
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_HYPHEN, ManageUserPage.PASSWORD)
+
+        assert driver.get_elements_text(ManageUserPage.USER_ID_HYPHEN)[0] == ManageUserPage.USER_NAME_HYPHEN
+        driver.delete_user(ManageUserPage.USER_NAME_HYPHEN)
+
+    def test_create_user_with_dot_fullname(self):
+        """
+        TC_JN_73
+        create user with '.' fullname
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME_WITH_DOT,
+                                                        ManageUserPage.USER_EMAIL)
+
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_dot_password(self):
+        """
+        TC_JN_74
+        create user with '.' password
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.USER_PASSWORD_DOT,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_etta_email(self):
+        """
+        TC_JN_75
+        create user with "@" email
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL_ETTA)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_only_dot_fullname(self):
+        """
+        TC_JN_76
+        create user with only '.' in fullname
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME_DOT,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_without_dot_email(self):
+        """
+        TC_JN_77
+        create user without '.' email
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL_WO_DOT)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_long_name(self):
+        """
+        TC_JN_78
+        create user with name more than 255 ch
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME_MORE_255_SYMBOLS,
+                                             ManageUserPage.PASSWORD)
+
+        assert driver.get_elements_text(ManageUserPage.USER_ID_MORE_255_SYMBOLS)[0] \
+               == ManageUserPage.USER_NAME_MORE_255_SYMBOLS
+        driver.delete_user(ManageUserPage.USER_NAME_MORE_255_SYMBOLS)
+
+    def test_create_user_with_long_password(self):
+        """
+        TC_JN_79
+        create user with password more than 255 ch
+        verify, that user present on the page
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME,
+                                             ManageUserPage.USER_PASSWORD_MORE_255_SYMBOLS)
+
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
