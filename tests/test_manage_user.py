@@ -429,7 +429,7 @@ class TestManageUserPage:
         assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
-    def test_create_user_with_all_date_early_but_username(self, execution_number):
+    def test_create_user_with_all_date_early_but_username(self):
         """
         TC_JN_91
         create user with all data for record which we have early, but username is new
