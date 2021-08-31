@@ -120,6 +120,8 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_EXIST_FOLDER).click()
         assert driver.get_current_url() == URLLocators.URL_EXIST_FOLDER
         assert driver.is_element_present(FolderPageLocator.EMPTY_FOLDER)
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
 
     def test_create_new_job_in_folder(self):
         driver = FolderPage(self.driver)
