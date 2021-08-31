@@ -45,7 +45,6 @@ class FolderPage(BasePage):
     TITLE_INSIDE_DOT = f"{name_inside_dot} Config [Jenkins]"
     TITLE_INSIDE_DOT_JOB = f"All [{name_inside_dot}] [Jenkins]"
     TITLE_JOB_INSIDE_FOLDER = f"{name} [{name}] [Jenkins]"
-
     WRONG_TITLE = "Jenkins [Jenkins]"
 
 

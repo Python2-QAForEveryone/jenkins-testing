@@ -1,4 +1,3 @@
-
 import pytest
 
 from config.TestData import TestData
@@ -135,4 +134,3 @@ class TestFolderPage:
         driver.get_wait(FolderPageLocator.BUTTON_PANEL)
         driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
         assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
-
