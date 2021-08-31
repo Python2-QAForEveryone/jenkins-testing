@@ -408,3 +408,52 @@ class TestManageUserPage:
 
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_empty_fullname(self):
+        """
+        TC_JN_87
+        create user with empty fullname
+        verify, that user present on the page
+        verify, that fullname equals User_Name
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.EMPTY_FIELD,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.click(ManageUserPage.USER_ID)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    def test_create_user_with_all_date_early_but_username(self):
+        """
+        TC_JN_91
+        create user with all data for record which we have early, but username is new
+        verify, that both users present on the page
+        verify, that in the both users fullname equals User_Name
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME,
+                                             ManageUserPage.PASSWORD)
+        print("===================================")
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME_EDIT,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        assert driver.get_elements_text(ManageUserPage.USER_ID_EDIT)[0] == ManageUserPage.USER_NAME_EDIT
+        driver.click(ManageUserPage.USER_ID)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_FULLNAME
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click(ManageUserPage.USER_ID_EDIT)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_FULLNAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+        driver.delete_user(ManageUserPage.USER_NAME_EDIT)
