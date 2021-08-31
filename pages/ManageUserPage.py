@@ -29,6 +29,7 @@ class ManageUserPage(BasePage):
     BUTTON_CREATE_ID = (By.ID, "yui-gen1-button")
 
     USER_NAME = f'{name}'
+    USER_NAME_EDIT = f'{edit_name}'
     PASSWORD = f'{password}'
     PASSWORD_EDIT = f'{edit_password}'
     USER_FULLNAME = f'User {name}'
@@ -43,9 +44,11 @@ class ManageUserPage(BasePage):
     USER_FULLNAME_WITH_DOT = f'User . {name}'
     USER_PASSWORD_MORE_255_SYMBOLS = f'{password * 30}'
     USER_EMAIL_ETTA = '@'
-    USER_EMAIL_WO_DOT = f"{name}@gmailcom"
+    USER_EMAIL_WO_DOT = f'{name}@gmailcom'
+    EMPTY_FIELD = ''
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
+    USER_ID_EDIT = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{edit_name}']")
     USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
     USER_ID_HYPHEN = (By.XPATH, "//table[@id='people']//tr/td/a[text()='-']")
     USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name * 30}']")
