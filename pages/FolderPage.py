@@ -44,6 +44,7 @@ class FolderPage(BasePage):
     TITLE_START_DOT_JOB = f"All [{name_start_dot}] [Jenkins]"
     TITLE_INSIDE_DOT = f"{name_inside_dot} Config [Jenkins]"
     TITLE_INSIDE_DOT_JOB = f"All [{name_inside_dot}] [Jenkins]"
+    TITLE_JOB_INSIDE_FOLDER = f"{name} [{name}] [Jenkins]"
 
     WRONG_TITLE = "Jenkins [Jenkins]"
 
@@ -63,8 +64,17 @@ class FolderPageLocator:
     ERROR_PAGE_NONAME = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'No name is specified')]")
     LINK_DELETE_FOLDER = (By.XPATH, "//a[@title='Delete Folder']")
     BUTTON_YES = (By.ID, 'yui-gen1-button')
+    LINK_EXIST_FOLDER = (By.CSS_SELECTOR, f'#job_{FolderPage.name} .model-link')
+    EMPTY_FOLDER = (By.CSS_SELECTOR, ".h4")
+    LINK_CREATE_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, ".trailing-icon > .svg-icon")
+    LINK_FREESTYLE = (By.CSS_SELECTOR, ".hudson_model_FreeStyleProject > .desc")
+    BUTTON_SAVE_IN_FOLDER = (By.CSS_SELECTOR, "[type='submit']")
+    BUTTON_OK_IN_FOLDER = (By.XPATH, "//form[@id=\'createItem\']/div[4]/div/span/button")
+    BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
 
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
     URL_PEOPLE_MANAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
+    URL_FOLDER_PAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
+    URL_EXIST_FOLDER = TestData.BASE_URL + f'job/{FolderPage.name}/'

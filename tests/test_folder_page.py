@@ -1,7 +1,10 @@
+
 import pytest
 
+from config.TestData import TestData
 from pages.FolderPage import FolderPage
 from pages.FolderPage import FolderPageLocator
+from pages.FolderPage import URLLocators
 
 
 class TestFolderPage:
@@ -105,3 +108,31 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.is_visible(FolderPageLocator.WRONG_REQUEST)
+
+    def test_new_folder_is_exist_and_empty(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.go_to_page(TestData.BASE_URL)
+        driver.get_element(FolderPageLocator.LINK_EXIST_FOLDER).click()
+        assert driver.get_current_url() == URLLocators.URL_EXIST_FOLDER
+        assert driver.is_element_present(FolderPageLocator.EMPTY_FOLDER)
+
+    def test_create_new_job_in_folder(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_CREATE_NEW_JOB_IN_FOLDER).click()
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FREESTYLE).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_IN_FOLDER).click()
+        driver.get_wait(FolderPageLocator.BUTTON_PANEL)
+        driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
+        assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
+
