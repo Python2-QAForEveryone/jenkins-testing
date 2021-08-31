@@ -16,7 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - run: |
+        mkdir -p saved_screenshots
     - uses: actions/cache@v2
       with:
        path: |
@@ -65,8 +66,22 @@ jobs:
 
 
     - name: Test with pytest
+      id: test
       run: |
         pytest -vs
+      continue-on-error: true
+
+    - name: Attach screenshots
+      uses: actions/upload-artifact@v2
+      if: steps.test.outcome != 'success'
+      with:
+        name: Saved_screenshots
+        path: saved_screenshots
+
 
     - name: Docker stop
       run: docker-compose -f ./selenium-grid/docker-compose.yml down
+
+    - name: Check on failures
+      if: steps.test.outcome != 'success'
+      run: exit 1
