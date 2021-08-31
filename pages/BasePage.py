@@ -102,6 +102,13 @@ class BasePage:
             text_elements.append(el.text)
         return text_elements
 
+    def get_elements_attribute(self, locator, attribute):
+        elements = self.get_elements(locator)
+        attr_elements = []
+        for el in elements:
+            attr_elements.append(el.get_attribute(attribute))
+        return attr_elements
+
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
@@ -109,6 +116,13 @@ class BasePage:
 
     def get_wait(self, locator):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+
+    def get_wait_and_click(self, locator):
+        self.get_wait(locator)
+        self.click(locator)
+
+    def get_wait_is_clickable(self, locator):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
 
     def get_wait_for_alert(self):
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())
