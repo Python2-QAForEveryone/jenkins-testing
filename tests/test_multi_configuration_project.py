@@ -95,6 +95,17 @@ class TestMultiConfigurationProject:
         assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + TestMultiConfigurationProject.projectNameStringAndInt
 
     @pytest.mark.dependency(depends=["test_rename_08"])
+    def test_build_now_09(self):
+        driver = ProjectPage(self.driver)
+        number_of_jobs_before = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+        number_of_jobs_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        assert len(number_of_jobs_before) != len(number_of_jobs_after)
+        assert driver.is_element_present(ProjectPageLocators.FIRST_BUILD)
+        
+
+    @pytest.mark.dependency(depends=["test_rename_08"])
     @pytest.mark.parametrize("project_name", projectName)
     def test_delete_project_10(self, project_name):
         driver = DashboardPage(self.driver)
