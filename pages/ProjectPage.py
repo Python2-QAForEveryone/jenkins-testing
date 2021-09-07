@@ -26,7 +26,7 @@ class ProjectPageLocators:
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
     FIRST_BUILD = (By.XPATH, "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
-
+    WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
 
 class ProjectPage(BasePage):
     """
