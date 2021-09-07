@@ -70,7 +70,7 @@ class TestMultiConfigurationProject:
         driver = ProjectPage(self.driver)
         assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "Project description"
         driver.click(ProjectPageLocators.ADD_DESCRIPTION_BUTTON)
-        driver.clear(ProjectPageLocators.DESCRIPTION_TEXTAREA);
+        driver.clear(ProjectPageLocators.DESCRIPTION_TEXTAREA)
         driver.do_send_keys(ProjectPageLocators.DESCRIPTION_TEXTAREA, "New description")
         driver.click(ProjectPageLocators.SUBMIT_DESCRIPTION_BUTTON)
         assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "New description"
@@ -103,11 +103,17 @@ class TestMultiConfigurationProject:
         number_of_jobs_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
         assert len(number_of_jobs_before) != len(number_of_jobs_after)
         assert driver.is_element_present(ProjectPageLocators.FIRST_BUILD)
-        
 
-    @pytest.mark.dependency(depends=["test_rename_08"])
+    @pytest.mark.dependency(depends=["test_build_now_09"])
+    def test_view_workspace_10(self):
+        driver = ProjectPage(self.driver)
+        driver.click(ProjectPageLocators.WORKSPACE)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Workspace of " + \
+               TestMultiConfigurationProject.projectNameStringAndInt + " on master"
+
+    @pytest.mark.dependency(depends=["test_view_workspace_10"])
     @pytest.mark.parametrize("project_name", projectName)
-    def test_delete_project_10(self, project_name):
+    def test_delete_project_11(self, project_name):
         driver = DashboardPage(self.driver)
         driver.go_to_page(TestData.BASE_URL)
         driver.get_wait(ProjectLocators.job_by_name(project_name))
