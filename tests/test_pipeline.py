@@ -1,6 +1,7 @@
 import time
 from pages.BasePage import BasePage
 from pages.DashboardPage import *
+from pages.FolderPage import *
 from pages.DashboardPage import URLLocators
 from pages.PipelinePage import *
 from pages.NewItemPage import NewItemPageLocators
@@ -19,6 +20,8 @@ class TestPipeline:
     pipelineName_valid = pages.StringUtils.generate_random_string(3)
     pipelineName_valid = "pipeline" + pipelineName_valid
     pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
+    project_name_special_symbol = [FolderPage.name_start_special_ch, FolderPage.name_only_one_or_two_dot,
+                                   FolderPage.name_empty]
 
     @pytest.mark.dependency()
     @pytest.mark.parametrize("pipeline_name", pipelineName)
@@ -85,3 +88,14 @@ class TestPipeline:
         driver.get_wait_for_alert()
         driver.accept_alert()
         assert driver.is_element_not_present(ProjectLocators.job_by_name(project_name))
+
+    @pytest.mark.parametrize("project_name", project_name_special_symbol)
+    def test_create_project_with_special_symbol_01(self, project_name):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.ENTER_AN_ITEM_NAME, project_name)
+        driver.click(NewItemPageLocators.NEW_PIPELINE_NAME)
+        assert driver.is_disabled(NewItemPageLocators.OK_BUTTON)
+        assert driver.is_element_present(NewItemPageLocators.ERROR_MESSAGE)
+
+
