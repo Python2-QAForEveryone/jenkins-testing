@@ -106,6 +106,7 @@ class TestFolderPage:
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
+
         assert driver.get_element_text(FolderPageLocator.WRONG_REQUEST) == "A problem occurred while processing the request."
 
     def test_new_folder_is_exist_and_empty(self):
