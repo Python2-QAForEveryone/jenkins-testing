@@ -29,6 +29,7 @@ class ManageUserPage(BasePage):
     BUTTON_CREATE_ID = (By.ID, "yui-gen1-button")
 
     USER_NAME = f'{name}'
+    USER_NAME_EDIT = f'{edit_name}'
     PASSWORD = f'{password}'
     PASSWORD_EDIT = f'{edit_password}'
     USER_FULLNAME = f'User {name}'
@@ -43,9 +44,20 @@ class ManageUserPage(BasePage):
     USER_FULLNAME_WITH_DOT = f'User . {name}'
     USER_PASSWORD_MORE_255_SYMBOLS = f'{password * 30}'
     USER_EMAIL_ETTA = '@'
-    USER_EMAIL_WO_DOT = f"{name}@gmailcom"
+    USER_EMAIL_WO_DOT = f'{name}@gmailcom'
+    USER_EMAIL_WO_ETTA = f'{name}gmail.com'
+    EMPTY_FIELD = ''
+    USER_NAME_NOT_ALPHABETIC = 'Алфавит'
+    USER_NAME_WITH_DOT = USER_NAME + '.'
+    USER_NAME_WITH_SPECIAL_SYMBOL = USER_NAME + '!'
+    USER_NAME_WITH_ETTA = USER_NAME + '@'
+    USER_NOT_CORRECT_NAME = [USER_NAME_NOT_ALPHABETIC, USER_NAME_WITH_ETTA, USER_NAME_WITH_DOT,
+                             USER_NAME_WITH_SPECIAL_SYMBOL, EMPTY_FIELD]
+    USER_PASSWORD_NOT_CORRECT = [EMPTY_FIELD, PASSWORD_EDIT]
+    USER_EMAIL_NOT_CORRECT = [USER_EMAIL_WO_ETTA, EMPTY_FIELD]
 
     USER_ID = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name}']")
+    USER_ID_EDIT = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{edit_name}']")
     USER_ID_UNDERSCORE = (By.XPATH, "//table[@id='people']//tr/td/a[text()='_']")
     USER_ID_HYPHEN = (By.XPATH, "//table[@id='people']//tr/td/a[text()='-']")
     USER_ID_MORE_255_SYMBOLS = (By.XPATH, f"//table[@id='people']//tr/td/a[text()='{name * 30}']")
@@ -76,7 +88,21 @@ class ManageUserPage(BasePage):
 
     URL_USER_CREATE = TestData.BASE_URL + 'securityRealm/addUser'
     URL_USER_MANAGE = TestData.BASE_URL + 'securityRealm/'
+    URL_USER_CREATE_ERROR = URL_USER_MANAGE + 'createAccountByAdmin'
     URL_JOB_VIEW_FROM_USER = TestData.BASE_URL + f'user/{name}/builds'
+
+    ERRORS = (By.CLASS_NAME, 'error')
+    ERROR_USER_CREATE_NAME = 'User name must only contain alphanumeric characters, underscore and dash'
+    ERROR_USER_USERNAME = '\"\" is prohibited as a username for security reasons.'
+    ERROR_USER_TAKEN_NAME = 'User name is already taken'
+    ERROR_USER_PASSWORD = 'Password is required'
+    ERROR_USER_FULLNAME = '\"\" is prohibited as a full name for security reasons.'
+    ERROR_USER_EMAIL = 'Invalid e-mail address'
+    ERROR_USER_PASSWORD_DONT_MATCH = 'Password didn\'t match'
+    ERRORS_TEXT = [ERROR_USER_CREATE_NAME, ERROR_USER_PASSWORD_DONT_MATCH,
+                   ERROR_USER_USERNAME, ERROR_USER_EMAIL, ERROR_USER_FULLNAME,
+                   ERROR_USER_PASSWORD, ERROR_USER_TAKEN_NAME]
+
 
     def click_button_create_new_user(self):
         """
@@ -121,6 +147,28 @@ class ManageUserPage(BasePage):
         self.do_send_keys(ManageUserPage.username_id, name)
         self.do_send_keys(ManageUserPage.password_input_name, password)
         self.do_send_keys(ManageUserPage.enter_confirm_password, password)
+        self.do_send_keys(ManageUserPage.fullname_name, fullname)
+        self.do_send_keys(ManageUserPage.email_name, email)
+        self.click(ManageUserPage.BUTTON_CREATE_ID)
+        return self
+
+    def fill_all_field_and_click_save_with_all_diff_values(self, name, password1, password2, fullname, email):
+        """
+        in the during create new user fill out all fields
+        push on the button
+
+        :param email:
+        :param fullname:
+        :param name:
+        :param password1:
+        :param password2:
+        :return:
+
+        this object
+        """
+        self.do_send_keys(ManageUserPage.username_id, name)
+        self.do_send_keys(ManageUserPage.password_input_name, password1)
+        self.do_send_keys(ManageUserPage.enter_confirm_password, password2)
         self.do_send_keys(ManageUserPage.fullname_name, fullname)
         self.do_send_keys(ManageUserPage.email_name, email)
         self.click(ManageUserPage.BUTTON_CREATE_ID)

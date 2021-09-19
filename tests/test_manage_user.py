@@ -8,8 +8,11 @@ from pages.ProjectPage import ProjectPageLocators, ProjectPage
 from pages.BuildHistoryPage import BuildHistoryPage
 
 
+@pytest.mark.webtest
 class TestManageUserPage:
 
+    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_create_user_valid_credential(self):
         """
         TC_JN_35
@@ -25,6 +28,8 @@ class TestManageUserPage:
         assert driver.get_current_url() == ManageUserPage.URL_USER_MANAGE
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
 
+    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_added_new_user_on_the_people_page(self):
         """
         TC_JN_37
@@ -38,6 +43,8 @@ class TestManageUserPage:
         assert lst[1] == ManageUserPage.USER_NAME
         lst.clear()
 
+    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_check_log_in_new_user(self):
         """
         TC_JN_36
@@ -52,6 +59,8 @@ class TestManageUserPage:
 
         assert driver.get_current_url() == TD.BASE_URL
 
+    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_run_the_build_job_started(self):
         """
         TC_JN_98
@@ -71,6 +80,8 @@ class TestManageUserPage:
         assert len(lst_job_before) != len(lst_job_after)
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_verify_the_build_job_was_run(self):
         """
         TC_JN_99
@@ -91,6 +102,7 @@ class TestManageUserPage:
         assert len(lst) != 0
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.regression
     def test_verify_job_in_the_list(self):
         """
         TC_JN_100
@@ -114,6 +126,7 @@ class TestManageUserPage:
         assert text_num_of_job[0] in text_names_of_builds
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.regression
     def test_job_was_started_by_user(self):
         """
         TC_JN_101
@@ -132,6 +145,7 @@ class TestManageUserPage:
         assert driver.get_element_text(ManageUserPage.STARTED_BY_USER) == ManageUserPage.USER_FULLNAME
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.regression
     def test_review_all_build_ran(self):
         """
         TC_JN_102
@@ -259,6 +273,7 @@ class TestManageUserPage:
 
         self.test_delete_new_user()
 
+    @pytest.mark.positive
     def test_create_user_with_underscore_name(self):
         """
         TC_JN_64
@@ -275,6 +290,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID_UNDERSCORE)[0] == ManageUserPage.USER_NAME_UNDERSCORE
         driver.delete_user(ManageUserPage.USER_NAME_UNDERSCORE)
 
+    @pytest.mark.positive
     def test_create_user_with_hyphen_name(self):
         """
         TC_JN_72
@@ -290,6 +306,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID_HYPHEN)[0] == ManageUserPage.USER_NAME_HYPHEN
         driver.delete_user(ManageUserPage.USER_NAME_HYPHEN)
 
+    @pytest.mark.positive
     def test_create_user_with_dot_fullname(self):
         """
         TC_JN_73
@@ -308,6 +325,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
+    @pytest.mark.positive
     def test_create_user_with_dot_password(self):
         """
         TC_JN_74
@@ -325,6 +343,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
+    @pytest.mark.positive
     def test_create_user_with_etta_email(self):
         """
         TC_JN_75
@@ -342,6 +361,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
+    @pytest.mark.positive
     def test_create_user_with_only_dot_fullname(self):
         """
         TC_JN_76
@@ -359,6 +379,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
+    @pytest.mark.positive
     def test_create_user_without_dot_email(self):
         """
         TC_JN_77
@@ -376,6 +397,7 @@ class TestManageUserPage:
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
 
+    @pytest.mark.positive
     def test_create_user_with_long_name(self):
         """
         TC_JN_78
@@ -393,6 +415,7 @@ class TestManageUserPage:
                == ManageUserPage.USER_NAME_MORE_255_SYMBOLS
         driver.delete_user(ManageUserPage.USER_NAME_MORE_255_SYMBOLS)
 
+    @pytest.mark.positive
     def test_create_user_with_long_password(self):
         """
         TC_JN_79
@@ -408,3 +431,202 @@ class TestManageUserPage:
 
         assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
         driver.delete_user(ManageUserPage.USER_NAME)
+
+    @pytest.mark.positive
+    def test_create_user_with_empty_fullname(self):
+        """
+        TC_JN_87
+        create user with empty fullname
+        verify, that user present on the page
+        verify, that fullname equals User_Name
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.EMPTY_FIELD,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        driver.click(ManageUserPage.USER_ID)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    @pytest.mark.positive
+    def test_create_user_with_all_date_early_but_username(self):
+        """
+        TC_JN_91
+        create user with all data for record which we have early, but username is new
+        verify, that both users present on the page
+        verify, that in the both users fullname equals User_Name
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME,
+                                             ManageUserPage.PASSWORD)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME_EDIT,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL)
+        assert driver.get_elements_text(ManageUserPage.USER_ID)[0] == ManageUserPage.USER_NAME
+        assert driver.get_elements_text(ManageUserPage.USER_ID_EDIT)[0] == ManageUserPage.USER_NAME_EDIT
+        driver.click(ManageUserPage.USER_ID)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_FULLNAME
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click(ManageUserPage.USER_ID_EDIT)
+        assert driver.get_element_text(ManageUserPage.FULLNAME_TEXT) == ManageUserPage.USER_FULLNAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+        driver.delete_user(ManageUserPage.USER_NAME_EDIT)
+
+    @pytest.mark.negative
+    def test_try_create_user_with_empty_fields(self):
+        """
+        TC_JN_80
+        try create user with empty fields
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.EMPTY_FIELD,
+                                                        ManageUserPage.EMPTY_FIELD,
+                                                        ManageUserPage.EMPTY_FIELD,
+                                                        ManageUserPage.EMPTY_FIELD)
+        text_els = driver.get_elements_text(ManageUserPage.ERRORS)
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        for text_el in text_els:
+            assert text_el in ManageUserPage.ERRORS_TEXT
+
+    @pytest.mark.negative
+    @pytest.mark.parametrize("name", ManageUserPage.USER_NOT_CORRECT_NAME)
+    def test_try_create_user_with_not_correct_username(self, name):
+        """
+        TC_JN_81
+        try create user with username included not alphabetic or digit letters
+        TC_JN_82
+        try create user with username included dot
+        TC_JN_83
+        try create user with username included special symbol
+        TC_JN_84
+        try create user with empty username
+        TC_JN_89
+        try create user with username included etta
+
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(name,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        ManageUserPage.USER_EMAIL)
+        text_els = driver.get_elements_text(ManageUserPage.ERRORS)
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        for text_el in text_els:
+            assert text_el in ManageUserPage.ERRORS_TEXT
+
+    @pytest.mark.negative
+    def test_try_create_user_with_not_correct_password(self):
+        """
+        TC_JN_85
+        try create user with fill out all field, but password1 empty
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_with_all_diff_values(ManageUserPage.USER_NAME,
+                                                                  ManageUserPage.EMPTY_FIELD,
+                                                                  ManageUserPage.PASSWORD,
+                                                                  ManageUserPage.USER_FULLNAME,
+                                                                  ManageUserPage.USER_EMAIL)
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        assert driver.get_element_text(ManageUserPage.ERRORS) == ManageUserPage.ERROR_USER_PASSWORD
+
+    @pytest.mark.negative
+    @pytest.mark.parametrize("password", ManageUserPage.USER_PASSWORD_NOT_CORRECT)
+    def test_try_create_user_with_not_correct_password(self, password):
+        """
+        TC_JN_86
+        try create user with fill out all field, but password2 empty
+        TC_JN_92
+        try create user with fill out all field, but password1 not equals password2
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_with_all_diff_values(ManageUserPage.USER_NAME,
+                                                                  ManageUserPage.PASSWORD,
+                                                                  password,
+                                                                  ManageUserPage.USER_FULLNAME,
+                                                                  ManageUserPage.USER_EMAIL)
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        assert driver.get_element_text(ManageUserPage.ERRORS) == ManageUserPage.ERROR_USER_PASSWORD_DONT_MATCH
+
+    @pytest.mark.negative
+    def test_create_user_with_taken_username(self):
+        """
+        TC_JN_90
+        create user with all data for record which we have early
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save(ManageUserPage.USER_NAME,
+                                             ManageUserPage.PASSWORD)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD_EDIT,
+                                                        ManageUserPage.USER_FULLNAME_EDIT,
+                                                        ManageUserPage.USER_EMAIL_EDIT)
+
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        assert driver.get_element_text(ManageUserPage.ERRORS) == ManageUserPage.ERROR_USER_TAKEN_NAME
+        driver.delete_user(ManageUserPage.USER_NAME)
+
+    @pytest.mark.negative
+    @pytest.mark.parametrize("email", ManageUserPage.USER_EMAIL_NOT_CORRECT)
+    def test_try_create_user_with_invalid_email(self, email):
+        """
+        TC_JN_93
+        try create user with email don't include "@"
+        TC_JN_88
+        try create user with fill out all field, but email empty
+
+        verify, that user leaves on the same page
+        verify, that user watches notifications
+        :return:
+        """
+        driver = ManageUserPage(self.driver)
+        driver.go_to_page(ManageUserPage.URL_USER_MANAGE)
+
+        driver.click_button_create_new_user()
+        driver.fill_all_field_and_click_save_diff_value(ManageUserPage.USER_NAME,
+                                                        ManageUserPage.PASSWORD,
+                                                        ManageUserPage.USER_FULLNAME,
+                                                        email)
+        assert driver.get_current_url() == ManageUserPage.URL_USER_CREATE_ERROR
+        assert driver.get_element_text(ManageUserPage.ERRORS) == ManageUserPage.ERROR_USER_EMAIL
