@@ -33,7 +33,6 @@ class FolderPage(BasePage):
     name_inside_dot = (''.join(random.choice(string.digits) for i in range(3))) \
                       + '.' + (''.join(random.choice(string.ascii_letters) for i in range(6)))
     name_only_one_or_two_dot = (''.join(random.choice(dots)))
-    # name_only_three_or_more_dots = (''.join(random.choice(three_or_more_dots)))
     name_only_three_or_more_dots = '...'
     name_whitespace = (''.join(random.choice(white_spaces)))
 
