@@ -3,6 +3,7 @@ import pytest
 from config.TestData import TestData as TD
 from pages.LoginPage import LoginPage
 from pages.ManageUserPage import ManageUserPage
+from pages.NewItemPage import NewItemPageLocators
 from pages.PeoplePage import PeoplePage, URLLocators, PeoplePageLocator
 from pages.ProjectPage import ProjectPageLocators, ProjectPage
 from pages.BuildHistoryPage import BuildHistoryPage
@@ -67,7 +68,7 @@ class TestManageUserPage:
         verify that the job was started
         :return:
         """
-        name = ProjectPage.create_new_job(self)
+        name = ProjectPage.create_new_default_job(self, NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
 
         driver = ProjectPage(self.driver)
@@ -88,7 +89,7 @@ class TestManageUserPage:
         verify that the job was run
         :return:
         """
-        name = ProjectPage.create_new_job(self)
+        name = ProjectPage.create_new_default_job(self, NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
 
         driver = ProjectPage(self.driver)
@@ -110,7 +111,7 @@ class TestManageUserPage:
         :return:
         """
 
-        name = ProjectPage.create_new_job(self)
+        name = ProjectPage.create_new_default_job(self, NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
 
         driver = ProjectPage(self.driver)
@@ -133,7 +134,7 @@ class TestManageUserPage:
         Verify that job was build with new Username
         :return:
         """
-        name = ProjectPage.create_new_job(self)
+        name = ProjectPage.create_new_default_job(self, NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
 
         driver = ProjectPage(self.driver)
@@ -152,7 +153,7 @@ class TestManageUserPage:
         Verify that user has jobs ran which were early
         :return:
         """
-        name = ProjectPage.create_new_job(self)
+        name = ProjectPage.create_new_default_job(self, NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
 
         driver = ProjectPage(self.driver)
