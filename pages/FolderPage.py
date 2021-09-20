@@ -73,7 +73,7 @@ class FolderPageLocator:
     BUTTON_OK_IN_FOLDER = (By.XPATH, "//form[@id=\'createItem\']/div[4]/div/span/button")
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
     BUTTON_ADD_LIBRARY = (By.CSS_SELECTOR, ".repeatable-add [type]")
-    INPUT_FIELD_LIBRARY_NAME = (By.XPATH, "//input[@name='_.name']")
+    INPUT_FIELD_LIBRARY_NAME = (By.NAME, '_.name')
 
 
 class URLLocators:
