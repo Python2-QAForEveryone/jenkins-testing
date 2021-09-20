@@ -5,6 +5,7 @@ from pages.BasePage import BasePage
 from config.TestData import TestData
 from selenium.webdriver.common.by import By
 
+
 class FreestylePage(BasePage):
     """
     initialized driver
@@ -16,6 +17,7 @@ class FreestylePage(BasePage):
         self.go_to_page(URLLocators.URL_FREESTYLE_CREATE)
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
+
 
 class URLLocators:
     URL_FREESTYLE_CREATE = TestData.BASE_URL + 'view/all/newJob'

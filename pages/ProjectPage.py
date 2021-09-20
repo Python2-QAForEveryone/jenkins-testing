@@ -25,8 +25,10 @@ class ProjectPageLocators:
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
-    FIRST_BUILD = (By.XPATH, "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
+    FIRST_BUILD = (
+    By.XPATH, "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
     WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
+
 
 class ProjectPage(BasePage):
     """
@@ -77,3 +79,9 @@ class ProjectPage(BasePage):
         driver.click(ManageUserPage.JOB_DELETE_PROJECT)
         driver.get_wait_for_alert()
         driver.accept_alert()
+
+    def get_url_job(self, name):
+        return TD.BASE_URL + f'job/{name}'
+
+    def get_url_configure_of_job(self, name):
+        return TD.BASE_URL + f'job/{name}/configure'
