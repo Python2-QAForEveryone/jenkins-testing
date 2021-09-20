@@ -106,7 +106,8 @@ class TestFolderPage:
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
-        assert driver.get_title() == FolderPage.WRONG_TITLE
+        print(driver.get_title())
+        assert driver.get_title() == FolderPage.TITLE_THREE_DOT
         assert driver.is_element_present(FolderPageLocator.WRONG_REQUEST)
 
         # driver = FolderPage(self.driver)

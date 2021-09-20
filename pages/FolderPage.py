@@ -43,6 +43,7 @@ class FolderPage(BasePage):
     TITLE_START_DOT = f"{name_start_dot} Config [Jenkins]"
     TITLE_START_DOT_JOB = f"All [{name_start_dot}] [Jenkins]"
     TITLE_INSIDE_DOT = f"{name_inside_dot} Config [Jenkins]"
+    TITLE_THREE_DOT = f"{name_only_three_or_more_dots} Config [Jenkins]"
     TITLE_INSIDE_DOT_JOB = f"All [{name_inside_dot}] [Jenkins]"
     TITLE_JOB_INSIDE_FOLDER = f"{name} [{name}] [Jenkins]"
     WRONG_TITLE = "Jenkins [Jenkins]"
