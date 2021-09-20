@@ -72,7 +72,7 @@ class FolderPageLocator:
     BUTTON_SAVE_IN_FOLDER = (By.CSS_SELECTOR, "[type='submit']")
     BUTTON_OK_IN_FOLDER = (By.XPATH, "//form[@id=\'createItem\']/div[4]/div/span/button")
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
-    BUTTON_ADD_LIBRARY = (By.CSS_SELECTOR, ".repeatable-add [type]")
+    BUTTON_ADD_LIBRARY = (By.ID, "yui-gen13-button")
     INPUT_FIELD_LIBRARY_NAME = (By.NAME, '_.name')
 
 
