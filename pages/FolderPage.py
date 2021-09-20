@@ -35,6 +35,7 @@ class FolderPage(BasePage):
     name_only_one_or_two_dot = (''.join(random.choice(dots)))
     name_only_three_or_more_dots = '...'
     name_whitespace = (''.join(random.choice(white_spaces)))
+    name_library = 'Library first'
 
     TITLE = f"{name} Config [Jenkins]"
     TITLE_JOB = f"All [{name}] [Jenkins]"
@@ -71,6 +72,8 @@ class FolderPageLocator:
     BUTTON_SAVE_IN_FOLDER = (By.CSS_SELECTOR, "[type='submit']")
     BUTTON_OK_IN_FOLDER = (By.XPATH, "//form[@id=\'createItem\']/div[4]/div/span/button")
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
+    BUTTON_ADD_LIBRARY = (By.CSS_SELECTOR, ".repeatable-add [type]")
+    INPUT_FIELD_LIBRARY_NAME = (By.XPATH, "//input[@name='_.name']")
 
 
 class URLLocators:
