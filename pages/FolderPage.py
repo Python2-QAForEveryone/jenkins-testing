@@ -75,7 +75,6 @@ class FolderPageLocator:
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
-    URL_PEOPLE_MANAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
     URL_FOLDER_PAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
     URL_EXIST_FOLDER = TestData.BASE_URL + f'job/{FolderPage.name}/'
     URL_CREATE_ITEM = TestData.BASE_URL + "view/all/createItem"

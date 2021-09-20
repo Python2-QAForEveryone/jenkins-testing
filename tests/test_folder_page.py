@@ -109,7 +109,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         print(driver.get_current_url())
         print(driver.get_title())
-        assert driver.get_current_url() == URLLocators.URL_CREATE_ITEM
+        assert driver.get_title() == FolderPage.WRONG_TITLE
         assert driver.is_element_present(FolderPageLocator.WRONG_REQUEST)
 
         # driver = FolderPage(self.driver)
