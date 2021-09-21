@@ -100,13 +100,14 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
         assert driver.is_element_present(FolderPageLocator.ERROR_PAGE_NONAME)
 
-    @pytest.mark.skip(reason="because it was failing previously, need some additional research")
+    @pytest.mark.skip(reason="Because this test find a bug in CI")
     def test_name_only_three_or_more_dots(self):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name_only_three_or_more_dots)
         driver.get_element(FolderPageLocator.LINK_FOLDER).click()
         driver.get_element(FolderPageLocator.OK_BUTTON).click()
-        assert driver.is_visible(FolderPageLocator.WRONG_REQUEST)
+        assert driver.get_title() == FolderPage.WRONG_TITLE
+        assert driver.is_element_present(FolderPageLocator.WRONG_REQUEST)
 
     def test_new_folder_is_exist_and_empty(self):
         driver = FolderPage(self.driver)

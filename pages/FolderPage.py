@@ -33,7 +33,7 @@ class FolderPage(BasePage):
     name_inside_dot = (''.join(random.choice(string.digits) for i in range(3))) \
                       + '.' + (''.join(random.choice(string.ascii_letters) for i in range(6)))
     name_only_one_or_two_dot = (''.join(random.choice(dots)))
-    name_only_three_or_more_dots = (''.join(random.choice(three_or_more_dots)))
+    name_only_three_or_more_dots = '...'
     name_whitespace = (''.join(random.choice(white_spaces)))
 
     TITLE = f"{name} Config [Jenkins]"
@@ -43,6 +43,7 @@ class FolderPage(BasePage):
     TITLE_START_DOT = f"{name_start_dot} Config [Jenkins]"
     TITLE_START_DOT_JOB = f"All [{name_start_dot}] [Jenkins]"
     TITLE_INSIDE_DOT = f"{name_inside_dot} Config [Jenkins]"
+    TITLE_THREE_DOT = f"{name_only_three_or_more_dots} Config [Jenkins]"
     TITLE_INSIDE_DOT_JOB = f"All [{name_inside_dot}] [Jenkins]"
     TITLE_JOB_INSIDE_FOLDER = f"{name} [{name}] [Jenkins]"
     WRONG_TITLE = "Jenkins [Jenkins]"
@@ -55,7 +56,7 @@ class FolderPageLocator:
     OK_BUTTON = (By.ID, 'ok-button')
     OK_BUTTON_DISABLED = (By.XPATH, "//button[@id='ok-button'][@class='disabled']")
     SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
-    WRONG_REQUEST = (By.XPATH, '//*[@id="main-panel"]/h1/img')
+    WRONG_REQUEST = (By.CSS_SELECTOR, 'div#error-description > h2')
     ITEM_NAME_INVALID = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is an unsafe character')]")
     ERROR_PAGE = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'is an unsafe character')]")
     ITEM_NAME_REQUIRED = (By.XPATH, "//div[@id='itemname-required'][contains(text(),'This field cannot be empty')]")
@@ -74,6 +75,6 @@ class FolderPageLocator:
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
-    URL_PEOPLE_MANAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
     URL_FOLDER_PAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
     URL_EXIST_FOLDER = TestData.BASE_URL + f'job/{FolderPage.name}/'
+    URL_CREATE_ITEM = TestData.BASE_URL + "view/all/createItem"
