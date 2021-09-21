@@ -25,8 +25,11 @@ class ProjectPageLocators:
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
-    FIRST_BUILD = (By.XPATH, "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
+    FIRST_BUILD = (
+        By.XPATH,
+        "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
     WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
+
 
 class ProjectPage(BasePage):
     """
@@ -37,21 +40,31 @@ class ProjectPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def create_new_job(self):
+    def create_new_default_job(self, name, type_of_project):
         """
         create new job Freestyle project
         :return:
         """
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
-        name = ManageUserPage.CREATE_USER_JOB
         driver.do_send_keys(NewItemPageLocators.ENTER_AN_ITEM_NAME, name)
-        driver.click(NewItemPageLocators.FREESTYLE_PROJECT)
+        driver.click(type_of_project)
         driver.get_wait_is_clickable(NewItemPageLocators.OK_BUTTON)
         driver.click(NewItemPageLocators.OK_BUTTON)
+
+        return name
+
+    def click_save_button_into_project(self, name):
+        """
+        click on the Save button into projects
+        :return:
+        """
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
         driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
         driver.click(NewItemPageLocators.SAVE_BUTTON)
-        return name
 
     def delete_job(self, name):
         """
@@ -66,3 +79,9 @@ class ProjectPage(BasePage):
         driver.click(ManageUserPage.JOB_DELETE_PROJECT)
         driver.get_wait_for_alert()
         driver.accept_alert()
+
+    def get_url_job(self, name):
+        return TD.BASE_URL + f'job/{name}'
+
+    def get_url_configure_of_job(self, name):
+        return TD.BASE_URL + f'job/{name}/configure'
