@@ -33,7 +33,7 @@ class FolderPage(BasePage):
     name_inside_dot = (''.join(random.choice(string.digits) for i in range(3))) \
                       + '.' + (''.join(random.choice(string.ascii_letters) for i in range(6)))
     name_only_one_or_two_dot = (''.join(random.choice(dots)))
-    name_only_three_or_more_dots = '...'
+    name_only_three_or_more_dots = (''.join(random.choice(three_or_more_dots)))
     name_whitespace = (''.join(random.choice(white_spaces)))
     name_library = 'Library first'
 
@@ -48,6 +48,7 @@ class FolderPage(BasePage):
     TITLE_INSIDE_DOT_JOB = f"All [{name_inside_dot}] [Jenkins]"
     TITLE_JOB_INSIDE_FOLDER = f"{name} [{name}] [Jenkins]"
     WRONG_TITLE = "Jenkins [Jenkins]"
+    ALERT_TEXT = f"Delete the Project ‘{name}’?"
 
 
 class FolderPageLocator:
@@ -64,6 +65,7 @@ class FolderPageLocator:
     ITEM_NAME_NOT_ALLOWED = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is not an allowed name')]")
     ERROR_PAGE_NONAME = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'No name is specified')]")
     LINK_DELETE_FOLDER = (By.XPATH, "//a[@title='Delete Folder']")
+    LINK_DELETE_PROJECT = (By.LINK_TEXT, 'Delete Project')
     BUTTON_YES = (By.ID, 'yui-gen1-button')
     LINK_EXIST_FOLDER = (By.CSS_SELECTOR, f'#job_{FolderPage.name} .model-link')
     EMPTY_FOLDER = (By.CSS_SELECTOR, ".h4")

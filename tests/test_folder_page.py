@@ -138,6 +138,12 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
         assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
 
+        driver.get_element(FolderPageLocator.LINK_DELETE_PROJECT).click()
+        assert self.driver.switch_to.alert.text == FolderPage.ALERT_TEXT
+        self.driver.switch_to.alert.accept()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
     def test_create_folder_with_library(self):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
