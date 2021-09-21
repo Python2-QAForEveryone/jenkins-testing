@@ -137,3 +137,24 @@ class TestFolderPage:
         driver.get_wait(FolderPageLocator.BUTTON_PANEL)
         driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
         assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
+
+        driver.get_element(FolderPageLocator.LINK_DELETE_PROJECT).click()
+        assert self.driver.switch_to.alert.text == FolderPage.ALERT_TEXT
+        self.driver.switch_to.alert.accept()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
+    def test_create_folder_with_library(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_element(FolderPageLocator.BUTTON_ADD_LIBRARY).click()
+        driver.do_send_keys(FolderPageLocator.INPUT_FIELD_LIBRARY_NAME, FolderPage.name_library)
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.go_to_page(URLLocators.URL_FOLDER_PAGE)
+        assert driver.get_element_attribute(FolderPageLocator.INPUT_FIELD_LIBRARY_NAME, "value") == FolderPage.name_library
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
