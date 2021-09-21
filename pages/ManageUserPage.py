@@ -1,9 +1,8 @@
-import random
-import string
-
 from selenium.webdriver.common.by import By
+
 from pages.BasePage import BasePage
 from config.TestData import TestData
+from pages.StringUtils import *
 
 
 class ManageUserPage(BasePage):
@@ -15,11 +14,12 @@ class ManageUserPage(BasePage):
         super().__init__(driver)
         self.go_to_page(ManageUserPage.URL_USER_MANAGE)
 
-    name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
-    password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
-    edit_name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
-    edit_password = (''.join(random.choice(string.ascii_letters + string.digits) for i in range(10)))
-    job_name = (''.join(random.choice(string.ascii_letters) for i in range(5)))
+    name = generate_random_string(10)
+    password = generate_random_string_and_int(10)
+    edit_name = generate_random_string(10)
+    edit_password = generate_random_string_and_int(10)
+    job_name = generate_random_string(5)
+    specific_symbol = generate_random_special_symbol(1)
 
     username_id = (By.ID, "username")
     password_input_name = (By.NAME, "password1")
@@ -49,7 +49,7 @@ class ManageUserPage(BasePage):
     EMPTY_FIELD = ''
     USER_NAME_NOT_ALPHABETIC = 'Алфавит'
     USER_NAME_WITH_DOT = USER_NAME + '.'
-    USER_NAME_WITH_SPECIAL_SYMBOL = USER_NAME + '!'
+    USER_NAME_WITH_SPECIAL_SYMBOL = USER_NAME + specific_symbol
     USER_NAME_WITH_ETTA = USER_NAME + '@'
     USER_NOT_CORRECT_NAME = [USER_NAME_NOT_ALPHABETIC, USER_NAME_WITH_ETTA, USER_NAME_WITH_DOT,
                              USER_NAME_WITH_SPECIAL_SYMBOL, EMPTY_FIELD]
@@ -102,7 +102,6 @@ class ManageUserPage(BasePage):
     ERRORS_TEXT = [ERROR_USER_CREATE_NAME, ERROR_USER_PASSWORD_DONT_MATCH,
                    ERROR_USER_USERNAME, ERROR_USER_EMAIL, ERROR_USER_FULLNAME,
                    ERROR_USER_PASSWORD, ERROR_USER_TAKEN_NAME]
-
 
     def click_button_create_new_user(self):
         """
