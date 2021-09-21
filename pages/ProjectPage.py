@@ -26,7 +26,8 @@ class ProjectPageLocators:
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
     FIRST_BUILD = (
-    By.XPATH, "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
+        By.XPATH,
+        "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
     WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
 
 
@@ -39,14 +40,13 @@ class ProjectPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def create_new_default_job(self, type_of_project):
+    def create_new_default_job(self, name, type_of_project):
         """
         create new job Freestyle project
         :return:
         """
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
-        name = ManageUserPage.CREATE_USER_JOB
         driver.do_send_keys(NewItemPageLocators.ENTER_AN_ITEM_NAME, name)
         driver.click(type_of_project)
         driver.get_wait_is_clickable(NewItemPageLocators.OK_BUTTON)
