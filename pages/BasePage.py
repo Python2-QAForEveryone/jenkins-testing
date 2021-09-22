@@ -109,6 +109,10 @@ class BasePage:
             attr_elements.append(el.get_attribute(attribute))
         return attr_elements
 
+    def get_element_attribute(self, locator, attribute):
+        element = self.get_element(locator)
+        return element.get_attribute(attribute)
+
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
