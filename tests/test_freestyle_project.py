@@ -5,6 +5,7 @@ from pages.FolderPage import *
 from pages.NewItemPage import *
 from pages.ProjectPage import ProjectPageLocators
 from pages.StringUtils import *
+from pages.FreestylePage import *
 
 
 @pytest.mark.webtest
@@ -53,3 +54,35 @@ class TestFreestyleProject:
         driver.click(NewItemPageLocators.FREESTYLE_PROJECT)
         assert driver.is_disabled(NewItemPageLocators.OK_BUTTON)
         assert driver.is_element_present(NewItemPageLocators.ERROR_MESSAGE)
+
+    @pytest.mark.parametrize("tab_name, assert_name", FreestylePageLocators.verify_works_tabs)
+    def test_create_freestyle_project_and_verify_tabs(self, tab_name, assert_name):
+        """
+        TC_JN_143
+        User create project and on the Configurate page verify General tab
+        TC_JN_144
+        User create project and on the Configurate page verify Source Code Management tab
+        TC_JN_145
+        User create project and on the Configurate page verify Build Triggers tab
+        TC_JN_146
+        User create project and on the Configurate page verify Build Environment tab
+        TC_JN_147
+        User create project and on the Configurate page verify Build tab
+        TC_JN_148
+        User create project and on the Configurate page verify Post-build Actions tab
+        :return:
+        """
+
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait(tab_name)
+        driver.click(tab_name)
+        assert driver.is_element_present(assert_name)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+
+        ProjectPage.delete_job(self, name)

@@ -45,6 +45,7 @@ class ProjectPage(BasePage):
         create new job Freestyle project
         :return:
         """
+
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
         driver.do_send_keys(NewItemPageLocators.ENTER_AN_ITEM_NAME, name)
@@ -79,6 +80,7 @@ class ProjectPage(BasePage):
         driver.click(ManageUserPage.JOB_DELETE_PROJECT)
         driver.get_wait_for_alert()
         driver.accept_alert()
+        driver.get_wait(DashboardPageLocators.TEXT_NEW_ITEM)
 
     def get_url_job(self, name):
         return TD.BASE_URL + f'job/{name}'
