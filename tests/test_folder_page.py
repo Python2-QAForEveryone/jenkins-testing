@@ -196,3 +196,4 @@ class TestFolderPage:
         assert driver.get_element_text(FolderPageLocator.TAB_CREATED_LIST_VIEW) == FolderPage.name
         assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
 
+
