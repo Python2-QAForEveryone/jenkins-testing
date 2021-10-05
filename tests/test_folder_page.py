@@ -195,9 +195,4 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.BUTTON_OK_LIST_VIEW_CONFIGURATION).click()
         assert driver.get_element_text(FolderPageLocator.TAB_CREATED_LIST_VIEW) == FolderPage.name
         assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
-        # driver.get_element(FolderPageLocator.TAB_CREATED_GLOBAL_VIEW).click()
-        # assert driver.is_element_present(FolderPageLocator.TAB_CREATED_GLOBAL_VIEW)
-        # assert driver.is_element_present(FolderPageLocator.LINK_EDIT_VIEW)
-        # driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
-        # driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
-        # driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
