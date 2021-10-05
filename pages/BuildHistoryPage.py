@@ -23,6 +23,9 @@ class BuildHistoryPage(BasePage):
     ATOM_FEED_FOR_LIST_BUILDS = (By.XPATH, '// *[ @ id = "rss-bar"] / span[3] / a / span[2]')
     REST_API = (By.XPATH, "//*[@id='jenkins']/footer/div/div/div[2]/a")
     JENKINS_VERS_NUMBER = (By.XPATH, '//*[@id="jenkins"]/footer/div/div/div[3]/a')
+    CHART_BUILD1=(By.XPATH, '//*[@id="label-tl-0-1-e1"]')
+    CHART_TOOLTIP1= (By.XPATH,'//*[@id="jenkins"]/div[5]/div/div[9]/div/div[3]')
+
 
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)

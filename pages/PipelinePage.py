@@ -10,6 +10,8 @@ class PipelinePageLocators:
     TAB_PART1 = '//a[contains(text(),\"'
     TAB_PART2 = '\")]'
     URL_PIPELINE_PAGE = TD.BASE_URL + "job/"
+    BUILDS_RECORDS = (By.XPATH, '//a[contains(@class, "tip model-link inside build-link display-name")]')
+
 
     def locator_for_tab(self,  name):
         return (By.XPATH, PipelinePageLocators.TAB_PART1 + f'{name}' + PipelinePageLocators.TAB_PART2)

@@ -5,6 +5,7 @@ from pages.FolderPage import *
 from pages.DashboardPage import URLLocators
 from pages.PipelinePage import *
 from pages.NewItemPage import NewItemPageLocators
+from pages.BuildHistoryPage import BuildHistoryPage
 from selenium.webdriver.common.by import By
 from config.TestData import TestData as TD
 from pages.ProjectPage import ProjectPageLocators
@@ -36,7 +37,6 @@ class TestPipeline:
         driver.click(NewItemPageLocators.OK_BUTTON)
         assert (pipeline_name in driver.get_current_url())
         driver.click(NewItemPageLocators.OK_BUTTON)
-        # verify Jenkins has created page for a pipeline with format name plus [Jenkins]
         assert (driver.get_title() == pipeline_name + " [Jenkins]")
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
@@ -46,6 +46,33 @@ class TestPipeline:
         driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE+ pipeline_name)
         menu_tasks = driver.get_element_text(PipelinePageLocators.MENU_TASKS)
         assert ("Build Now" in menu_tasks)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
+        builds = driver.get_elements_text(PipelinePageLocators.BUILDS_RECORDS)
+        assert builds[0]=="#1"
+
+#//a[contains(@href, '/job/pipeline_test1/7/')]
+    # /
+
+
+
+    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now"])
+    @pytest.mark.parametrize("pipeline_name", pipelineName)
+    def test_pipeline_build_is_on_BuildHostoryPage(self, pipeline_name):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
+        time.sleep(5)
+        driver.click(BuildHistoryPage.CHART_BUILD1)
+        time.sleep(5)
+        driver.click(BuildHistoryPage.CHART_TOOLTIP1)
+        time.sleep(5)
+        time_date = driver.get_elements_text(BuildHistoryPage.CHART_TOOLTIP1)
+ #       for each in date_time:
+ #           assert each in
+        print(time_date)
+
+
+  #      print(BuildHistoryPage.get_list_builded_jobs(self, pipeline_name))
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_name_in_the_tab(self):
@@ -94,9 +121,7 @@ class TestPipeline:
         driver = DashboardPage(self.driver)
         driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
         driver.do_send_keys(NewItemPageLocators.ENTER_AN_ITEM_NAME, project_name)
+        time.sleep(5)
         driver.click(NewItemPageLocators.NEW_PIPELINE_NAME)
         assert driver.is_disabled(NewItemPageLocators.OK_BUTTON)
         assert driver.is_element_present(NewItemPageLocators.ERROR_MESSAGE)
-
-
-
