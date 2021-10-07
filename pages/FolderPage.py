@@ -76,6 +76,20 @@ class FolderPageLocator:
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
     BUTTON_ADD_LIBRARY = (By.ID, "yui-gen13-button")
     INPUT_FIELD_LIBRARY_NAME = (By.NAME, '_.name')
+    LINK_PLUS_NEW_VIEW = (By.CSS_SELECTOR, '.addTab')
+    INPUT_FIELD_VIEW_NAME = (By.ID, 'name')
+    RADIOBUTTON_GLOBAL_VIEW = (By.XPATH, '//div/input[@value="hudson.model.ProxyView"]')
+    RADIOBUTTON_LIST_VIEW = (By.XPATH, '//div/input[@value="hudson.model.ListView"]')
+    RADIOBUTTON_MY_VIEW = (By.XPATH, '//div/input[@value="hudson.model.MyView"]')
+    BUTTON_OK_VIEW = (By.ID, 'ok')
+    BUTTON_OK_VIEW_CONFIGURATION = (By.ID, 'yui-gen2-button')
+    TAB_CREATED_GLOBAL_VIEW = (By.CSS_SELECTOR, '#breadcrumbs .item:nth-of-type(5) .breadcrumbBarAnchor')
+    LINK_EDIT_VIEW = (By.CSS_SELECTOR, '#tasks .task:nth-of-type(7) .task-link-text')
+    DASHBOARD_TAB_FOLDER = (By.CSS_SELECTOR, '#breadcrumbs .item:nth-of-type(3) .breadcrumbBarAnchor')
+    TAB_CREATED_LIST_VIEW = (By.CSS_SELECTOR, '.active > a')
+    BUTTON_OK_LIST_VIEW_CONFIGURATION = (By.ID, 'yui-gen13-button')
+    DASHBOARD_TAB_FOLDER_LIST_VIEW = (By.XPATH, f'//a[contains(text(),"{FolderPage.name}")]')
+
 
 
 class URLLocators:

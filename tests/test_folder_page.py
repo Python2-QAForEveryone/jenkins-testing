@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from config.TestData import TestData
@@ -158,3 +160,40 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
         driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
+    def test_create_folder_include_global_view(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_PLUS_NEW_VIEW).click()
+        driver.do_send_keys(FolderPageLocator.INPUT_FIELD_VIEW_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.RADIOBUTTON_GLOBAL_VIEW).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_VIEW).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_VIEW_CONFIGURATION).click()
+        assert driver.get_element_text(FolderPageLocator.TAB_CREATED_GLOBAL_VIEW) == FolderPage.name
+        driver.get_element(FolderPageLocator.TAB_CREATED_GLOBAL_VIEW).click()
+        assert driver.is_element_present(FolderPageLocator.TAB_CREATED_GLOBAL_VIEW)
+        assert driver.is_element_present(FolderPageLocator.LINK_EDIT_VIEW)
+        driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
+    def test_add_folder_view_name_list_view(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_PLUS_NEW_VIEW).click()
+        driver.do_send_keys(FolderPageLocator.INPUT_FIELD_VIEW_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.RADIOBUTTON_LIST_VIEW).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_VIEW).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_LIST_VIEW_CONFIGURATION).click()
+        assert driver.get_element_text(FolderPageLocator.TAB_CREATED_LIST_VIEW) == FolderPage.name
+        assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
+
+
