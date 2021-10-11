@@ -74,9 +74,7 @@ class TestPipeline:
                                      ])
     @pytest.mark.parametrize("pipeline_name", pipelineName)
     def test_pipeline_build_is_on_BuildHistoryPage_in_tooltip(self, pipeline_name):
-        #//*[@id="projectStatus"]/tbody
         driver = BuildHistoryPage(self.driver)
-#        driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
         driver.click(BuildHistoryPage.CHART_BUILD1)
         print(pipeline_name)
         print(driver.get_element_text(BuildHistoryPage.CHART_BUILD1))
