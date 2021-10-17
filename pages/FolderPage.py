@@ -94,6 +94,7 @@ class FolderPageLocator:
 
 
 
+
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
     URL_FOLDER_PAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'

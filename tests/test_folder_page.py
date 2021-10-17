@@ -218,3 +218,4 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.BUTTON_OK_LIST_VIEW_CONFIGURATION).click()
         assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
 
+
