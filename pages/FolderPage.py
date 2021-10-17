@@ -93,6 +93,7 @@ class FolderPageLocator:
     CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
 
 
+
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
     URL_FOLDER_PAGE = TestData.BASE_URL + f'job/{FolderPage.name}/configure'
