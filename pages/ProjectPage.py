@@ -20,11 +20,15 @@ class ProjectPageLocators:
     NEW_NAME = (By.XPATH, "//input[@name='newName']")
     RENAME_BUTTON = (By.XPATH, "//button[text()='Rename']")
     BUILD_NOW = (By.XPATH, "//a[@title='Build Now']//span[2]")
+    CONFIGURE = (By.XPATH, "//a[@title='Configure']//span[2]")
     BUILD_HISTORY_JOBS = (By.XPATH, '//tr[contains(@class, "build-row multi-line")]')
     BUILD_SUCCESS_JOBS = (By.XPATH, '//a[@class="build-status-link"]')
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
+    CANCEL_BUILD = (By.XPATH, "//table[@class='pane stripped']//tr[2]//div[@class='build-stop']/a")
+    BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/img")
+    BUILD_STATUS_CANCELLED = (By.XPATH, "//table[@class='pane stripped']//a[@class='build-status-link']/img[@title='Aborted > Console Output']")
     FIRST_BUILD = (
         By.XPATH,
         "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
