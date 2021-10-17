@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from config.TestData import TestData
@@ -195,6 +193,9 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.BUTTON_OK_LIST_VIEW_CONFIGURATION).click()
         assert driver.get_element_text(FolderPageLocator.TAB_CREATED_LIST_VIEW) == FolderPage.name
         assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
+        driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
 
     def test_add_jobs_in_folder_view_name_list_view(self):
         driver = FolderPage(self.driver)
@@ -217,4 +218,6 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.CHECK_BOX_ADD_JOB_IN_LIST_VIEW).click()
         driver.get_element(FolderPageLocator.BUTTON_OK_LIST_VIEW_CONFIGURATION).click()
         assert driver.is_element_present(FolderPageLocator.DASHBOARD_TAB_FOLDER_LIST_VIEW)
-
+        driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
