@@ -8,7 +8,7 @@ from pages.NewItemPage import NewItemPageLocators
 from pages.BuildHistoryPage import BuildHistoryPage
 from selenium.webdriver.common.by import By
 from config.TestData import TestData as TD
-from pages.ProjectPage import ProjectPageLocators
+from pages.ProjectPage import ProjectPageLocators, ProjectPage
 
 import pages.StringUtils
 import pytest
@@ -20,6 +20,7 @@ class TestPipeline:
     pipelineName_Int_and_String = pages.StringUtils.generate_random_string_and_int(10)
     pipelineName_valid = pages.StringUtils.generate_random_string(3)
     pipelineName_valid = "pipeline" + pipelineName_valid
+    pipeline_testName = "test" + pipelineName_valid
     pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
     project_name_special_symbol = [FolderPage.name_start_special_ch, FolderPage.name_only_one_or_two_dot,
                                    FolderPage.name_empty]
@@ -50,7 +51,6 @@ class TestPipeline:
         driver.click(ProjectPageLocators.BUILD_NOW)
         driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
         builds = driver.get_elements_text(PipelinePageLocators.BUILDS_RECORDS)
-        print("builds", builds)
         assert builds[0] == "#1"
 
     @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now"])
@@ -68,21 +68,21 @@ class TestPipeline:
 
         assert pipeline_name_is_in_the_list == True
 
-    @pytest.mark.skip
-    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now",
-                                     "test_pipeline_build_is_on_BuildHistoryPage"
-                                     ])
-    @pytest.mark.parametrize("pipeline_name", pipelineName)
-    def test_pipeline_build_is_on_BuildHistoryPage_in_tooltip(self, pipeline_name):
-        driver = BuildHistoryPage(self.driver)
-        driver.click(BuildHistoryPage.CHART_BUILD1)
-        print(pipeline_name)
-        print(driver.get_element_text(BuildHistoryPage.CHART_BUILD1))
-        driver.click(BuildHistoryPage.CHART_TOOLTIP1)
-        time_date_text = driver.get_elements_text(BuildHistoryPage.CHART_TOOLTIP1)
-        print(time_date_text)
-        assert time_date_text != ""
-
+#    @pytest.mark.skip
+#    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now",
+#                                    "test_pipeline_build_is_on_BuildHistoryPage",
+#                                     "test_delete_pipeline_project"])
+#    @pytest.mark.parametrize("pipeline_name", pipelineName)
+#    def test_pipeline_build_is_on_BuildHistoryPage_in_tooltip(self):
+#        driver = BuildHistoryPage(self.driver)
+#        driver.click(BuildHistoryPage.CHART_BUILD1)
+#        time.sleep(10)
+#        print(driver.get_element_text(BuildHistoryPage.CHART_BUILD1))
+#        driver.click(BuildHistoryPage.CHART_TOOLTIP1)
+#        time_date_text = driver.get_elements_text(BuildHistoryPage.CHART_TOOLTIP1)
+#        print(time_date_text)
+#        assert time_date_text != ""
+#
 
     @pytest.mark.dependency(depends=["test_create_pipeline",
                                      "test_pipeline_can_build_now",
@@ -103,6 +103,10 @@ class TestPipeline:
         driver.click(tab_locator_valid)
         assert (self.pipelineName_valid in driver.get_element_text(tab_locator_valid))
         assert driver.is_element_present(tab_locator_valid)
+
+
+
+
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_disabled(self):
@@ -150,3 +154,42 @@ class TestPipeline:
         assert driver.is_element_present(NewItemPageLocators.ERROR_MESSAGE)
 
 
+    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab"])
+    def test_build_now_starts_and_finishes(self):
+        driver = DashboardPage(self.driver)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.pipeline_testName)
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        driver.click(PipelinePageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
+        assert driver.is_clickable(PipelinePageLocators.BUILDS_RECORDS)
+
+    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab","test_build_now_starts_and_finishes"])
+    def test_view_build_details_click_name_tooltip(self):
+        driver = PipelinePage(self.driver)
+        driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
+        driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
+        driver.get_wait_is_clickable(BuildHistoryPage.CHART_BUILD1)
+        driver.click(BuildHistoryPage.CHART_BUILD1)
+        text_tooltip=driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
+        print(text_tooltip)
+        assert text_tooltip != ""
+
+    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab",
+                                     "test_build_now_starts_and_finishes"])
+    def test_view_build_console_output(self):
+        driver = DashboardPage(self.driver)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
+        time.sleep(10)
+        driver.click(ProjectPageLocators.BUILD_SUCCESS_LAST_JOB)
+        time.sleep(5)
+        print(driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT))
+        assert 1==1
+    #    // *[ @ id = "main-panel"] / pre
+
+#//*[@id="buildHistory"]/div[2]/table/tbody/tr[2]/td/div[1]/a
+
+
+#

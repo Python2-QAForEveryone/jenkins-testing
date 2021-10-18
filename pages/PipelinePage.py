@@ -12,6 +12,8 @@ class PipelinePageLocators:
     TAB_PART2 = '\")]'
     URL_PIPELINE_PAGE = TD.BASE_URL + "job/"
     BUILDS_RECORDS = (By.XPATH, '//a[contains(@class, "tip model-link inside build-link display-name")]')
+    CONSOLE_OUTPUT = (By.XPATH, '//*[@id="main-panel"]/h1/text()')
+
 
 
     def locator_for_tab(self,  name):
@@ -26,7 +28,7 @@ class PipelineConfigureLocators:
 
 
 class PipelinePage(BasePage):
-    def __init__(self, driver):
+    def __init__(self, driver) -> object:
         super().__init__(driver)
 
 
