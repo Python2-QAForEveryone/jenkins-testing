@@ -125,7 +125,7 @@ class TestMultiConfigurationProject:
         driver.get_wait(NewItemPageLocators.CODEMIRROR)
         driver.click(NewItemPageLocators.CODEMIRROR_LINE)
         codemirror = driver.get_element(NewItemPageLocators.CODEMIRROR)
-        driver.do_send_keys_script(codemirror, "sleep 50")
+        driver.do_send_keys_script(codemirror, "sleep 5")
         driver.click(NewItemPageLocators.SAVE_BUTTON)
 
         driver.click(ProjectPageLocators.BUILD_NOW)

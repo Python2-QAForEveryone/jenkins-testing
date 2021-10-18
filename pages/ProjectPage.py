@@ -28,7 +28,7 @@ class ProjectPageLocators:
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
     CANCEL_BUILD = (By.XPATH, "//table[@class='pane stripped']//tr[2]//div[@class='build-stop']/a")
     BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/img")
-    BUILD_STATUS_CANCELLED = (By.XPATH, "//table[@class='pane stripped']//a[@class='build-status-link']/img[@title='Aborted > Console Output']")
+    BUILD_STATUS_CANCELLED = (By.XPATH, "//a[@class='build-status-link']/img[@title='Aborted > Console Output']")
     FIRST_BUILD = (
         By.XPATH,
         "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
