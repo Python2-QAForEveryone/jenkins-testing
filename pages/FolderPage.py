@@ -55,7 +55,7 @@ class FolderPageLocator:
     LINK_NEW_ITEM = (By.XPATH, "//a[@title='New Item']")
     ITEM_NAME = (By.ID, 'name')
     LINK_FOLDER = (By.CLASS_NAME, 'com_cloudbees_hudson_plugins_folder_Folder')
-    OK_BUTTON = (By.ID, 'ok-button')
+    OK_BUTTON = (By.XPATH, "//span/button[@type='submit']")
     OK_BUTTON_DISABLED = (By.XPATH, "//button[@id='ok-button'][@class='disabled']")
     SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
     WRONG_REQUEST = (By.CSS_SELECTOR, 'div#error-description > h2')
@@ -89,6 +89,9 @@ class FolderPageLocator:
     TAB_CREATED_LIST_VIEW = (By.CSS_SELECTOR, '.active > a')
     BUTTON_OK_LIST_VIEW_CONFIGURATION = (By.ID, 'yui-gen13-button')
     DASHBOARD_TAB_FOLDER_LIST_VIEW = (By.XPATH, f'//a[contains(text(),"{FolderPage.name}")]')
+    LINK_NEW_FOLDER_ON_TOP_LIST = (By.XPATH, f"//li/a[@href='/job/{FolderPage.name}/']")
+    CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
+
 
 
 
