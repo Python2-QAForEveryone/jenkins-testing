@@ -125,7 +125,7 @@ class TestMultiConfigurationProject:
         driver.get_wait(NewItemPageLocators.CODEMIRROR)
         driver.click(NewItemPageLocators.CODEMIRROR_LINE)
         codemirror = driver.get_element(NewItemPageLocators.CODEMIRROR)
-        driver.do_send_keys_script(codemirror, "sleep 5")
+        driver.do_send_keys_script(codemirror, "sleep 15")
         driver.click(NewItemPageLocators.SAVE_BUTTON)
 
         driver.click(ProjectPageLocators.BUILD_NOW)
@@ -133,6 +133,7 @@ class TestMultiConfigurationProject:
         driver.click(ProjectPageLocators.CANCEL_BUILD)
         driver.get_wait_for_alert()
         driver.accept_alert()
+        print(ProjectPageLocators.BUILD_STATUS_CANCELLED)
         driver.get_wait(ProjectPageLocators.BUILD_STATUS_CANCELLED)
         number_of_jobs_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
         assert len(number_of_jobs_before) != len(number_of_jobs_after)
