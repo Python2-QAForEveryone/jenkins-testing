@@ -11,6 +11,11 @@ class NewItemPageLocators:
     MULTI_CONFIGURATION_PROJECT = (By.XPATH, '//li[@class="hudson_matrix_MatrixProject"]')
     SAVE_BUTTON = (By.XPATH, '//span[@name="Submit"]')
     NEW_PIPELINE_NAME = (By.XPATH, '//*[@id="name"]')
+    ADD_BUILD_STEP = (By.XPATH, '//span[button[text()="Add build step"]]')
+    EXECUTE_SHELL = (By.XPATH, '//a[text() = "Execute shell"]')
+    CODEMIRROR = (By.CLASS_NAME, 'CodeMirror')
+    CODEMIRROR_LINE = (By.XPATH, "//div[@class='CodeMirror-lines']")
+    CODEMIRROR_PRE = (By.XPATH, "//div[@class='CodeMirror-lines']")
 
 class NewItemPage(BasePage):
     """
