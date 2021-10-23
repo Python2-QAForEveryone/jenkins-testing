@@ -170,7 +170,7 @@ class TestPipeline:
         driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
         assert driver.is_clickable(PipelinePageLocators.BUILDS_RECORDS)
 
-    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab","test_build_now_starts_and_finishes"])
+    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab", "test_build_now_starts_and_finishes"])
     def test_view_build_details_click_name_tooltip(self):
         driver = PipelinePage(self.driver)
         driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
@@ -182,7 +182,8 @@ class TestPipeline:
 
 
     @pytest.mark.dependency(depends=["test_create_pipeline",
-                                     "test_build_now_starts_and_finishes"])
+                                     "test_build_now_starts_and_finishes",
+                                     "test_view_build_details_click_name_tooltip"])
     def test_view_build_console_output(self):
         driver = DashboardPage(self.driver)
         driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipeline_testName)
@@ -194,6 +195,22 @@ class TestPipeline:
         driver.click(BuildHistoryPage.get_console_output_from_the_list(self,self.pipeline_testName))
         console_output_build_history_page = driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT)
         assert console_output_after_build == console_output_build_history_page
+
+        @pytest.mark.dependency(depends=["test_create_pipeline",
+                                     "test_build_now_starts_and_finishes",
+                                         "test_view_build_details_click_name_tooltip"
+                                         ])
+        @pytest.mark.parametrize("project_name", self.pipeline_testName)
+        def test_delete_pipeline_project_test_name(self, project_name):
+            driver = DashboardPage(self.driver)
+            driver.go_to_page(TD.BASE_URL)
+            driver.get_wait(ProjectLocators.job_by_name(project_name))
+            driver.click(ProjectLocators.job_by_name(project_name))
+            driver.click(ProjectPageLocators.DELETE_PROJECT)
+            driver.get_wait_for_alert()
+            driver.accept_alert()
+            assert driver.is_element_not_present(ProjectLocators.job_by_name(project_name))
+
 
 
 
