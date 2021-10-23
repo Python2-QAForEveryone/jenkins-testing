@@ -7,12 +7,17 @@ class PipelinePageLocators:
     SUBMIT_BTN = (By.XPATH, '//*[@id="ok-button"]')
     MENU_TASKS = (By.XPATH, '//*[@id="tasks"]')
     BUILD_NOW = (By.XPATH, "//*[contains(text(),'Build Now')]")
-    BACK_TO_DASHBOARD = (By.XPATH, "//*[contains(text(),'Back to Dashboard')]")
+    BACK_TO_DASHBOARD = (By.XPATH, "//a[@title='Back to Dashboard']")
     TAB_PART1 = '//a[contains(text(),\"'
     TAB_PART2 = '\")]'
     URL_PIPELINE_PAGE = TD.BASE_URL + "job/"
     BUILDS_RECORDS = (By.XPATH, '//a[contains(@class, "tip model-link inside build-link display-name")]')
     CONSOLE_OUTPUT = (By.XPATH, '//*[@id="main-panel"]/h1/text()')
+    BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
+    CONSOLE_OUTPUT = (By.XPATH,"//pre")
+    BACK_TO_PROJECT=(By.XPATH, '//a[@title="Back to Project"]')
+    CREATE_PIPELINE_SAMPLES =(By.XPATH, '//*[@class="samples"]')
+    BUILD_HELLO_WORLD= (By.XPATH,'(//option[@value="hello"])[1]')
 
 
 

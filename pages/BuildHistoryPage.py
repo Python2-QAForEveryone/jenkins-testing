@@ -32,6 +32,7 @@ class BuildHistoryPage(BasePage):
     BUILD_PART1 = '//*[@id="job_'
     BUILD_PART2= ']/td[3]'
 
+
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)
 
@@ -42,4 +43,10 @@ class BuildHistoryPage(BasePage):
 
     def get_first_name_in_list(self, name):
         return By.XPATH, f'//*[@id="job_{name}"]/td[3]'
+
+    def find_build_in_the_list(self,name):
+        return (By.XPATH, f'//a[@href="job/{name}/"]')
+
+    def get_console_output_from_the_list(self, name):
+        return (By.XPATH, f'//a[@href="/job/{name}/1/console"]')
 

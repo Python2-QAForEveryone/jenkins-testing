@@ -22,6 +22,7 @@ class ProjectPageLocators:
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
+    BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
 
 
 class ProjectPage(BasePage):

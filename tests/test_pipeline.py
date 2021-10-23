@@ -161,6 +161,9 @@ class TestPipeline:
         driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.pipeline_testName)
         driver.click(NewItemPageLocators.PIPELINE)
         driver.click(NewItemPageLocators.OK_BUTTON)
+        driver.click(PipelinePageLocators.CREATE_PIPELINE_SAMPLES)
+        driver.click(PipelinePageLocators.BUILD_HELLO_WORLD)
+        driver.get_wait_is_clickable(NewItemPageLocators.OK_BUTTON)
         driver.click(NewItemPageLocators.OK_BUTTON)
         driver.click(PipelinePageLocators.BUILD_NOW)
         driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
@@ -174,22 +177,22 @@ class TestPipeline:
         driver.get_wait_is_clickable(BuildHistoryPage.CHART_BUILD1)
         driver.click(BuildHistoryPage.CHART_BUILD1)
         text_tooltip=driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
-        print(text_tooltip)
         assert text_tooltip != ""
 
-    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab",
+
+    @pytest.mark.dependency(depends=["test_create_pipeline",
                                      "test_build_now_starts_and_finishes"])
     def test_view_build_console_output(self):
         driver = DashboardPage(self.driver)
-        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipelineName_valid)
-        time.sleep(10)
-        driver.click(ProjectPageLocators.BUILD_SUCCESS_LAST_JOB)
-        time.sleep(5)
-        print(driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT))
-        assert 1==1
-    #    // *[ @ id = "main-panel"] / pre
-
-#//*[@id="buildHistory"]/div[2]/table/tbody/tr[2]/td/div[1]/a
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipeline_testName)
+        driver.click(ProjectPageLocators.BUILD_STATUS)
+        console_output_after_build = driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT)
+        driver.click(PipelinePageLocators.BACK_TO_PROJECT)
+        driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
+        driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
+        driver.click(BuildHistoryPage.get_console_output_from_the_list(self,self.pipeline_testName))
+        console_output_build_history_page = driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT)
+        assert console_output_after_build == console_output_build_history_page
 
 
 #
