@@ -109,6 +109,10 @@ class BasePage:
             attr_elements.append(el.get_attribute(attribute))
         return attr_elements
 
+    def get_element_attribute(self, locator, attribute):
+        element = self.get_element(locator)
+        return element.get_attribute(attribute)
+
     def get_element_text(self, locator):
         condition = EC.visibility_of_element_located(locator)
         element = WebDriverWait(self.driver, 2).until(condition)
@@ -158,3 +162,6 @@ class BasePage:
 
     def switch_to_window(self, window_name):
         self.driver.switch_to.window(window_name)
+
+    def do_send_keys_script(self, element, text):
+        self.driver.execute_script('arguments[0].CodeMirror.setValue("'+text+'");', element)

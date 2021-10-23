@@ -70,14 +70,77 @@ class TestMultiConfigurationProject:
         driver = ProjectPage(self.driver)
         assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "Project description"
         driver.click(ProjectPageLocators.ADD_DESCRIPTION_BUTTON)
-        driver.clear(ProjectPageLocators.DESCRIPTION_TEXTAREA);
+        driver.get_wait(ProjectPageLocators.DESCRIPTION_TEXTAREA)
+        driver.clear(ProjectPageLocators.DESCRIPTION_TEXTAREA)
         driver.do_send_keys(ProjectPageLocators.DESCRIPTION_TEXTAREA, "New description")
         driver.click(ProjectPageLocators.SUBMIT_DESCRIPTION_BUTTON)
         assert driver.get_element_text(ProjectPageLocators.DESCRIPTION) == "New description"
 
     @pytest.mark.dependency(depends=["test_edit_description_06"])
+    def test_rename_07(self):
+        driver = ProjectPage(self.driver)
+        driver.click(ProjectPageLocators.RENAME)
+        driver.clear(ProjectPageLocators.NEW_NAME);
+        driver.do_send_keys(ProjectPageLocators.NEW_NAME, "NewProjectName")
+        driver.click(ProjectPageLocators.RENAME_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project NewProjectName"
+
+    @pytest.mark.dependency(depends=["test_rename_07"])
+    def test_rename_08(self):
+        driver = ProjectPage(self.driver)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project NewProjectName"
+        driver.click(ProjectPageLocators.RENAME)
+        driver.clear(ProjectPageLocators.NEW_NAME);
+        driver.do_send_keys(ProjectPageLocators.NEW_NAME, TestMultiConfigurationProject.projectNameStringAndInt)
+        driver.click(ProjectPageLocators.RENAME_BUTTON)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + TestMultiConfigurationProject.projectNameStringAndInt
+
+    @pytest.mark.dependency(depends=["test_rename_08"])
+    def test_build_now_09(self):
+        driver = ProjectPage(self.driver)
+        number_of_jobs_before = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.BUILD_SUCCESS_JOBS)
+        number_of_jobs_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        assert len(number_of_jobs_before) != len(number_of_jobs_after)
+        assert driver.is_element_present(ProjectPageLocators.FIRST_BUILD)
+
+    @pytest.mark.dependency(depends=["test_build_now_09"])
+    def test_view_workspace_10(self):
+        driver = ProjectPage(self.driver)
+        driver.click(ProjectPageLocators.WORKSPACE)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Workspace of " + \
+               TestMultiConfigurationProject.projectNameStringAndInt + " on master"
+
+    @pytest.mark.dependency(depends=["test_view_workspace_10"])
+    def test_cancel_build_11(self):
+        driver = ProjectPage(self.driver)
+        number_of_jobs_before = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        driver.click(ProjectPageLocators.CONFIGURE)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.scroll_to_bottom()
+        driver.click(NewItemPageLocators.ADD_BUILD_STEP)
+        driver.get_wait(NewItemPageLocators.EXECUTE_SHELL)
+        driver.click(NewItemPageLocators.EXECUTE_SHELL)
+        driver.get_wait(NewItemPageLocators.CODEMIRROR)
+        driver.click(NewItemPageLocators.CODEMIRROR_LINE)
+        codemirror = driver.get_element(NewItemPageLocators.CODEMIRROR)
+        driver.do_send_keys_script(codemirror, "sleep 5")
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait(ProjectPageLocators.CANCEL_BUILD)
+        driver.click(ProjectPageLocators.CANCEL_BUILD)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        driver.get_wait(ProjectPageLocators.BUILD_STATUS_CANCELLED)
+        number_of_jobs_after = driver.get_elements(ProjectPageLocators.COUNT_OF_BUILD_HISTORY)
+        assert len(number_of_jobs_before) != len(number_of_jobs_after)
+        assert "icon-aborted" in driver.get_element_attribute(ProjectPageLocators.BUILD_STATUS, "class")
+
+    @pytest.mark.dependency(depends=["test_view_workspace_10"])
     @pytest.mark.parametrize("project_name", projectName)
-    def test_delete_project_07(self, project_name):
+    def test_delete_project_12(self, project_name):
         driver = DashboardPage(self.driver)
         driver.go_to_page(TestData.BASE_URL)
         driver.get_wait(ProjectLocators.job_by_name(project_name))
