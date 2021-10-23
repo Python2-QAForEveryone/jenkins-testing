@@ -161,6 +161,7 @@ class TestPipeline:
         driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.pipeline_testName)
         driver.click(NewItemPageLocators.PIPELINE)
         driver.click(NewItemPageLocators.OK_BUTTON)
+        driver.get_wait_is_clickable(PipelinePageLocators.CREATE_PIPELINE_SAMPLES)
         driver.click(PipelinePageLocators.CREATE_PIPELINE_SAMPLES)
         driver.click(PipelinePageLocators.BUILD_HELLO_WORLD)
         driver.get_wait_is_clickable(NewItemPageLocators.OK_BUTTON)
@@ -195,4 +196,4 @@ class TestPipeline:
         assert console_output_after_build == console_output_build_history_page
 
 
-#
+
