@@ -33,7 +33,7 @@ class ProjectPageLocators:
     FIRST_BUILD = (
         By.XPATH,
         "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
-    WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]"
+    WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
 
 
 class ProjectPage(BasePage):
