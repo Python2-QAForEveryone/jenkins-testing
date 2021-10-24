@@ -180,7 +180,7 @@ class TestPipeline:
         text_tooltip=driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
         assert text_tooltip != ""
 
-
+    @pytest.mark.skip
     @pytest.mark.dependency(depends=["test_create_pipeline",
                                      "test_build_now_starts_and_finishes",
                                      "test_view_build_details_click_name_tooltip"])
