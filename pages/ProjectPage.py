@@ -10,7 +10,7 @@ class ProjectPageLocators:
     PROJECT_NAME = (By.XPATH, '//h1')
     DELETE_PROJECT = (By.XPATH, '//a/span[contains(text(),"Delete")]')
     DISABLE_PROJECT_BUTTON = (By.XPATH, '//button[text()="Disable Project"]')
-    ENABLE_PROJECT_BUTTON = (By.XPATH, '// button[text() = "Enable"]')
+    ENABLE_PROJECT_BUTTON = (By.XPATH, '//button[text() = "Enable"]')
     DISABLE_PROJECT_WARNING = (By.XPATH, "//div[@class='warning']")
     ADD_DESCRIPTION_BUTTON = (By.ID, "description-link")
     DESCRIPTION_TEXTAREA = (By.XPATH, "//textarea[@name='description']")
