@@ -105,6 +105,5 @@ class TestFreestyleProject:
         driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
         driver.click(NewItemPageLocators.SAVE_BUTTON)
         driver.get_wait(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
-        print("======================" + str(ProjectPageLocators.ENABLE_PROJECT_BUTTON))
         assert driver.is_clickable(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
         ProjectPage.delete_job(self, name)
