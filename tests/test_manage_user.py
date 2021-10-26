@@ -83,6 +83,7 @@ class TestManageUserPage:
         assert len(lst_job_before) != len(lst_job_after)
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.skip
     @pytest.mark.smoke
     @pytest.mark.regression
     def test_verify_the_build_job_was_run(self):

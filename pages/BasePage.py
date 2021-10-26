@@ -162,3 +162,6 @@ class BasePage:
 
     def switch_to_window(self, window_name):
         self.driver.switch_to.window(window_name)
+
+    def do_send_keys_script(self, element, text):
+        self.driver.execute_script('arguments[0].CodeMirror.setValue("'+text+'");', element)
