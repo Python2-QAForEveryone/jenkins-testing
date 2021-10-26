@@ -18,6 +18,7 @@ class PipelinePageLocators:
     BACK_TO_PROJECT=(By.XPATH, '//a[@title="Back to Project"]')
     CREATE_PIPELINE_SAMPLES =(By.XPATH, '//*[@class="samples"]')
     BUILD_HELLO_WORLD= (By.XPATH,'(//option[@value="hello"])[1]')
+    BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
 
 
 

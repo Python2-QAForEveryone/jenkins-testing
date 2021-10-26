@@ -68,31 +68,6 @@ class TestPipeline:
 
         assert pipeline_name_is_in_the_list == True
 
-#    @pytest.mark.skip
-#    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now",
-#                                    "test_pipeline_build_is_on_BuildHistoryPage",
-#                                     "test_delete_pipeline_project"])
-#    @pytest.mark.parametrize("pipeline_name", pipelineName)
-#    def test_pipeline_build_is_on_BuildHistoryPage_in_tooltip(self):
-#        driver = BuildHistoryPage(self.driver)
-#        driver.click(BuildHistoryPage.CHART_BUILD1)
-#        time.sleep(10)
-#        print(driver.get_element_text(BuildHistoryPage.CHART_BUILD1))
-#        driver.click(BuildHistoryPage.CHART_TOOLTIP1)
-#        time_date_text = driver.get_elements_text(BuildHistoryPage.CHART_TOOLTIP1)
-#        print(time_date_text)
-#        assert time_date_text != ""
-#
-
-    @pytest.mark.dependency(depends=["test_create_pipeline",
-                                     "test_pipeline_can_build_now",
-                                     "test_pipeline_build_is_on_BuildHistoryPage"])
-    @pytest.mark.parametrize("pipeline_name", pipelineName)
-    def test_pipeline_BuildHistoryPage_ConsoleOutput(self, pipeline_name):
-        driver = BuildHistoryPage(self.driver)
-        pass
-
-
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_name_in_the_tab(self):
@@ -103,8 +78,6 @@ class TestPipeline:
         driver.click(tab_locator_valid)
         assert (self.pipelineName_valid in driver.get_element_text(tab_locator_valid))
         assert driver.is_element_present(tab_locator_valid)
-
-
 
 
 
@@ -180,14 +153,14 @@ class TestPipeline:
         text_tooltip=driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
         assert text_tooltip != ""
 
-    @pytest.mark.skip
+
     @pytest.mark.dependency(depends=["test_create_pipeline",
                                      "test_build_now_starts_and_finishes",
                                      "test_view_build_details_click_name_tooltip"])
     def test_view_build_console_output(self):
         driver = DashboardPage(self.driver)
         driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + self.pipeline_testName)
-        driver.click(ProjectPageLocators.BUILD_STATUS)
+        driver.click(PipelinePageLocators.BUILD_STATUS)
         console_output_after_build = driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT)
         driver.click(PipelinePageLocators.BACK_TO_PROJECT)
         driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
