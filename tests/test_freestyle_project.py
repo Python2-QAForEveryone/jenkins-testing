@@ -140,6 +140,7 @@ class TestFreestyleProject:
         assert len(lst_of_time) > 0
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.skip
     def test_created_freestyle_project_add_action_build_steps(self):
         """
         TC_JN_185
@@ -171,6 +172,7 @@ class TestFreestyleProject:
         assert ConsoleOutputPage.is_contains_text(driver, lst_of_text, subtext)
         ProjectPage.delete_job(self, name)
 
+    @pytest.mark.skip
     def test_created_freestyle_project_add_post_build_action(self):
         """
         TC_JN_186
