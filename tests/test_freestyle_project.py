@@ -155,6 +155,7 @@ class TestFreestyleProject:
 
         driver = FreestylePage(self.driver)
         driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.scroll_to_bottom()
         driver.get_wait_is_clickable(FreestylePageLocators.BUTTON_ADD_BUILD_STEPS)
         driver.scroll_to_element(FreestylePageLocators.BUTTON_ADD_BUILD_STEPS)
         driver.click(FreestylePageLocators.BUTTON_ADD_BUILD_STEPS)
@@ -183,6 +184,7 @@ class TestFreestyleProject:
 
         driver = FreestylePage(self.driver)
         driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.scroll_to_bottom()
         driver.get_wait_is_clickable(FreestylePageLocators.BUTTON_ADD_POST_BUILD_ACTION)
         driver.scroll_to_element(FreestylePageLocators.BUTTON_ADD_POST_BUILD_ACTION)
         driver.click(FreestylePageLocators.BUTTON_ADD_POST_BUILD_ACTION)
