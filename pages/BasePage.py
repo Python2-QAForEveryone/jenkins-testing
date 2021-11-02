@@ -140,6 +140,10 @@ class BasePage:
     def scroll_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 
+    def scroll_to_element(self, locator):
+        element = self.get_element(locator)
+        self.driver.execute_script("return arguments[0].scrollIntoView();", element)
+
     def js_click(self, locator):
         self.driver.execute_script("arguments[0].click();", self.click(locator))
 
@@ -164,4 +168,4 @@ class BasePage:
         self.driver.switch_to.window(window_name)
 
     def do_send_keys_script(self, element, text):
-        self.driver.execute_script('arguments[0].CodeMirror.setValue("'+text+'");', element)
+        self.driver.execute_script('arguments[0].CodeMirror.setValue("' + text + '");', element)
