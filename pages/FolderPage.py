@@ -22,6 +22,9 @@ class FolderPage(BasePage):
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
+    name_special_ch_only = (''.join(random.choice(special_characters))) + \
+                           (''.join(random.choice(special_characters)))
+    name_twins_special_ch_only = (''.join(random.choice(special_characters))) * 2
     name_start_special_ch = (''.join(random.choice(special_characters))) \
                             + (''.join(random.choice(string.ascii_letters) for i in range(9)))
     name_inside_special_ch = (''.join(random.choice(string.digits) for i in range(3))) \
@@ -91,8 +94,6 @@ class FolderPageLocator:
     DASHBOARD_TAB_FOLDER_LIST_VIEW = (By.XPATH, f'//a[contains(text(),"{FolderPage.name}")]')
     LINK_NEW_FOLDER_ON_TOP_LIST = (By.XPATH, f"//li/a[@href='/job/{FolderPage.name}/']")
     CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
-
-
 
 
 class URLLocators:

@@ -34,14 +34,24 @@ class FreestylePageLocators:
     SELECTION_BUILD_ENVIRONMENT = (
         By.XPATH, '//div[contains(@class, "config-section-activator config_build_environment")]')
     TITLE_BUILD_ENVIRONMENT = (By.XPATH, '//div[@title="Build Environment"]')
+    CHECKBOX_ADD_TIMESTAMPS_TO_CONSOLE_OUTPUT = \
+        (By.XPATH, '//input[@name="hudson-plugins-timestamper-TimestamperBuildWrapper"]')
 
     SELECTION_BUILD = (
         By.XPATH, '//div[contains(@class, "config-section-activator config_build")]')
     TITLE_BUILD = (By.XPATH, '//div[@title="Build"]')
+    BUTTON_ADD_BUILD_STEPS = (By.ID, 'yui-gen13-button')
+    OPTION_EXECUTE_WINDOWS_COMMAND = \
+        (By.XPATH, '//div[@id="yui-gen14"]//a[text()="Execute Windows batch command"]')
+    TEXTAREA_COMMAND = (By.XPATH, '//textarea[@name="command"]')
 
     SELECTION_POST_BUILD_ACTIONS = (
         By.XPATH, '//div[contains(@class, "config-section-activator config_post_build_actions")]')
     TITLE_POST_BUILD_ACTIONS = (By.XPATH, '//div[@title="Post-build Actions"]')
+    BUTTON_ADD_POST_BUILD_ACTION = (By.ID, "yui-gen15-button")
+    OPTION_EDITABLE_EMAIL_NOTIFICATION = \
+        (By.XPATH, '//div[@id="yui-gen16"]//a[text()="Editable Email Notification"]')
+    EDITABLE_AREA = (By.XPATH, '//div[@class="dd-handle"]/b[text()="Editable Email Notification"]')
 
     verify_works_tabs = [(SELECTION_GENERAL, TEXTAREA_DESCRIPTION),
                          (SELECTION_SOURCE_CODE, TITLE_SOURCE_CODE),
