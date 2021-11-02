@@ -222,6 +222,7 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
         driver.get_element(FolderPageLocator.BUTTON_YES).click()
 
+
     def test_add_folder_view_name_my_view(self):
         driver = FolderPage(self.driver)
         driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)

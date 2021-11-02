@@ -86,3 +86,24 @@ class TestFreestyleProject:
         driver.click(NewItemPageLocators.SAVE_BUTTON)
 
         ProjectPage.delete_job(self, name)
+
+    def test_create_freestyle_project_add_post_build_action(self):
+        """
+        TC_JN_165
+        User create project and add post-build action: Disable this project
+        :return:
+        """
+
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait_is_clickable(FreestylePageLocators.CHECKBOX_DISABLE_THIS_PROJECT)
+        driver.click(FreestylePageLocators.CHECKBOX_DISABLE_THIS_PROJECT)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+        driver.get_wait(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        assert driver.is_clickable(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        ProjectPage.delete_job(self, name)
