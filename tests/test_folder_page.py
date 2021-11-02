@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from config.TestData import TestData
@@ -272,3 +274,10 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_DASHBOARD).click()
         driver.get_element(FolderPageLocator.LINK_SECOND_FOLDER_ON_TOP_LIST).click()
         assert driver.is_element_present(FolderPageLocator.LINK_NEW_JOB_IN_FOLDER)
+        driver.get_element(FolderPageLocator.LINK_FIRST_FOLDER_ON_TOP_LIST).click()
+        time.sleep(7)
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
+        driver.get_element(FolderPageLocator.LINK_SECOND_FOLDER_ON_TOP_LIST).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()

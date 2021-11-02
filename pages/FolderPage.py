@@ -64,7 +64,7 @@ class FolderPageLocator:
     ITEM_NAME_REQUIRED = (By.XPATH, "//div[@id='itemname-required'][contains(text(),'This field cannot be empty')]")
     ITEM_NAME_NOT_ALLOWED = (By.XPATH, "//div[@id='itemname-invalid'][contains(text(),'is not an allowed name')]")
     ERROR_PAGE_NONAME = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'No name is specified')]")
-    LINK_DELETE_FOLDER = (By.XPATH, "//a[@title='Delete Folder']")
+    LINK_DELETE_FOLDER = (By.CSS_SELECTOR, ".task:nth-child(5) .task-link-text")
     LINK_DELETE_PROJECT = (By.LINK_TEXT, 'Delete Project')
     BUTTON_YES = (By.ID, 'yui-gen1-button')
     LINK_EXIST_FOLDER = (By.CSS_SELECTOR, f'#job_{FolderPage.name} .model-link')
