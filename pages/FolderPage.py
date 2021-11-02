@@ -94,6 +94,7 @@ class FolderPageLocator:
     LINK_FIRST_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f"{FolderPage.name}")
     LINK_SECOND_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f'{FolderPage.name}1')
     LINK_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, f"#job_{FolderPage.name} .model-link")
+    LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
 
 
 
