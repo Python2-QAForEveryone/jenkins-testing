@@ -91,6 +91,8 @@ class FolderPageLocator:
     DASHBOARD_TAB_FOLDER_LIST_VIEW = (By.XPATH, f'//a[contains(text(),"{FolderPage.name}")]')
     LINK_NEW_FOLDER_ON_TOP_LIST = (By.XPATH, f"//li/a[@href='/job/{FolderPage.name}/']")
     CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
+    LINK_FIRST_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f"{FolderPage.name}")
+    LINK_SECOND_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f'{FolderPage.name}1')
 
 
 
