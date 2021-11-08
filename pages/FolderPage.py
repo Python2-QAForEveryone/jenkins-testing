@@ -76,7 +76,7 @@ class FolderPageLocator:
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
     BUTTON_ADD_LIBRARY = (By.ID, "yui-gen13-button")
     INPUT_FIELD_LIBRARY_NAME = (By.NAME, '_.name')
-    LINK_PLUS_NEW_VIEW = (By.CSS_SELECTOR, '.addTab')
+    LINK_PLUS_NEW_VIEW = (By.CSS_SELECTOR, '.addTab > .svg-icon')
     INPUT_FIELD_VIEW_NAME = (By.ID, 'name')
     RADIOBUTTON_GLOBAL_VIEW = (By.XPATH, '//div/input[@value="hudson.model.ProxyView"]')
     RADIOBUTTON_LIST_VIEW = (By.XPATH, '//div/input[@value="hudson.model.ListView"]')
@@ -95,8 +95,8 @@ class FolderPageLocator:
     LINK_SECOND_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f'{FolderPage.name}1')
     LINK_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, f"#job_{FolderPage.name} .model-link")
     LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
-
-
+    LINK_FIRST_FOLDER = (By.LINK_TEXT, "first_folder")
+    ERROR_VIEW_MESSAGE = (By.CSS_SELECTOR, ".error")
 
 
 class URLLocators:
