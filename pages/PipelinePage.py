@@ -19,11 +19,18 @@ class PipelinePageLocators:
     CREATE_PIPELINE_SAMPLES =(By.XPATH, '//*[@class="samples"]')
     BUILD_HELLO_WORLD= (By.XPATH,'(//option[@value="hello"])[1]')
     BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
+    PIPELINE_NOT_CREATED_ERROR=(By.XPATH, '//*[@id="error-description"]')
+    PIPELINE_NAME_INVALID = (By.XPATH,'//*[@id="itemname-invalid"]')
+    PIPELINE_PAGE_ERROR= (By.XPATH, '//*[@id="main-panel"]/p')
+    DELETE_PIPELINE =(By. XPATH, '//*[@id="tasks"]/div[6]/span/a')
 
 
 
     def locator_for_tab(self,  name):
         return (By.XPATH, PipelinePageLocators.TAB_PART1 + f'{name}' + PipelinePageLocators.TAB_PART2)
+
+    def locator_pipeline_on_dashboard(self, name):
+        return (By. XPATH, '//a[@href="job/'+f'{name}'+'/"]')
 
 
 class PipelineConfigureLocators:

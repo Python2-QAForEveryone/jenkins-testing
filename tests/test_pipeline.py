@@ -21,10 +21,107 @@ class TestPipeline:
     pipelineName_valid = pages.StringUtils.generate_random_string(3)
     pipelineName_valid = "pipeline" + pipelineName_valid
     pipeline_testName = "test" + pipelineName_valid
-    pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
     project_name_special_symbol = [FolderPage.name_start_special_ch, FolderPage.name_only_one_or_two_dot,
                                    FolderPage.name_empty]
     builds = ""
+    name_only_letters = "PipelineNameHasOnlyLetterr"
+    name_only_digits = "00012345678912345678911"
+    name_only_letters_and_digits = "PipelineNameHasOnlyLettersAndDigits12344"
+    name_with_max_length_255 = 255 * "G"
+
+    pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
+    namesfortest = [name_only_letters_and_digits, name_with_max_length_255, name_only_digits, name_only_letters]
+
+
+    def test_create_pipeline_name_only_letters(self):
+        driver = BasePage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.name_only_letters)
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (self.name_only_letters in driver.get_current_url())
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (driver.get_title() == self.name_only_letters + " [Jenkins]")
+
+
+    def test_delete_pipeline_name_only_letters(self):
+        driver = DashboardPage(self.driver)
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_letters))
+        driver.click(PipelinePageLocators.DELETE_PIPELINE)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_letters))
+
+    def test_create_pipeline_name_only_digits(self):
+        driver = BasePage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.name_only_digits)
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (self.name_only_digits in driver.get_current_url())
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (driver.get_title() == self.name_only_digits + " [Jenkins]")
+
+
+    def test_delete_pipeline_name_only_digits(self):
+        driver = DashboardPage(self.driver)
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_digits))
+        driver.click(PipelinePageLocators.DELETE_PIPELINE)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_digits))
+
+
+    def test_create_pipeline_name_only_letters_and_digits(self):
+        driver = BasePage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.name_only_letters_and_digits)
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (self.name_only_letters_and_digits in driver.get_current_url())
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (driver.get_title() == self.name_only_letters_and_digits + " [Jenkins]")
+
+    def test_delete_pipeline_name_only_letters_and_digits(self):
+        driver = DashboardPage(self.driver)
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_letters_and_digits))
+        driver.click(PipelinePageLocators.DELETE_PIPELINE)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_letters_and_digits))
+
+    def test_pipeline_name_max_length_255(self):
+        driver = BasePage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.name_with_max_length_255)
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (self.name_with_max_length_255 in driver.get_current_url())
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert (driver.get_title() == self.name_with_max_length_255 + " [Jenkins]")
+
+    def test_delete_pipeline_name_max_length_255(self):
+        driver = DashboardPage(self.driver)
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_with_max_length_255))
+        driver.click(PipelinePageLocators.DELETE_PIPELINE)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_with_max_length_255))
+
+    def test_pipeline_not_created_name_max_length_256(self):
+        driver = BasePage(self.driver)
+        driver.go_to_page(TD.BASE_URL)
+        driver.click(DashboardPageLocators.TEXT_NEW_ITEM)
+        driver.do_send_keys(NewItemPageLocators.NEW_PIPELINE_NAME, self.name_with_max_length_255 + "A")
+        driver.click(NewItemPageLocators.PIPELINE)
+        driver.click(NewItemPageLocators.OK_BUTTON)
+        assert driver.is_element_present(PipelinePageLocators.PIPELINE_NOT_CREATED_ERROR)
+
+
 
     @pytest.mark.dependency()
     @pytest.mark.parametrize("pipeline_name", pipelineName)
@@ -45,7 +142,7 @@ class TestPipeline:
     @pytest.mark.parametrize("pipeline_name", pipelineName)
     def test_pipeline_can_build_now(self, pipeline_name):
         driver = BasePage(self.driver)
-        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE+ pipeline_name)
+        driver.go_to_page(PipelinePageLocators.URL_PIPELINE_PAGE + pipeline_name)
         menu_tasks = driver.get_element_text(PipelinePageLocators.MENU_TASKS)
         assert ("Build Now" in menu_tasks)
         driver.click(ProjectPageLocators.BUILD_NOW)
@@ -68,7 +165,6 @@ class TestPipeline:
 
         assert pipeline_name_is_in_the_list == True
 
-
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_name_in_the_tab(self):
         driver = BasePage(self.driver)
@@ -78,8 +174,6 @@ class TestPipeline:
         driver.click(tab_locator_valid)
         assert (self.pipelineName_valid in driver.get_element_text(tab_locator_valid))
         assert driver.is_element_present(tab_locator_valid)
-
-
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_disabled(self):
@@ -100,7 +194,6 @@ class TestPipeline:
         menu_tasks = driver.get_element_text(PipelinePageLocators.MENU_TASKS)
         assert ("Build Now" in menu_tasks)
 
-
     @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_can_build_now",
                                      "test_pipeline_build_is_on_BuildHistoryPage"
                                      ])
@@ -115,8 +208,6 @@ class TestPipeline:
         driver.accept_alert()
         assert driver.is_element_not_present(ProjectLocators.job_by_name(project_name))
 
-
-
     @pytest.mark.parametrize("project_name", project_name_special_symbol)
     def test_create_project_with_special_symbol_01(self, project_name):
         driver = DashboardPage(self.driver)
@@ -125,7 +216,6 @@ class TestPipeline:
         driver.click(NewItemPageLocators.NEW_PIPELINE_NAME)
         assert driver.is_disabled(NewItemPageLocators.OK_BUTTON)
         assert driver.is_element_present(NewItemPageLocators.ERROR_MESSAGE)
-
 
     @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab"])
     def test_build_now_starts_and_finishes(self):
@@ -143,16 +233,16 @@ class TestPipeline:
         driver.get_wait_is_clickable(PipelinePageLocators.BUILDS_RECORDS)
         assert driver.is_clickable(PipelinePageLocators.BUILDS_RECORDS)
 
-    @pytest.mark.dependency(depends=["test_create_pipeline", "test_pipeline_name_in_the_tab", "test_build_now_starts_and_finishes"])
+    @pytest.mark.dependency(
+        depends=["test_create_pipeline", "test_pipeline_name_in_the_tab", "test_build_now_starts_and_finishes"])
     def test_view_build_details_click_name_tooltip(self):
         driver = PipelinePage(self.driver)
         driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
         driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
         driver.get_wait_is_clickable(BuildHistoryPage.CHART_BUILD1)
         driver.click(BuildHistoryPage.CHART_BUILD1)
-        text_tooltip=driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
+        text_tooltip = driver.get_element_text(BuildHistoryPage.CHART_TOOLTIP1)
         assert text_tooltip != ""
-
 
     @pytest.mark.dependency(depends=["test_create_pipeline",
                                      "test_build_now_starts_and_finishes",
@@ -165,25 +255,16 @@ class TestPipeline:
         driver.click(PipelinePageLocators.BACK_TO_PROJECT)
         driver.click(PipelinePageLocators.BACK_TO_DASHBOARD)
         driver.click(DashboardPageLocators.TEXT_BUILD_HISTORY)
-        driver.click(BuildHistoryPage.get_console_output_from_the_list(self,self.pipeline_testName))
+        driver.click(BuildHistoryPage.get_console_output_from_the_list(self, self.pipeline_testName))
         console_output_build_history_page = driver.get_element_text(PipelinePageLocators.CONSOLE_OUTPUT)
         assert console_output_after_build == console_output_build_history_page
 
-        @pytest.mark.dependency(depends=["test_create_pipeline",
-                                     "test_build_now_starts_and_finishes",
-                                         "test_view_build_details_click_name_tooltip"
-                                         ])
-        @pytest.mark.parametrize("project_name", self.pipeline_testName)
-        def test_delete_pipeline_project_test_name(self, project_name):
-            driver = DashboardPage(self.driver)
-            driver.go_to_page(TD.BASE_URL)
-            driver.get_wait(ProjectLocators.job_by_name(project_name))
-            driver.click(ProjectLocators.job_by_name(project_name))
-            driver.click(ProjectPageLocators.DELETE_PROJECT)
-            driver.get_wait_for_alert()
-            driver.accept_alert()
-            assert driver.is_element_not_present(ProjectLocators.job_by_name(project_name))
-
-
-
-
+    @pytest.mark.dependency(depends=["test_view_build_console_output"])
+    def test_delete_pipeline_project_test_name(self):
+        driver = DashboardPage(self.driver)
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.pipeline_testName))
+        driver.click(PipelinePageLocators.DELETE_PIPELINE)
+        driver.get_wait_for_alert()
+        driver.accept_alert()
+        assert driver.is_element_not_present(
+            PipelinePageLocators.locator_pipeline_on_dashboard(self, self.pipeline_testName))
