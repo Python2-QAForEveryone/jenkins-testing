@@ -22,6 +22,9 @@ class FolderPage(BasePage):
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
+    name_special_ch_only = (''.join(random.choice(special_characters))) + \
+                           (''.join(random.choice(special_characters)))
+    name_twins_special_ch_only = (''.join(random.choice(special_characters))) * 2
     name_start_special_ch = (''.join(random.choice(special_characters))) \
                             + (''.join(random.choice(string.ascii_letters) for i in range(9)))
     name_inside_special_ch = (''.join(random.choice(string.digits) for i in range(3))) \
@@ -97,6 +100,7 @@ class FolderPageLocator:
     LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
     LINK_FIRST_FOLDER = (By.LINK_TEXT, "first_folder")
     ERROR_VIEW_MESSAGE = (By.CSS_SELECTOR, ".error")
+
 
 
 class URLLocators:
