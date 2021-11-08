@@ -52,7 +52,7 @@ class FolderPage(BasePage):
 
 
 class FolderPageLocator:
-    LINK_NEW_ITEM = (By.XPATH, "//a[@title='New Item']")
+    LINK_NEW_ITEM = (By.CSS_SELECTOR, "a[title='New Item'] > .task-link-text")
     ITEM_NAME = (By.ID, 'name')
     LINK_FOLDER = (By.CLASS_NAME, 'com_cloudbees_hudson_plugins_folder_Folder')
     OK_BUTTON = (By.XPATH, "//span/button[@type='submit']")
@@ -89,8 +89,11 @@ class FolderPageLocator:
     TAB_CREATED_LIST_VIEW = (By.CSS_SELECTOR, '.active > a')
     BUTTON_OK_LIST_VIEW_CONFIGURATION = (By.ID, 'yui-gen13-button')
     DASHBOARD_TAB_FOLDER_LIST_VIEW = (By.XPATH, f'//a[contains(text(),"{FolderPage.name}")]')
-    LINK_NEW_FOLDER_ON_TOP_LIST = (By.XPATH, f"//li/a[@href='/job/{FolderPage.name}/']")
+    LINK_FIRST_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f"{FolderPage.name}")
+    LINK_SECOND_FOLDER_ON_TOP_LIST = (By.LINK_TEXT, f'{FolderPage.name}1')
     CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
+    LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
+    LINK_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, f"#job_{FolderPage.name} .model-link")
 
 
 
