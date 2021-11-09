@@ -97,7 +97,10 @@ class FolderPageLocator:
     LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
     LINK_FIRST_FOLDER = (By.LINK_TEXT, "first_folder")
     ERROR_VIEW_MESSAGE = (By.CSS_SELECTOR, ".error")
-
+    LINK_JOB_IN_FOLDER_DIGITS_NAME = (By.XPATH, f"//tr[@id='job_{FolderPage.name_digits}']/td/a[contains(text(), '{FolderPage.name_digits}')]")
+    LINK_RENAME = (By.CSS_SELECTOR, "a[title='Rename'] > .task-link-text")
+    INPUT_FIELD_RENAME_JOB_IN_FOLDER = (By.CSS_SELECTOR, "input[name='newName']")
+    NAME_FIELD_INPUT_RENAME_JOB = (By.CSS_SELECTOR, ".help-sibling.setting-name")
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
