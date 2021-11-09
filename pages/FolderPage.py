@@ -22,6 +22,9 @@ class FolderPage(BasePage):
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
+    name_special_ch_only = (''.join(random.choice(special_characters))) + \
+                           (''.join(random.choice(special_characters)))
+    name_twins_special_ch_only = (''.join(random.choice(special_characters))) * 2
     name_start_special_ch = (''.join(random.choice(special_characters))) \
                             + (''.join(random.choice(string.ascii_letters) for i in range(9)))
     name_inside_special_ch = (''.join(random.choice(string.digits) for i in range(3))) \
@@ -101,6 +104,7 @@ class FolderPageLocator:
     LINK_RENAME = (By.CSS_SELECTOR, "a[title='Rename'] > .task-link-text")
     INPUT_FIELD_RENAME_JOB_IN_FOLDER = (By.CSS_SELECTOR, "input[name='newName']")
     NAME_FIELD_INPUT_RENAME_JOB = (By.CSS_SELECTOR, ".help-sibling.setting-name")
+
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'
