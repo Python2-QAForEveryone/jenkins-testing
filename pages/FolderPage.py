@@ -22,6 +22,9 @@ class FolderPage(BasePage):
 
     name = (''.join(random.choice(string.ascii_letters) for i in range(10)))
     long_name = (''.join(random.choice(string.ascii_letters) for i in range(256)))
+    name_special_ch_only = (''.join(random.choice(special_characters))) + \
+                           (''.join(random.choice(special_characters)))
+    name_twins_special_ch_only = (''.join(random.choice(special_characters))) * 2
     name_start_special_ch = (''.join(random.choice(special_characters))) \
                             + (''.join(random.choice(string.ascii_letters) for i in range(9)))
     name_inside_special_ch = (''.join(random.choice(string.digits) for i in range(3))) \
@@ -66,11 +69,13 @@ class FolderPageLocator:
     ERROR_PAGE_NONAME = (By.XPATH, "//div[@id='main-panel']/p[contains(text(),'No name is specified')]")
     LINK_DELETE_FOLDER = (By.XPATH, "//a[@title='Delete Folder']")
     LINK_DELETE_PROJECT = (By.LINK_TEXT, 'Delete Project')
+    LINK_DELETE_PIPELINE = (By.LINK_TEXT, 'Delete Pipeline')
     BUTTON_YES = (By.ID, 'yui-gen1-button')
     LINK_EXIST_FOLDER = (By.CSS_SELECTOR, f'#job_{FolderPage.name} .model-link')
     EMPTY_FOLDER = (By.CSS_SELECTOR, ".h4")
     LINK_CREATE_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, ".trailing-icon > .svg-icon")
     LINK_FREESTYLE = (By.CSS_SELECTOR, ".hudson_model_FreeStyleProject > .desc")
+    LINK_PIPELINE = (By.CSS_SELECTOR, ".org_jenkinsci_plugins_workflow_job_WorkflowJob")
     BUTTON_SAVE_IN_FOLDER = (By.CSS_SELECTOR, "[type='submit']")
     BUTTON_OK_IN_FOLDER = (By.XPATH, "//form[@id=\'createItem\']/div[4]/div/span/button")
     BUTTON_PANEL = (By.CSS_SELECTOR, ".bottom-sticker-inner")
@@ -94,8 +99,6 @@ class FolderPageLocator:
     CHECK_BOX_ADD_JOB_IN_LIST_VIEW = (By.NAME, f"{FolderPage.name}")
     LINK_DASHBOARD = (By.XPATH, "//a[contains(text(),'Dashboard')]")
     LINK_NEW_JOB_IN_FOLDER = (By.CSS_SELECTOR, f"#job_{FolderPage.name} .model-link")
-
-
 
 
 class URLLocators:

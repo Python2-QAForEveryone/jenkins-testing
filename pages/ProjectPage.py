@@ -10,7 +10,7 @@ class ProjectPageLocators:
     PROJECT_NAME = (By.XPATH, '//h1')
     DELETE_PROJECT = (By.XPATH, '//a/span[contains(text(),"Delete")]')
     DISABLE_PROJECT_BUTTON = (By.XPATH, '//button[text()="Disable Project"]')
-    ENABLE_PROJECT_BUTTON = (By.XPATH, '// button[text() = "Enable"]')
+    ENABLE_PROJECT_BUTTON = (By.XPATH, '//button[text() = "Enable"]')
     DISABLE_PROJECT_WARNING = (By.XPATH, "//div[@class='warning']")
     ADD_DESCRIPTION_BUTTON = (By.ID, "description-link")
     DESCRIPTION_TEXTAREA = (By.XPATH, "//textarea[@name='description']")
@@ -29,6 +29,7 @@ class ProjectPageLocators:
     BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
     CANCEL_BUILD = (By.XPATH, "//table[@class='pane stripped']//tr[2]//div[@class='build-stop']/a")
     BUILD_STATUS_CANCELLED = (By.XPATH, "//a[@class='build-status-link']//span[contains(@class, 'icon-aborted')]")
+    EMAIL_TEMPLATE_TESTING = (By.XPATH, '//div[@id="tasks"]//span[text()="Email Template Testing"]')
     FIRST_BUILD = (
         By.XPATH,
         "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")

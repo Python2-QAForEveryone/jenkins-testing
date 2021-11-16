@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from config.TestData import TestData
@@ -275,3 +273,54 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.LINK_SECOND_FOLDER_ON_TOP_LIST).click()
         assert driver.is_element_present(FolderPageLocator.LINK_NEW_JOB_IN_FOLDER)
 
+
+    def test_create_freestyle_project_into_folder(self):
+        """
+        TC_JN_155
+        Create Freestyle project into the folder
+        :return:
+        """
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_CREATE_NEW_JOB_IN_FOLDER).click()
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FREESTYLE).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_IN_FOLDER).click()
+        driver.get_wait(FolderPageLocator.BUTTON_PANEL)
+        driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
+        assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
+
+        driver.get_element(FolderPageLocator.LINK_DELETE_PROJECT).click()
+        self.driver.switch_to.alert.accept()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
+
+    def test_create_pipeline_into_folder(self):
+        """
+        TC_JN_156
+        Create Pipeline into the folder
+        :return:
+        """
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_CREATE_NEW_JOB_IN_FOLDER).click()
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_PIPELINE).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_IN_FOLDER).click()
+        driver.get_wait(FolderPageLocator.BUTTON_PANEL)
+        driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
+        assert driver.get_title() == FolderPage.TITLE_JOB_INSIDE_FOLDER
+
+        driver.get_element(FolderPageLocator.LINK_DELETE_PIPELINE).click()
+        self.driver.switch_to.alert.accept()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
