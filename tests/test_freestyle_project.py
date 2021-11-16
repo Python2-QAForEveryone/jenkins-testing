@@ -117,6 +117,7 @@ class TestFreestyleProject:
         ProjectPage.delete_job(self, self.test_name_verify_console_output)
 
     def test_freestyle_project_user_sees_workspace(self):
+        """TC 195"""
         name = ProjectPage.create_new_default_job(self, self.test_name_verify_workspace_output,
                                                   NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
