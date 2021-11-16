@@ -95,38 +95,19 @@ class TestFreestyleProject:
         ProjectPage.delete_job(self, name)
 
 
-    def test_create_freestyle_project_test_name(self):
-        """
-        TC_JN_122
-        User can create project with StringName
-        TC_JN_123
-        User can create project with IntName
-        TC_JN_125
-        User can create project with StringName and IntName
-        :param project_name:
-        :return:
-        """
-        name = ProjectPage.create_new_default_job (self, self.test_name_verify_console_output, NewItemPageLocators.FREESTYLE_PROJECT)
+    def test_freestyle_project_build_success(self):
+        ''' TC 194'''
+        name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
         ProjectPage.click_save_button_into_project(self, name)
 
         driver = ProjectPage(self.driver)
         driver.go_to_page(URL_JOB)
 
-        assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + self.test_name_verify_console_output
-        assert driver.get_element_text(ProjectPageLocators.DELETE_PROJECT) == "Delete Project"
-
-    def test_freestyle_project_can_build_now(self):
-        ''' For test cases  194 and 195'''
         driver = ProjectPage(self.driver)
         driver.go_to_page(ProjectPage.get_url_job(self, self.test_name_verify_console_output))
         driver.get_wait(ProjectPageLocators.BUILD_NOW)
-        assert (driver.is_clickable(ProjectPageLocators.BUILD_NOW))
-
-    @pytest.mark.dependency(depends=["test_freestyle_project_can_build_now"])
-    def test_freestyle_project_build_success(self):
-        ''' For test cases 194'''
-        driver = ProjectPage(self.driver)
         driver.click(ProjectPageLocators.BUILD_NOW)
         driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
         driver.click(ProjectPageLocators.BUILD_STATUS)
@@ -135,32 +116,12 @@ class TestFreestyleProject:
         assert ('SUCCESS' in console_output_text.upper())
         ProjectPage.delete_job(self, self.test_name_verify_console_output)
 
-    def test_create_freestyle_project_test_name_workspace(self):
-        """
-        TC_JN_122
-        User can create project with StringName
-        TC_JN_123
-        User can create project with IntName
-        TC_JN_125
-        User can create project with StringName and IntName
-        :param project_name:
-        :return:
-        """
+    def test_freestyle_project_user_sees_workspace(self):
         name = ProjectPage.create_new_default_job(self, self.test_name_verify_workspace_output,
                                                   NewItemPageLocators.FREESTYLE_PROJECT)
         URL_JOB = TD.BASE_URL + f'job/{name}/'
         ProjectPage.click_save_button_into_project(self, name)
 
-        driver = ProjectPage(self.driver)
-        driver.go_to_page(URL_JOB)
-
-        assert driver.get_element_text(
-            ProjectPageLocators.PROJECT_NAME) == "Project " + self.test_name_verify_workspace_output
-        assert driver.get_element_text(ProjectPageLocators.DELETE_PROJECT) == "Delete Project"
-
-    @pytest.mark.dependency(depends=["test_create_freestyle_project_test_name", "test_freestyle_project_can_build_now"])
-    def test_freestyle_project_user_sees_workspace(self):
-        URL_JOB = TD.BASE_URL + f'job/{self.test_name_verify_workspace_output}/'
         driver = ProjectPage(self.driver)
         driver.go_to_page(URL_JOB)
         driver.click(ProjectPageLocators.BUILD_NOW)
