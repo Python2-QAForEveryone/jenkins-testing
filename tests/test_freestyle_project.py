@@ -111,8 +111,8 @@ class TestFreestyleProject:
         driver.click(ProjectPageLocators.BUILD_NOW)
         driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
         driver.click(ProjectPageLocators.BUILD_STATUS)
-        driver.get_wait(FreestylePageLocators.CONSOLE_OUTPUT_AFTER_BUILD)
-        console_output_text = str(driver.get_element_text(FreestylePageLocators.CONSOLE_OUTPUT_AFTER_BUILD))
+        driver.get_wait(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD)
+        console_output_text = str(driver.get_element_text(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD))
         assert ('SUCCESS' in console_output_text.upper())
         ProjectPage.delete_job(self, self.test_name_verify_console_output)
 
@@ -127,16 +127,10 @@ class TestFreestyleProject:
         driver.click(ProjectPageLocators.BUILD_NOW)
         driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
         driver.click(ProjectPageLocators.WORKSPACE)
-        workspace_text= str(driver.get_element_text(FreestylePageLocators.AFTER_BUILD_WORKSPACE_PAGE_TITLE)).upper()
+        workspace_text= str(driver.get_element_text(ConsoleOutputPage.TITLE)).upper()
         assert "WORKSPACE" in workspace_text and self.test_name_verify_workspace_output.upper() in workspace_text
         driver.go_to_page(URL_JOB)
         ProjectPage.delete_job(self, self.test_name_verify_workspace_output)
-
-
-
-
-
-
 
     def test_create_freestyle_project_add_action_disable(self):
         """

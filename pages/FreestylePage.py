@@ -21,8 +21,6 @@ class URLLocators:
 class FreestylePageLocators:
     SELECTION_GENERAL = (By.XPATH, '//div[contains(@class, "config-section-activator config_general")]')
     TEXTAREA_DESCRIPTION = (By.XPATH, '//textarea[@name="description"]')
-    CONSOLE_OUTPUT_AFTER_BUILD = (By.XPATH, '//pre[@class="console-output"]')
-    AFTER_BUILD_WORKSPACE_PAGE_TITLE = (By.XPATH, '//h1')
     CHECKBOX_DISABLE_THIS_PROJECT = (By.XPATH, "//label[text()='Disable this project']/../input")
 
     SELECTION_SOURCE_CODE = \
