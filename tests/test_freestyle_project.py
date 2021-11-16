@@ -19,8 +19,7 @@ class TestFreestyleProject:
                                    FolderPage.name_empty]
     test_name_verify_console_output= "freestyle000"
     test_name_verify_workspace_output= "freestyle001"
-                                   FolderPage.name_empty, FolderPage.name_special_ch_only,
-                                   FolderPage.name_twins_special_ch_only]
+
 
     @pytest.mark.parametrize("project_name", projectName)
     def test_create_freestyle_project(self, project_name):
