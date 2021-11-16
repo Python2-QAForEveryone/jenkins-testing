@@ -111,10 +111,7 @@ class TestFreestyleProject:
 
         assert driver.get_element_text(ProjectPageLocators.PROJECT_NAME) == "Project " + self.test_name_verify_console_output
         assert driver.get_element_text(ProjectPageLocators.DELETE_PROJECT) == "Delete Project"
-#        ProjectPage.delete_job(self, name)
 
-
-#   @pytest.mark.dependency(depends=["test_create_freestyle_project_test_name"])
     def test_freestyle_project_can_build_now(self):
         ''' For test cases  194 and 195'''
         driver = ProjectPage(self.driver)
