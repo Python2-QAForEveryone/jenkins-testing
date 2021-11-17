@@ -1,4 +1,3 @@
-import time
 from pages.BasePage import BasePage
 from pages.DashboardPage import *
 from pages.FolderPage import *
