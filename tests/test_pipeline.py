@@ -121,9 +121,6 @@ class TestPipeline:
         driver.click(NewItemPageLocators.OK_BUTTON)
         assert driver.is_element_present(PipelinePageLocators.PIPELINE_NOT_CREATED_ERROR)
 
-
-
-    @pytest.mark.dependency()
     @pytest.mark.parametrize("pipeline_name", pipelineName)
     def test_create_pipeline(self, pipeline_name):
         driver = BasePage(self.driver)
@@ -173,7 +170,6 @@ class TestPipeline:
         driver.get_element(tab_locator_valid)
         driver.click(tab_locator_valid)
         assert (self.pipelineName_valid in driver.get_element_text(tab_locator_valid))
-        assert driver.is_element_present(tab_locator_valid)
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_disabled(self):
