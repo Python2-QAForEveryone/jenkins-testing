@@ -16,8 +16,10 @@ class TestFreestyleProject:
     projectNameStringAndInt = generate_random_string_and_int(10)
     projectName = [projectNameString, projectNameInt, projectNameStringAndInt]
     project_name_special_symbol = [FolderPage.name_start_special_ch, FolderPage.name_only_one_or_two_dot,
-                                   FolderPage.name_empty, FolderPage.name_special_ch_only,
-                                   FolderPage.name_twins_special_ch_only]
+                                   FolderPage.name_empty]
+    test_name_verify_console_output= "freestyle000"
+    test_name_verify_workspace_output= "freestyle001"
+
 
     @pytest.mark.parametrize("project_name", projectName)
     def test_create_freestyle_project(self, project_name):
@@ -90,8 +92,41 @@ class TestFreestyleProject:
         assert driver.is_element_present(assert_name)
         driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
         driver.click(NewItemPageLocators.SAVE_BUTTON)
-
         ProjectPage.delete_job(self, name)
+
+
+    def test_freestyle_project_build_success(self):
+        ''' TC 194'''
+        name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        ProjectPage.click_save_button_into_project(self, name)
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(ProjectPage.get_url_job(self, self.test_name_verify_console_output))
+        driver.get_wait(ProjectPageLocators.BUILD_NOW)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
+        driver.click(ProjectPageLocators.BUILD_STATUS)
+        driver.get_wait(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD)
+        console_output_text = str(driver.get_element_text(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD))
+        assert ('SUCCESS' in console_output_text.upper())
+        ProjectPage.delete_job(self, self.test_name_verify_console_output)
+
+    def test_freestyle_project_user_sees_workspace(self):
+        """TC 195"""
+        name = ProjectPage.create_new_default_job(self, self.test_name_verify_workspace_output,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+        ProjectPage.click_save_button_into_project(self, name)
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
+        driver.click(ProjectPageLocators.WORKSPACE)
+        workspace_text= str(driver.get_element_text(ConsoleOutputPage.TITLE)).upper()
+        assert "WORKSPACE" in workspace_text and self.test_name_verify_workspace_output.upper() in workspace_text
+        ProjectPage.delete_job(self, self.test_name_verify_workspace_output)
 
     def test_create_freestyle_project_add_action_disable(self):
         """
