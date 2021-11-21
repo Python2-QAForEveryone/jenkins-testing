@@ -99,13 +99,11 @@ class TestFreestyleProject:
         ''' TC 194'''
         name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
                                                   NewItemPageLocators.FREESTYLE_PROJECT)
-        URL_JOB = TD.BASE_URL + f'job/{name}/'
+
         ProjectPage.click_save_button_into_project(self, name)
 
         driver = ProjectPage(self.driver)
-        driver.go_to_page(URL_JOB)
 
-        driver = ProjectPage(self.driver)
         driver.go_to_page(ProjectPage.get_url_job(self, self.test_name_verify_console_output))
         driver.get_wait(ProjectPageLocators.BUILD_NOW)
         driver.click(ProjectPageLocators.BUILD_NOW)
@@ -130,7 +128,7 @@ class TestFreestyleProject:
         driver.click(ProjectPageLocators.WORKSPACE)
         workspace_text= str(driver.get_element_text(ConsoleOutputPage.TITLE)).upper()
         assert "WORKSPACE" in workspace_text and self.test_name_verify_workspace_output.upper() in workspace_text
-        driver.go_to_page(URL_JOB)
+
         ProjectPage.delete_job(self, self.test_name_verify_workspace_output)
 
     def test_create_freestyle_project_add_action_disable(self):
