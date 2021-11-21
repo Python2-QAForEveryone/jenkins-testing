@@ -1,11 +1,11 @@
-from pages.BasePage import BasePage
+
 from pages.DashboardPage import *
 from pages.FolderPage import *
 from pages.DashboardPage import URLLocators
 from pages.PipelinePage import *
 from pages.NewItemPage import NewItemPageLocators
 from pages.BuildHistoryPage import BuildHistoryPage
-from selenium.webdriver.common.by import By
+
 from config.TestData import TestData as TD
 from pages.ProjectPage import ProjectPageLocators, ProjectPage
 
@@ -31,7 +31,6 @@ class TestPipeline:
     pipelineName = [pipelineName_String, pipelineName_Int, pipelineName_Int_and_String, pipelineName_valid]
     namesfortest = [name_only_letters_and_digits, name_with_max_length_255, name_only_digits, name_only_letters]
 
-
     def test_create_pipeline_name_only_letters(self):
         driver = BasePage(self.driver)
         driver.go_to_page(TD.BASE_URL)
@@ -43,10 +42,9 @@ class TestPipeline:
         driver.click(NewItemPageLocators.OK_BUTTON)
         assert (driver.get_title() == self.name_only_letters + " [Jenkins]")
 
-
     def test_delete_pipeline_name_only_letters(self):
         driver = DashboardPage(self.driver)
-        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_letters))
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_letters))
         driver.click(PipelinePageLocators.DELETE_PIPELINE)
         driver.get_wait_for_alert()
         driver.accept_alert()
@@ -63,15 +61,13 @@ class TestPipeline:
         driver.click(NewItemPageLocators.OK_BUTTON)
         assert (driver.get_title() == self.name_only_digits + " [Jenkins]")
 
-
     def test_delete_pipeline_name_only_digits(self):
         driver = DashboardPage(self.driver)
-        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_digits))
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_digits))
         driver.click(PipelinePageLocators.DELETE_PIPELINE)
         driver.get_wait_for_alert()
         driver.accept_alert()
         assert driver.is_element_not_present(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_digits))
-
 
     def test_create_pipeline_name_only_letters_and_digits(self):
         driver = BasePage(self.driver)
@@ -86,7 +82,7 @@ class TestPipeline:
 
     def test_delete_pipeline_name_only_letters_and_digits(self):
         driver = DashboardPage(self.driver)
-        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_only_letters_and_digits))
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_only_letters_and_digits))
         driver.click(PipelinePageLocators.DELETE_PIPELINE)
         driver.get_wait_for_alert()
         driver.accept_alert()
@@ -105,7 +101,7 @@ class TestPipeline:
 
     def test_delete_pipeline_name_max_length_255(self):
         driver = DashboardPage(self.driver)
-        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self,self.name_with_max_length_255))
+        driver.click(PipelinePageLocators.locator_pipeline_on_dashboard(self, self.name_with_max_length_255))
         driver.click(PipelinePageLocators.DELETE_PIPELINE)
         driver.get_wait_for_alert()
         driver.accept_alert()
@@ -159,7 +155,7 @@ class TestPipeline:
             if pipeline_name in each:
                 pipeline_name_is_in_the_list = True
 
-        assert pipeline_name_is_in_the_list == True
+        assert pipeline_name_is_in_the_list is True
 
     @pytest.mark.dependency(depends=["test_create_pipeline"])
     def test_pipeline_name_in_the_tab(self):
