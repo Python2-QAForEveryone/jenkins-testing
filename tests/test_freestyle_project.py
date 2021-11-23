@@ -94,7 +94,6 @@ class TestFreestyleProject:
         driver.click(NewItemPageLocators.SAVE_BUTTON)
         ProjectPage.delete_job(self, name)
 
-
     def test_freestyle_project_build_success(self):
         ''' TC 194'''
         name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
