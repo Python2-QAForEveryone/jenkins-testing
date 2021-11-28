@@ -95,39 +95,6 @@ class TestFreestyleProject:
         ProjectPage.delete_job(self, name)
 
 
-    def test_freestyle_project_build_success(self):
-        ''' TC 194'''
-        name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
-                                                  NewItemPageLocators.FREESTYLE_PROJECT)
-        ProjectPage.click_save_button_into_project(self, name)
-
-        driver = ProjectPage(self.driver)
-        driver.go_to_page(ProjectPage.get_url_job(self, self.test_name_verify_console_output))
-        driver.get_wait(ProjectPageLocators.BUILD_NOW)
-        driver.click(ProjectPageLocators.BUILD_NOW)
-        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
-        driver.click(ProjectPageLocators.BUILD_STATUS)
-        driver.get_wait(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD)
-        console_output_text = str(driver.get_element_text(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD))
-        assert ('SUCCESS' in console_output_text.upper())
-        ProjectPage.delete_job(self, self.test_name_verify_console_output)
-
-    def test_freestyle_project_user_sees_workspace(self):
-        """TC 195"""
-        name = ProjectPage.create_new_default_job(self, self.test_name_verify_workspace_output,
-                                                  NewItemPageLocators.FREESTYLE_PROJECT)
-        URL_JOB = TD.BASE_URL + f'job/{name}/'
-        ProjectPage.click_save_button_into_project(self, name)
-
-        driver = ProjectPage(self.driver)
-        driver.go_to_page(URL_JOB)
-        driver.click(ProjectPageLocators.BUILD_NOW)
-        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
-        driver.click(ProjectPageLocators.WORKSPACE)
-        workspace_text= str(driver.get_element_text(ConsoleOutputPage.TITLE)).upper()
-        assert "WORKSPACE" in workspace_text and self.test_name_verify_workspace_output.upper() in workspace_text
-        ProjectPage.delete_job(self, self.test_name_verify_workspace_output)
-
     def test_create_freestyle_project_add_action_disable(self):
         """
         TC_JN_165
@@ -232,4 +199,131 @@ class TestFreestyleProject:
         driver.click(NewItemPageLocators.SAVE_BUTTON)
         driver.get_wait(ProjectPageLocators.EMAIL_TEMPLATE_TESTING)
         assert driver.is_clickable(ProjectPageLocators.EMAIL_TEMPLATE_TESTING)
+        ProjectPage.delete_job(self, name)
+
+    def test_freestyle_project_build_success(self):
+        ''' TC 194'''
+        name = ProjectPage.create_new_default_job(self, self.test_name_verify_console_output,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        ProjectPage.click_save_button_into_project(self, name)
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(ProjectPage.get_url_job(self, self.test_name_verify_console_output))
+        driver.get_wait(ProjectPageLocators.BUILD_NOW)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
+        driver.click(ProjectPageLocators.BUILD_STATUS)
+        driver.get_wait(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD)
+        console_output_text = str(driver.get_element_text(ConsoleOutputPage.CONSOLE_OUTPUT_AFTER_BUILD))
+        assert ('SUCCESS' in console_output_text.upper())
+        ProjectPage.delete_job(self, self.test_name_verify_console_output)
+
+    def test_freestyle_project_user_sees_workspace(self):
+        """TC 195"""
+        name = ProjectPage.create_new_default_job(self, self.test_name_verify_workspace_output,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB = TD.BASE_URL + f'job/{name}/'
+        ProjectPage.click_save_button_into_project(self, name)
+
+        driver = ProjectPage(self.driver)
+        driver.go_to_page(URL_JOB)
+        driver.click(ProjectPageLocators.BUILD_NOW)
+        driver.get_wait_is_clickable(ProjectPageLocators.BUILD_STATUS)
+        driver.click(ProjectPageLocators.WORKSPACE)
+        workspace_text= str(driver.get_element_text(ConsoleOutputPage.TITLE)).upper()
+        assert "WORKSPACE" in workspace_text and self.test_name_verify_workspace_output.upper() in workspace_text
+        ProjectPage.delete_job(self, self.test_name_verify_workspace_output)
+
+    def test_freestyle_project_user_sees_workspace_from_project_page(self):
+        """
+        TC_JN_196
+        Verify user can view workspace through project page
+        :return:
+        """
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+        driver.get_wait(ProjectPageLocators.WORKSPACE_ON_PROJECT_PAGE)
+        driver.click(ProjectPageLocators.WORKSPACE_ON_PROJECT_PAGE)
+        assert "Error" in driver.get_element_text(ProjectPageLocators.WORKSPACE_ERROR)
+        ProjectPage.delete_job(self, name)
+
+    def test_freestyle_project_user_can_delete(self):
+        """
+        TC_JN_197
+        Verify user can delete project
+        :return:
+        """
+
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+        URL_PROJECT_PAGE = TD.BASE_URL + f'job/{name}/'
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+        driver.get_wait(ProjectPageLocators.WORKSPACE_ON_PROJECT_PAGE)
+        ProjectPage.delete_job(self, name)
+
+        driver.go_to_page(URL_PROJECT_PAGE)
+        assert driver.get_element_text(ProjectPageLocators.PROJECT_PAGE_ERROR) == \
+               ProjectPageMessages.ERROR_MESSAGE_PROJECT_PAGE
+
+        driver.go_to_page(TD.BASE_URL)
+        lst = driver.get_elements_text(DashboardPageLocators.PROJECTS_NAME)
+        assert name not in lst
+
+    def test_freestyle_project_user_can_disable(self):
+        """
+        TC_JN_201
+        Verify user can disable project
+        :return:
+        """
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+        PROJECT_SIGN = (By.XPATH, f'//table[@id="projectstatus"]//tr[@id="job_{name}"]')
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+        driver.get_wait(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        driver.click(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        assert ProjectPageMessages.DISABLE_MESSAGE in driver.get_element_text(ProjectPageLocators.DISABLE_PROJECT_WARNING)
+        driver.go_to_page(TD.BASE_URL)
+
+        assert "disabledJob" in driver.get_element_attribute(PROJECT_SIGN, 'class')
+        ProjectPage.delete_job(self, name)
+
+    def test_freestyle_project_user_can_enable(self):
+        """
+        TC_JN_202
+        Verify user can enable project
+        :return:
+        """
+        name = ProjectPage.create_new_default_job(self, self.projectNameStringAndInt,
+                                                  NewItemPageLocators.FREESTYLE_PROJECT)
+        URL_JOB_FOR_SAVE = TD.BASE_URL + f'job/{name}/configure'
+        PROJECT_SIGN = (By.XPATH, f'//table[@id="projectstatus"]//tr[@id="job_{name}"]')
+
+        driver = FreestylePage(self.driver)
+        driver.go_to_page(URL_JOB_FOR_SAVE)
+        driver.get_wait(NewItemPageLocators.SAVE_BUTTON)
+        driver.click(NewItemPageLocators.SAVE_BUTTON)
+        driver.get_wait(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        driver.click(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+        driver.get_wait(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        driver.click(ProjectPageLocators.ENABLE_PROJECT_BUTTON)
+        assert driver.is_clickable(ProjectPageLocators.DISABLE_PROJECT_BUTTON)
+
+        driver.go_to_page(TD.BASE_URL)
+        assert " job-status-nobuilt" in driver.get_element_attribute(PROJECT_SIGN, 'class')
         ProjectPage.delete_job(self, name)
