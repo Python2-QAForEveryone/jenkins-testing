@@ -34,7 +34,13 @@ class ProjectPageLocators:
         By.XPATH,
         "//div[@id='buildHistory']//table[@class='pane stripped']//div[@class='pane build-name']//a[text()='#1']")
     WORKSPACE = (By.XPATH, "//a[@title='Workspace']//span[2]")
+    WORKSPACE_ON_PROJECT_PAGE = (By.XPATH, "//td/a[text()='Workspace']")
+    WORKSPACE_ERROR = (By.TAG_NAME, 'h1')
+    PROJECT_PAGE_ERROR = (By.TAG_NAME, 'h2')
 
+class ProjectPageMessages:
+    ERROR_MESSAGE_PROJECT_PAGE = 'HTTP ERROR 404 Not Found'
+    DISABLE_MESSAGE = 'This project is currently disabled'
 
 class ProjectPage(BasePage):
     """
