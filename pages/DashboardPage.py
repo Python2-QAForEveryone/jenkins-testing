@@ -23,6 +23,7 @@ class DashboardPageLocators:
     ICON_LOCKABLE_RESOURCES = (By.XPATH, '//a[@title="Lockable Resources"]/span/img')
     TEXT_NEW_VIEW = (By.XPATH, '//a[@title="New View"]')
     ICON_NEW_VIEW = (By.CSS_SELECTOR, 'img.icon-folder')
+    PROJECTS_NAME = (By.XPATH, '//tbody//td/a[contains(@class, "model-link")]')
 
     locators_dashboard_all = [TEXT_NEW_ITEM, ICON_NEW_ITEM, TEXT_PEOPLE, ICON_PEOPLE,
                               TEXT_BUILD_HISTORY, ICON_BUILD_HISTORY, TEXT_MANAGE_JENKINS,
