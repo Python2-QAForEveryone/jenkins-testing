@@ -23,7 +23,7 @@ class BuildHistoryPage(BasePage):
     ATOM_FEED_FOR_LIST_BUILDS = (By.XPATH, '// *[ @ id = "rss-bar"] / span[3] / a / span[2]')
     REST_API = (By.XPATH, "//*[@id='jenkins']/footer/div/div/div[2]/a")
     JENKINS_VERS_NUMBER = (By.XPATH, '//*[@id="jenkins"]/footer/div/div/div[3]/a')
-    CHART_BUILD1=(By.XPATH, '//*[@id="label-tl-0-1-e2"]')
+    CHART_BUILD1=(By.XPATH, '//*[@id="label-tl-0-1-e1"]')
     CHART_TOOLTIP1= (By.XPATH, '//*[@id="jenkins"]/div[5]/div/div[9]/div/div[3]')
     CONSOLE_OUTPUT_PICTURE_LINK =(By.XPATH, '//*[@id="projectStatus"]/tbody/tr[2]/td[5]/a/img')
     CONSOLE_OUTPUT_PAGE=(By.XPATH, '//*[@id="main-panel"]/pre')
@@ -31,6 +31,7 @@ class BuildHistoryPage(BasePage):
     LIST_OF_BUILDS = (By.XPATH, '//*[@id="projectStatus"][1]')
     BUILD_PART1 = '//*[@id="job_'
     BUILD_PART2= ']/td[3]'
+
 
     def __init__(self, driver):
         super(BuildHistoryPage, self).__init__(driver)
@@ -42,4 +43,10 @@ class BuildHistoryPage(BasePage):
 
     def get_first_name_in_list(self, name):
         return By.XPATH, f'//*[@id="job_{name}"]/td[3]'
+
+    def find_build_in_the_list(self,name):
+        return (By.XPATH, f'//a[@href="job/{name}/"]')
+
+    def get_console_output_from_the_list(self, name):
+        return (By.XPATH, f'//a[@href="/job/{name}/1/console"]')
 

@@ -26,8 +26,8 @@ class ProjectPageLocators:
     BUILD_SUCCESS_LAST_JOB = (By.XPATH, '//td[@class="build-row-cell"][1]//a[@class="build-status-link"]')
     BUILD_LAST_JOB_BY_TEXT = (By.XPATH, '//a[contains(@class, "display-name")][1]')
     COUNT_OF_BUILD_HISTORY = (By.XPATH, '//table[@class="pane stripped"]//tr')
-    CANCEL_BUILD = (By.XPATH, "//table[@class='pane stripped']//tr[2]//div[@class='build-stop']/a")
     BUILD_STATUS = (By.XPATH, "//table[@class='pane stripped']//tr[2]//a[@class='build-status-link']/span")
+    CANCEL_BUILD = (By.XPATH, "//table[@class='pane stripped']//tr[2]//div[@class='build-stop']/a")
     BUILD_STATUS_CANCELLED = (By.XPATH, "//a[@class='build-status-link']//span[contains(@class, 'icon-aborted')]")
     EMAIL_TEMPLATE_TESTING = (By.XPATH, '//div[@id="tasks"]//span[text()="Email Template Testing"]')
     FIRST_BUILD = (
