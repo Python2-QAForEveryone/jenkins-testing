@@ -104,7 +104,7 @@ class FolderPageLocator:
     LINK_RENAME = (By.CSS_SELECTOR, "a[title='Rename'] > .task-link-text")
     INPUT_FIELD_RENAME_JOB_IN_FOLDER = (By.CSS_SELECTOR, "input[name='newName']")
     NAME_FIELD_INPUT_RENAME_JOB = (By.CSS_SELECTOR, ".help-sibling.setting-name")
-
+    ITEM_NAME_INVALID_INPUT = (By.CSS_SELECTOR, "div#itemname-invalid")
 
 class URLLocators:
     URL_FOLDER_CREATE = TestData.BASE_URL + 'view/all/newJob'

@@ -298,6 +298,9 @@ class TestFolderPage:
         driver.do_send_keys(FolderPageLocator.INPUT_FIELD_VIEW_NAME, FolderPage.name)
         driver.get_element(FolderPageLocator.RADIOBUTTON_GLOBAL_VIEW).click()
         assert driver.get_element_text(FolderPageLocator.ERROR_VIEW_MESSAGE) == f'A view already exists with the name "{FolderPage.name}"'
+        driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        driver.get_element(FolderPageLocator.BUTTON_YES).click()
 
     def test_create_two_jobs_in_once_folder_and_rename_one_to_another(self):
         driver = FolderPage(self.driver)
@@ -327,3 +330,30 @@ class TestFolderPage:
         driver.get_element(FolderPageLocator.NAME_FIELD_INPUT_RENAME_JOB).click()
         assert driver.get_element_text(FolderPageLocator.ERROR_VIEW_MESSAGE)\
                == f'The name “{FolderPage.name}” is already in use.'
+
+        driver.get_element(FolderPageLocator.DASHBOARD_TAB_FOLDER).click()
+        time.sleep(3)
+        driver.switch_to_window()
+        driver.get_element(FolderPageLocator.LINK_DELETE_FOLDER).click()
+        time.sleep(4)
+        # driver.get_element(FolderPageLocator.BUTTON_YES).click()
+
+    def test_create_two_jobs_with_same_name_in_once_folder(self):
+        driver = FolderPage(self.driver)
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FOLDER).click()
+        driver.get_element(FolderPageLocator.OK_BUTTON).click()
+        driver.get_wait(FolderPageLocator.SAVE_BUTTON)
+        driver.get_element(FolderPageLocator.SAVE_BUTTON).click()
+        driver.get_element(FolderPageLocator.LINK_CREATE_NEW_JOB_IN_FOLDER).click()
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FREESTYLE).click()
+        driver.get_element(FolderPageLocator.BUTTON_OK_IN_FOLDER).click()
+        driver.get_wait(FolderPageLocator.BUTTON_PANEL)
+        driver.get_element(FolderPageLocator.BUTTON_SAVE_IN_FOLDER).click()
+        driver.get_element(FolderPageLocator.LINK_NEW_FOLDER_ON_TOP_LIST).click()
+        driver.get_element(FolderPageLocator.LINK_NEW_ITEM).click()
+        driver.do_send_keys(FolderPageLocator.ITEM_NAME, FolderPage.name)
+        driver.get_element(FolderPageLocator.LINK_FREESTYLE).click()
+        assert driver.get_element_text(FolderPageLocator.ITEM_NAME_INVALID_INPUT) \
+               == f"» A job already exists with the name ‘{FolderPage.name}’"
